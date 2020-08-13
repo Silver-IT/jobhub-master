@@ -1,0 +1,11 @@
+<a class="close" [mat-dialog-close]="AgreementDialogAction.Closed"><span class="material-icons">close</span></a>
+<h5 mat-dialog-title class="text-center mt-20 px-0 px-md-50 color-mine-shaft">Hire J&D Landscaping</h5>
+<p class="color-dove-gray font-14 text-center mx-0 mx-md-40">
+  Please confirm that you have reviewed the proposal submitted by <b>J&D Landscaping</b> and you agree to <a class="text-primary cursor-pointer" [mat-dialog-close]="AgreementDialogAction.OpenTerms">payments terms</a>.
+</p>
+<div mat-dialog-content class="pt-10 px-20 px-md-50 pretty-scroll">
+  <job-hub-checkbox [(value)]="agree" label="I have reviewed the proposal and agree to payment terms."></job-hub-checkbox>
+</div>
+<div mat-dialog-actions class="d-flex justify-content-center">
+  <button class="btn btn-primary btn-lt-md-block" (click)="confirm()" [disabled]="!agree">Confirm</button>
+</div>

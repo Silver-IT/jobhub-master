@@ -1,0 +1,18 @@
+<job-hub-spinner *ngIf="isLoading"></job-hub-spinner>
+<div class="container h-100 d-flex align-items-center justify-content-center">
+  <div class="row w-100 mb-0 mb-md-150">
+    <div class="col-12 col-md-6 col-lg-5 mx-auto">
+      <h1 class="text-center mb-50 color-mine-shaft">Welcome!</h1>
+      <form class="w-100" autocomplete="off" [formGroup]="form" (ngSubmit)="acceptInvite()">
+        <job-hub-text-input type="password" label="Temporary Password" placeholder="Temporary Password" formControlName="temporaryPassword"></job-hub-text-input>
+        <job-hub-text-input type="password" label="New Password" placeholder="New Password" formControlName="password"></job-hub-text-input>
+        <job-hub-text-input type="password" label="Confirm password" placeholder="Confirm password" formControlName="confirmPassword"></job-hub-text-input>
+        <div class="d-flex flex-column align-items-center justify-content-center mt-50">
+          <button class="btn btn-primary mb-10 btn-lt-md-block" [disabled]="form.invalid || isLoading">Accept Invite</button>
+          <a class="font-10 text-primary" [routerLink]="ROUTES.auth.login | routeToAbsolute">Go back to login</a>
+        </div>
+      </form>
+    </div>
+  </div>
+  <job-hub-spinner *ngIf="isLoading"></job-hub-spinner>
+</div>

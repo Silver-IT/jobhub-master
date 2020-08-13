@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 64 (101010) - https://sketch.com -->
+    <title>C7C223B4-C7E6-4B86-81C8-8C148B0420C4</title>
+    <desc>Created with sketchtool.</desc>
+    <g id="Dashboard---AdminSide" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="AdminSide---Dashboard" transform="translate(-453.000000, -119.000000)">
+            <g id="icon-blockYTD" transform="translate(453.000000, 119.000000)">
+                <circle id="Oval" fill="#E6F6F5" cx="24" cy="24" r="24"></circle>
+                <path d="M24.712,32.682 L24.712,31.162 C27.353,31.048 28.588,29.243 28.588,27.533 C28.588,24.892 26.612,24.322 24.712,23.828 L24.712,18.755 C26.118,18.983 26.821,19.99 26.954,20.826 L28.36,20.826 C28.151,19.135 26.878,17.824 24.712,17.615 L24.712,16 L23.876,16 L23.876,17.596 C21.463,17.71 20,19.154 20,21.13 C20,23.714 21.976,24.265 23.876,24.778 L23.876,30.041 C22.261,29.813 21.539,28.654 21.444,27.647 L20.019,27.647 C20.114,29.547 21.615,30.934 23.876,31.143 L23.876,32.682 L24.712,32.682 Z M23.876,23.581 C22.489,23.182 21.349,22.631 21.349,21.073 C21.349,19.553 22.413,18.774 23.876,18.698 L23.876,23.581 Z M24.712,30.079 L24.712,25.025 C26.099,25.443 27.258,25.994 27.258,27.59 C27.258,28.901 26.384,29.984 24.712,30.079 Z" id="$" stroke="#07A39D" stroke-width="0.2" fill="#07A39D" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>

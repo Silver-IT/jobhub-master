@@ -1,0 +1,12 @@
+<section class="py-30">
+  <div class="container">
+    <div class="mb-50">
+      <p class="color-dove-gray">Given our many years in business and we have built relationships with many other reputable contractors from electricians to deck guys and everyone in between. Since we are asked so much who we recommend we decided to make it easy by giving you direct access to our network.</p>
+      <p class="color-dove-gray mb-0">Please keep in mind we can not guarantee the work of anyone we recommend, and if you have a less than satisfactory experience with someone please let us know so we can remove them from our network. </p>
+    </div>
+
+    <p class="font-weight-medium color-mine-shaft">Network Contractors</p>
+
+    <job-hub-contractor-table [readonly]="true" (selectContractor)="showContractorDetails($event)"></job-hub-contractor-table>
+  </div>
+</section>

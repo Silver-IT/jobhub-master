@@ -1,0 +1,18 @@
+<job-hub-jumbotron image="assets/images/landing-page/patio-packages/header.jpg"
+                   title="Hardscape Packages"></job-hub-jumbotron>
+<section class="py-100">
+  <div class="container">
+    <h3 class="color-mine-shaft font-30 font-weight-bold mb-55 text-center">Signature Hardscape Packages by J & D Landscaping</h3>
+    <p class="color-dove-gray text-center mb-20 px-0 px-xl-100">If you've been dreaming of a Hardscape project, but have trouble deciding whats going to look best and what to budget for your project our signature packages are a great place to start.</p>
+    <p class="color-dove-gray text-center mb-20 px-0 px-xl-100">J & D Landscaping's Hardscape packages can be customized to fit your backyard and offer you the selection and flexibility to bring your Hardscape dream to reality.</p>
+
+    <div class="row mt-50">
+      <div class="col-12 col-md-6 col-lg-4" *ngFor="let card of patioPackageCards">
+        <job-hub-package-card [card]="card" (navigate)="navigateTo($event)"></job-hub-package-card>
+      </div>
+    </div>
+  </div>
+</section>
+<div [id]="ScrollPosition.PatioPackageContent">
+  <router-outlet></router-outlet>
+</div>

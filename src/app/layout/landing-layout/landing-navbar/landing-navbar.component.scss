@@ -1,0 +1,122 @@
+@import "../../../../assets/theme";
+
+:host {
+  position: absolute;
+  width: 100%;
+}
+
+.navbar {
+  z-index: 99;
+  padding-top: 58px;
+  padding-bottom: 38px;
+  .navbar-toggler {
+    border: none;
+    outline: none;
+    height: 42px;
+    width: 42px;
+    padding: 0;
+  }
+  .navbar-nav {
+    .nav-item {
+      position: relative;
+      outline: none;
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: 0;
+        width: 0;
+        height: 2px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: $niagara;
+        transition: ease width .3s;
+      }
+      .nav-link {
+        cursor: pointer;
+        padding: 15px 12px;
+      }
+      &.active {
+        position: relative;
+        &:after {
+          width: 20px;
+        }
+      }
+      &:hover {
+        &:after {
+          width: 20px;
+        }
+      }
+      &.static:hover {
+        &:after {
+          content: none;
+        }
+      }
+    }
+  }
+}
+
+.navbar-collapse {
+  &.collapsing {
+    height: auto !important;
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .navbar {
+    padding-top: 70px;
+    .navbar-nav {
+      padding: 0 20px;
+      .nav-item {
+        height: 65px;
+        &.dropdown {
+          height: auto;
+        }
+        &:after {
+          content: none;
+        }
+        .nav-link {
+          padding: 16px;
+          font-size: 16px;
+          letter-spacing: -0.34px;
+          line-height: 23px;
+        }
+        button {
+          margin-top: 25px;
+        }
+        &.static a {
+          font-size: 16px;
+          letter-spacing: -0.25px;
+          line-height: 25px;
+        }
+      }
+    }
+  }
+
+  .navbar-collapse {
+    background-color: $niagara;
+    overflow: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    padding: 0 17px;
+    transform: translateX(0);
+    transition: transform 0.3s ease;
+    &.collapsing {
+      height: 100% !important;
+      transform: translateX(-100vw);
+    }
+  }
+}
+
+@include media-breakpoint-between(md, lg) {
+  .navbar-collapse {
+    right: calc(100vw - 400px);
+    &.collapsing {
+      transform: translateX(-400px);
+    }
+  }
+}
+

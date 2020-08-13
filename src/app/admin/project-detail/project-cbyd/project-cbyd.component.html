@@ -1,0 +1,32 @@
+<section class="py-50 px-15 px-lg-75 position-relative">
+  <div class="row">
+    <div class="col-12 col-md-10 mt-30 mt-md-0">
+      <p class="color-mine-shaft font-18 font-weight-medium mb-25">CBYD</p>
+      <p class="color-mine-shaft mb-25">Materials already ordered, contact CBYD 811 or create a ticket online.</p>
+      <p class="color-mine-shaft mb-40">These are the dates already proposed.</p>
+      <form [formGroup]="form">
+        <div class="row">
+          <job-hub-date-picker label="Start date" class="col-12 col-lg-4" id="{{prefix}}_startDate" [readonly]="readonly" formControlName="startDate"></job-hub-date-picker>
+          <job-hub-date-picker label="Completion date" class="col-12 col-lg-4" id="{{prefix}}_endDate" [readonly]="readonly" formControlName="endDate"></job-hub-date-picker>
+          <div class="form-group col-12 col-lg-4 d-flex align-items-center">
+            <mat-slide-toggle formControlName="governmentConfirmed" (click)="onToggleGovernmentConfirmed($event)"></mat-slide-toggle>
+            <span class="ml-10 text-primary font-12 font-weight-medium text-right">Done?</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <job-hub-textarea label="Notes from CBYD call" [readonly]="project.governmentConfirmed" placeholder="" formControlName="governmentCallComment"></job-hub-textarea>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-12 col-md-2 mt-30 mt-md-0">
+      <div class="client-sticky-sidebar text-center">
+        <button class="btn btn-warning text-white w-100 mb-20" disabled>Select Contractor</button>
+        <button class="btn btn-primary w-100 mb-20" (click)="navigateToProjectManagement()">Manage Project</button>
+        <job-hub-request-chat userRole="Customer" [project]="project" allowViewProfile="true" [user]="project.user"></job-hub-request-chat>
+      </div>
+    </div>
+  </div>
+  <job-hub-spinner *ngIf="isLoading"></job-hub-spinner>
+</section>

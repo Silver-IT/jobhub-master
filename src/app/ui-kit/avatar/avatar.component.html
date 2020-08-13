@@ -1,0 +1,7 @@
+<div class="d-flex avatar justify-content-center align-items-center" [style.width.px]="size" [style.height.px]="size">
+  <span *ngIf="initials; else avatar" class="font-13 font-weight-bold text-white">{{initials}}</span>
+  <ng-template #avatar>
+    <img *ngIf="!type" [src]="src || 'assets/images/icons/request-type/driveway.svg'" alt="Avatar">
+    <img *ngIf="type" [src]="type | projectIcon" alt="Project Icon">
+  </ng-template>
+</div>

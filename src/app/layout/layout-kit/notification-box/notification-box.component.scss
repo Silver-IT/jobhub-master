@@ -1,0 +1,21 @@
+@import "../../../../assets/theme";
+
+.notification-box {
+  width: 350px;
+}
+
+.box-frame {
+  height: 47px;
+}
+
+.circle {
+  @include circle(12px);
+}
+
+.action-wrapper {
+  width: 50px;
+}
+
+.notification-item {
+  @include hover_effect($black-squeeze);
+}

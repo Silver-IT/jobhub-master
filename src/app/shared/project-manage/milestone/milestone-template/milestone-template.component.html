@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-6 col-md-9 col-lg-10 text-primary font-12 font-weight-medium">Milestone #{{milestone.order + 1}}</div>
+  <div class="col-6 col-md-3 col-lg-2 font-12 color-mine-shaft">Amount</div>
+</div>
+
+<div class="row">
+  <div class="col-6 col-md-9 col-lg-2 color-mine-shaft font-12 font-weight-bold d-flex pr-0 pt-2">{{milestone.name}}</div>
+  <ng-content select="div.milestone-status"></ng-content>
+  <div class="col-6 order-0 order-lg-1 col-md-3 col-lg-2 text-primary font-18 d-flex align-items-baseline font-weight-medium">
+    <div>{{milestone | milestoneAmount | currency}}</div>
+  </div>
+</div>
+
+<ng-content select="div.milestone-addons"></ng-content>
+<p class="mt-20 mb-40 font-14 color-mine-shaft">{{milestone.comment}}</p>

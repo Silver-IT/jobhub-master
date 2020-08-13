@@ -1,0 +1,19 @@
+<p class="color-mine-shaft mb-20 font-weight-medium">Payment Methods</p>
+<div class="d-flex flex-column flex-grow-1 justify-content-between bg-white rounded shadow-1 p-20 position-relative">
+  <div class="chart-renderer">
+    <ngx-charts-pie-chart
+      *ngIf="!isLoading"
+      [scheme]="colors"
+      [results]="statistic"
+      [gradient]="true"
+      [legend]="false"
+      [labels]="true"
+      [doughnut]="false">
+    </ngx-charts-pie-chart>
+  </div>
+  <div class="legend-panel color-dove-gray font-12">
+    <div class="d-flex align-items-center"><span class="dot bg-primary mr-10"></span><span class="min-40">Stripe</span><span class="ml-20 color-mine-shaft">{{ statistic[0].value | currency }}</span></div>
+    <div class="d-flex align-items-center"><span class="dot bg-warning mr-10"></span><span class="min-40">Cash</span><span class="ml-20 color-mine-shaft">{{ statistic[2].value | currency }}</span></div>
+    <div class="d-flex align-items-center"><span class="dot bg-color-valencia mr-10"></span><span class="min-40">ACH</span><span class="ml-20 color-mine-shaft">{{ statistic[1].value | currency }}</span></div>
+  </div>
+</div>

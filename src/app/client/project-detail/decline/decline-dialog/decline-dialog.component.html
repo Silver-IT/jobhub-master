@@ -1,0 +1,19 @@
+<a class="close" mat-dialog-close><span class="material-icons">close</span></a>
+<h5 mat-dialog-title class="text-center mt-20 px-0 px-md-50 color-mine-shaft">Thank you for taking the time to speak with us!</h5>
+<div mat-dialog-content class="pt-30 pretty-scroll">
+  <div class="color-dove-gray font-14 text-center mx-0 mx-md-50">
+    <p class="mb-0">Could you please let us know why you have decided not to move forward with J & D Landscaping?</p>
+    <p>Your feedback will help us better serve our customers in the future.</p>
+  </div>
+  <form class="px-0 px-md-70" [formGroup]="declineForm" (ngSubmit)="decline()">
+    <div class="col-12 mb-30">
+      <job-hub-checkbox-group [options]="declineReasons" formControlName="declineReasons"></job-hub-checkbox-group>
+    </div>
+    <job-hub-textarea placeholder="Other" formControlName="declineComment"></job-hub-textarea>
+  </form>
+</div>
+<div mat-dialog-actions class="d-flex justify-content-center">
+  <button class="btn btn-primary" (click)="decline()" [disabled]="!declineForm.valid || isSaving">Send</button>
+</div>
+
+<job-hub-spinner *ngIf="isSaving"></job-hub-spinner>

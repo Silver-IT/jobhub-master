@@ -1,0 +1,8 @@
+<div class="image-renderer" [style.padding-bottom.%]="height">
+  <div>
+    <img *ngIf="src" [src]="src" alt="Image" [style.object-fit]="objectFit">
+    <div class="overlay" *ngIf="!readonly">
+      <job-hub-icon icon="close" color="white" class="cursor-pointer" (click)="delete.emit()"></job-hub-icon>
+    </div>
+  </div>
+</div>

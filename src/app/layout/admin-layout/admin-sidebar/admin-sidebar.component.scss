@@ -1,0 +1,84 @@
+@import "../../../../assets/theme";
+
+$sidebar-width: 142px;
+$sidebar-collapsed-width: 61px;
+
+:host {
+  display: block;
+  z-index: 100;
+}
+
+.sidebar {
+  position: relative;
+  width: $sidebar-width;
+  height: calc(100vh - 65px);
+  transition: ease width .3s;
+
+  .btn-collapse {
+    position: absolute;
+    right: -12px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: ease all .3s;
+    z-index: 1;
+    &:hover {
+      background-color: rgba(7, 163, 157, 0.5);
+    }
+  }
+
+  li {
+    height: 40px;
+  }
+
+  a {
+    text-decoration: none;
+    img.active {
+      display: none;
+    }
+    img.inactive {
+      display: block;
+    }
+    span {
+      color: $tundora;
+      transition: ease color .3s;
+      min-width: 70px;
+    }
+    &:hover {
+      span {
+        color: $niagara;
+      }
+      img.active {
+        display: block;
+      }
+      img.inactive {
+        display: none;
+      }
+    }
+    &.active {
+      span {
+        color: $niagara;
+        font-weight: 500;
+      }
+      img.active {
+        display: block;
+      }
+      img.inactive {
+        display: none;
+      }
+    }
+  }
+
+  &.collapsed {
+    width: $sidebar-collapsed-width;
+    .btn-collapse {
+      transform: rotate(180deg);
+    }
+    a span {
+      display: none;
+    }
+
+    @include media-breakpoint-down(sm) {
+      width: 0;
+    }
+  }
+}

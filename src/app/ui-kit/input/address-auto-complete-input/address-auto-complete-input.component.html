@@ -1,0 +1,12 @@
+<div class="form-group" [class.label-input-group]="label">
+  <label class="form-label">
+    {{ label }}
+    <input class="form-control" ngx-google-places-autocomplete
+           [options]="{types: [], componentRestrictions: { country: 'US' }}"
+           [placeholder]="placeholder"
+           [(ngModel)]="value"
+           (ngModelChange)="handleHardAddressChange($event)"
+           (onAddressChange)="handleAddressChange($event)"
+           [readonly]="readonly">
+  </label>
+</div>

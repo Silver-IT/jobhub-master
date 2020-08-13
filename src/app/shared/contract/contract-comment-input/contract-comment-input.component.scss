@@ -1,0 +1,8 @@
+:host {
+  job-hub-textarea::ng-deep {
+    .form-group.label-input-group textarea.form-control {
+      min-height: 80px;
+      height: 80px;
+    }
+  }
+}

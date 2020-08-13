@@ -1,0 +1,22 @@
+<section class="py-30 px-0 px-md-30 text-center overflow-auto pretty-scroll">
+  <div class="container">
+    <p class="text-primary">Step {{ step }} of {{ total }}</p>
+    <h2 class="color-mine-shaft mb-35">{{ title }}</h2>
+    <p class="color-dove-gray mb-50 px-0 px-xl-150">{{ description }}</p>
+    <div class="row">
+      <div class="col-12 col-md-9 col-lg-6 mx-auto">
+        <ng-container [ngSwitch]="step">
+          <job-hub-customer-select *ngSwitchCase="1" (customerSelect)="customerSelect($event)"></job-hub-customer-select>
+          <job-hub-project-general [addressAutoComplete]="true" *ngSwitchCase="2"></job-hub-project-general>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="position-relative footer-area" *ngIf="step === 2">
+      <div class="d-flex justify-content-center py-20 sticky">
+        <button class="btn btn-primary" (click)="complete()">Complete</button>
+      </div>
+    </div>
+  </div>
+  <job-hub-spinner *ngIf="isLoading"></job-hub-spinner>
+</section>

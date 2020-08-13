@@ -1,0 +1,54 @@
+<footer class="font-12 text-white text-center text-md-left">
+  <section class="bg-color-cod-gray py-100">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-4">
+          <a class="navbar-brand" ngxScrollTo="root" routerLink="/"><img src="assets/images/logo.svg" alt="J&D Landscaping"></a>
+          <div class="mt-20">Need help?</div>
+          <a class="font-weight-bold text-white" href="tel:18603246218">Call 860 324 6218</a>
+          <div class="mt-20 mb-20 mb-md-0 w-50 mx-auto mx-md-0">
+            J&D Landscaping LLC<br/>
+            123 South Main St.<br/>
+            East Windsor, CT, 06088</div>
+        </div>
+        <div class="col-12 col-md-8">
+
+          <div class="row">
+            <div class="col-12 col-md-3" *ngFor="let group of footer">
+              <div class="font-weight-bold mb-10 mb-md-40 mt-20 mt-md-0">{{ group.title }}</div>
+              <ul class="list-unstyled mb-0">
+                <ng-container *ngFor="let item of group.links">
+                  <ng-container *ngIf="item.href">
+                    <li class="py-10">
+                      <a class="text-white" routerLinkActive="font-weight-medium" [href]="item.href">{{ item.label }}</a>
+                    </li>
+                  </ng-container>
+                  <ng-container *ngIf="!item.href">
+                    <li class="py-10" ngxScrollTo="root" [routerLink]="item.route | routeToAbsolute">
+                      <a routerLinkActive="font-weight-medium">{{ item.label }}</a>
+                    </li>
+                  </ng-container>
+                </ng-container>
+              </ul>
+            </div>
+            <div class="col-12 col-md-3">
+              <div class="font-weight-bold mb-10 mb-md-40 mt-20 mt-md-0">Follow us</div>
+              <job-hub-social-buttons></job-hub-social-buttons>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="bg-color-black font-10 py-10">
+    <div class="container d-flex flex-column-reverse flex-md-row justify-content-between align-items-center">
+      <div>© 2020. J & D Landscaping. All rights reserved.</div>
+      <div class="mb-10 mb-md-0">
+        <a class="text-white" ngxScrollTo="root" [routerLink]="ROUTES.landingPages.privacy | routeToAbsolute">Privacy Policy</a>
+        <span class="mx-2">|</span>
+        <a class="text-white" ngxScrollTo="root" [routerLink]="ROUTES.landingPages.legalNotice | routeToAbsolute">Legal Notice</a>
+      </div>
+    </div>
+  </section>
+</footer>

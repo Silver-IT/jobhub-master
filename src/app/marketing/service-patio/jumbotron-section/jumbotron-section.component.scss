@@ -1,0 +1,39 @@
+@import "../../../../assets/theme";
+
+.position-absolute {
+  top: 0;
+}
+
+h1, h6 {
+  text-shadow: 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.content-overlay {
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.jumbotron-image-wrapper {
+  img {
+    width: 100%;
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .content-overlay {
+    background-color: transparent;
+  }
+  job-hub-request-estimate-button::ng-deep {
+    button {
+      width: 100%;
+    }
+  }
+
+  .jumbotron-image-wrapper {
+    height: 950px !important;
+    img {
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}

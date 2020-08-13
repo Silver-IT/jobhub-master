@@ -1,0 +1,32 @@
+@import "../../../../assets/theme";
+
+.room-header {
+  border-bottom: 1px solid $aqua-island;
+  height: 50px;
+}
+
+@include media-breakpoint-down(lg) {
+  h4 {
+    font-size: 20px !important;
+  }
+}
+
+.date-splitter {
+  position: relative;
+  &:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    right: 0;
+    left: 0;
+    display: block;
+    height: 1px;
+    background-color: $niagara;
+    top: 11px;
+    opacity: 0.2;
+  }
+  span {
+    z-index: 1;
+    @include absolute_x_middle();
+  }
+}

@@ -1,0 +1,10 @@
+@import "../../../assets/theme";
+
+section {
+  overflow: hidden;
+  @include flex(height, calc(100vh - 135px));
+}
+
+.btn-toggle-mode {
+  min-width: 200px;
+}

@@ -1,0 +1,10 @@
+@import "../../../../assets/theme";
+
+.time-span {
+  @include flex(width, 70px);
+  text-align: center;
+}
+
+.image-span {
+  @include flex(width, 40px);
+}

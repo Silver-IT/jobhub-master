@@ -1,0 +1,28 @@
+<section class="py-30 position-relative">
+  <div class="container">
+    <div class="row flex-column-reverse flex-md-row">
+      <div class="col-12 col-md-8 col-lg-9">
+        <p class="color-mine-shaft font-weight-medium mb-40 d-none d-md-block">Contract</p>
+        <p class="color-mine-shaft font-12 mb-2" *ngIf="project.contractSignedDate">{{ project.contractSignedDate | date }}</p>
+        <job-hub-contract [readonly]="true" [finalProposal]="finalProposal" [project]="project"></job-hub-contract>
+      </div>
+      <div class="col-12 col-md-4 col-lg-3">
+        <div class="client-sticky-sidebar mb-20 mb-md-0">
+          <p class="color-regent-gray font-weight-medium mb-20 d-block d-md-none">Project Contract</p>
+          <button class="btn btn-warning text-white btn-small w-100 mb-20" (click)="sign()" *ngIf="!project.contractSignedDate">Sign Contract</button>
+          <button class="btn btn-primary btn-small w-100 mb-20" [routerLink]="[ROUTES.app.root, ROUTES.app.project, project.id, ROUTES.app.payment] | routeToAbsolute">Management</button>
+          <button class="btn btn-primary btn-small w-100" (click)="print()">Print Contract</button>
+
+          <div class="mt-20 mt-md-45" *ngIf="project.latitude && project.longitude">
+            <job-hub-map [latitude]="project.latitude" [longitude]="project.longitude"></job-hub-map>
+          </div>
+
+          <div *ngIf="project.assignedContractor" class="mt-20 mt-md-45">
+            <job-hub-request-chat [project]="project" [user]="project.assignedContractor"></job-hub-request-chat>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <job-hub-spinner *ngIf="isLoading"></job-hub-spinner>
+</section>

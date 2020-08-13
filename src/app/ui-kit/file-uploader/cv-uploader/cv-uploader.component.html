@@ -1,0 +1,19 @@
+<div class="d-flex justify-content-center align-items-center bg-color-catskill-white"
+     ngFileDrop
+     [style.height.px]="height"
+     [options]="options"
+     (uploadOutput)="onUploadOutput($event)"
+     [uploadInput]="uploadInput">
+  <div class="text-primary" *ngIf="!file">
+    Drag & drop or
+    <label class="underline cursor-pointer">
+      <input class="d-none" type="file" ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput" multiple> browse
+    </label>
+    your file
+  </div>
+
+  <div class="text-primary" *ngIf="file">
+    File: {{ this.file.name }} (size: {{this.file.size}} bytes)
+  </div>
+</div>
+

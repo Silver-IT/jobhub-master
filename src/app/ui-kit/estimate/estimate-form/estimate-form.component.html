@@ -1,0 +1,131 @@
+<form [formGroup]="form">
+
+  <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between" [class.mb-15]="small" [class.mb-30]="!small">
+    <div class="mb-20 mb-md-0 w-100">
+      <p class="color-mine-shaft mb-0" *ngIf="renderSchedules" [ngClass]="small ? 'font-13 font-weight-bold' : 'font-weight-medium font-18'">Site Visit Availability</p>
+    </div>
+    <div class="d-flex justify-content-end w-100" *ngIf="showStatus && estimate.status">
+      <button type="button" class="btn btn-warning btn-lt-md-block text-white mr-20" *ngIf="estimate.status === EstimateStatus.SiteVisitScheduled && !project.finalProposal && (project | isProjectEditable)" (click)="createFinalProposal.emit()">Create Final Proposal</button>
+      <button type="button" class="btn btn-primary btn-small btn-lt-md-block text-white" *ngIf="estimate.status === EstimateStatus.SiteVisitScheduled || estimate.status === EstimateStatus.Pending" (click)="downloadEstimate()">Download Estimate</button>
+    </div>
+  </div>
+
+  <div class="row mb-20" *ngIf="renderSchedules">
+    <div *ngIf="contractors && contractors.length" class="col-12 col-md-6 col-lg-3">
+      <job-hub-select [options]="contractorOptions" [readonly]="!assignable" label="Assigned to" formControlName="contractorUserId"></job-hub-select>
+    </div>
+    <div *ngIf="selectedSiteVisitSchedule" class="col-12 col-md-6 col-lg-3">
+      <job-hub-text-input [label]="selectedSiteVisitSchedule.from | date" readonly="true" [value]="(selectedSiteVisitSchedule.from | date : 'h:mm a') + ' - ' + (selectedSiteVisitSchedule.to | date : 'h:mm a')"></job-hub-text-input>
+    </div>
+    <ng-container *ngIf="!selectedSiteVisitSchedule">
+      <div class="col-12 col-md-6 col-lg-3" *ngFor="let item of form.value.siteVisitSchedules">
+        <job-hub-text-input [label]="item.from | date" readonly="true" [value]="(item.from | date : 'h:mm a') + ' - ' + (item.to | date : 'h:mm a')"></job-hub-text-input>
+      </div>
+      <div class="col d-flex align-items-center" *ngIf="!form.value.siteVisitSchedules.length">
+        <p class="font-12 color-dove-gray font-weight-medium">Site visit schedule is not provided</p>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="d-flex align-items-center justify-content-between" [class.mb-15]="small" [class.mb-30]="!small">
+    <div class="w-100">
+      <p class="color-mine-shaft" [ngClass]="small ? 'font-13 font-weight-bold mb-15' : 'font-weight-medium mb-30 font-18'">Project Details</p>
+      <div class="row">
+        <div class="col-12 col-md-6 col-lg-3">
+          <job-hub-select id="{{prefix}}_projectType" [options]="projectOptions.projectAccessoryTypes" label="Project Type" formControlName="projectType" [readonly]="readonly"></job-hub-select>
+        </div>
+        <div class="col-12 col-md-6 col-lg-9">
+          <job-hub-multi-select id="{{prefix}}_materials" [options]="projectOptions.materialTypes" label="Type of materials" formControlName="materials" [readonly]="readonly"></job-hub-multi-select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-6 col-lg-3">
+          <job-hub-select id="{{prefix}}_locationType" [options]="projectOptions.projectLocationTypes" label="Project location on property" formControlName="locationType" [readonly]="readonly"></job-hub-select>
+        </div>
+        <div class="col-12 col-md-6 col-lg-5">
+          <job-hub-text-input id="{{prefix}}_groundState" label="What's currently there" placeholder="Grass" formControlName="groundState" [readonly]="readonly"></job-hub-text-input>
+        </div>
+        <div class="col-12 col-md-6 col-lg-2">
+          <job-hub-text-input id="{{prefix}}_projectSize" label="Approx size" placeholder="Enter size" formControlName="projectSize" [readonly]="readonly"></job-hub-text-input>
+        </div>
+        <div class="col-12 col-md-6 col-lg-2">
+          <job-hub-select id="{{prefix}}_shapeType" [options]="projectOptions.projectShapeTypes" label="Shape" formControlName="shapeType" [readonly]="readonly"></job-hub-select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-6" *ngIf="small && estimate.requestDetails || !small" [class.col-md-12]="small">
+          <job-hub-textarea label="Landscaping Request - Details" placeholder="Some plants/ landscaping near the house" formControlName="requestDetails" [readonly]="readonly"></job-hub-textarea>
+        </div>
+        <div class="col-12 col-md-6" [class.col-md-12]="small">
+          <job-hub-textarea id="{{prefix}}_coreProjectComment" label="Project description" placeholder="Project description" formControlName="coreProjectComment" [readonly]="readonly"></job-hub-textarea>
+        </div>
+      </div>
+      <div class="row justify-content-end align-items-center">
+        <ng-container  *ngIf="small">
+          <div class="col-12 col-md-9 col-lg-10 font-weight-bold font-13 color-dove-gray text-right">Project Estimate / $ per {{estimate.costUnit | optionLabel : projectOptions.costUnitTypes}}</div>
+          <div class="col-12 col-md-3 col-lg-2 font-weight-medium font-20 text-primary text-right">{{estimate.pricePerUnit | currency}}</div>
+        </ng-container>
+
+        <ng-container *ngIf="!small">
+          <div class="text-13 font-weight-bold text-right color-dove-gray pb-20 pr-3 col-12 col-md-4 col-lg-3">Project Estimate /</div>
+          <job-hub-select id="{{prefix}}_costUnit" [options]="projectOptions.costUnitTypes" class="col-12 col-md-4 col-lg-3 min-width-200 mr-0" label="$ Per" formControlName="costUnit" [readonly]="readonly"></job-hub-select>
+          <div class="col-12 col-md-4 col-lg-3" *ngIf="!readonly">
+            <job-hub-text-input id="{{prefix}}_pricePerUnit" type="number" min="1" label="Enter amount" placeholder="Enter amount" formControlName="pricePerUnit" [readonly]="readonly"></job-hub-text-input>
+          </div>
+          <div class="col-12 col-md-2 col-lg-2 font-weight-medium font-20 text-primary pb-20 min-width-200 text-right" *ngIf="readonly">{{ estimate.pricePerUnit | currency }}</div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <ng-container formGroupName="items" *ngFor="let item of items.controls; let i = index">
+    <div class="mb-20" [formGroupName]="i">
+      <p class="color-mine-shaft" [ngClass]="small ? 'font-13 font-weight-bold mb-15' : 'font-weight-medium mb-30 font-18'">{{ item.value.type | optionLabel : projectOptions.projectAccessoryTypes }}</p>
+
+      <div class="row">
+        <div class="col-12 col-lg-6">
+          <job-hub-multi-select id="{{prefix}}_items_{{i}}_materials" [options]="projectOptions.materialTypes" label="Type of materials" formControlName="materials" [readonly]="readonly"></job-hub-multi-select>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3">
+          <job-hub-select id="{{prefix}}_items_{{i}}_locationType" [options]="projectOptions.projectLocationTypes" label="Project location on property" formControlName="locationType" [readonly]="readonly"></job-hub-select>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3">
+          <job-hub-text-input label="Approx size" placeholder="Enter size" formControlName="size" [readonly]="readonly"></job-hub-text-input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <job-hub-textarea label="Project description" placeholder="Project description" formControlName="comment" [readonly]="readonly"></job-hub-textarea>
+        </div>
+      </div>
+
+      <div class="row justify-content-end">
+        <div class="col d-flex align-items-center justify-content-between justify-content-md-end" *ngIf="small">
+            <span class=" font-weight-bold font-13 color-dove-gray">
+              Project Estimate / $ per {{item.value.costUnit | optionLabel : projectOptions.costUnitTypes}}
+            </span>
+          <span class="font-weight-medium font-20 text-primary pl-40">{{item.value.pricePerUnit | currency}}</span>
+        </div>
+        <div class="col d-flex align-items-center justify-content-end flex-wrap" *ngIf="!small">
+          <div class="text-13 font-weight-bold text-right color-dove-gray pb-20 pr-3">{{item.value.type | optionLabel : projectOptions.projectAccessoryTypes}} Estimate /</div>
+          <job-hub-select id="{{prefix}}_items_{{i}}_costUnit" [options]="projectOptions.costUnitTypes" class="min-width-200 mr-20" label="$ Per" formControlName="costUnit" [readonly]="readonly"></job-hub-select>
+          <ng-container *ngIf="!readonly">
+            <job-hub-text-input id="{{prefix}}_items_{{i}}_pricePerUnit" type="number" min="1" label="Enter amount" placeholder="Enter amount" formControlName="pricePerUnit" [readonly]="readonly"></job-hub-text-input>
+          </ng-container>
+          <ng-container *ngIf="readonly">
+            <div class="font-weight-medium font-20 text-primary pb-20 min-width-200 text-right">{{ item.value.pricePerUnit | currency }}</div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <p class="color-mine-shaft" [ngClass]="small ? 'font-13 font-weight-bold mb-15' : 'font-weight-medium mb-30 font-18'">Current Project Lead Time</p>
+  <div class="row">
+    <div class="col-12 col-md-6 col-lg-3">
+      <job-hub-select id="{{prefix}}_timelineType" [options]="projectOptions.projectTimelineTypes" label="Time frame for completion" formControlName="timelineType" [readonly]="readonly"></job-hub-select>
+    </div>
+  </div>
+  <job-hub-textarea id="{{prefix}}_comment" label="Comments" placeholder="Comments" formControlName="comment" [readonly]="readonly"></job-hub-textarea>
+  <job-hub-spinner *ngIf="isLoading"></job-hub-spinner>
+</form>

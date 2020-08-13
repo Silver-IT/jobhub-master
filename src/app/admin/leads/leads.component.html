@@ -1,0 +1,16 @@
+<section class="p-15 p-md-30">
+  <form class="row align-items-center" [formGroup]="leadForm">
+    <div class="col-12 col-md-7 mb-20 d-flex align-items-center flex-wrap">
+      <p class="font-18 color-mine-shaft title font-weight-medium mr-20 mb-0">{{ leadForm.value.archivedType | optionLabel }} Leads</p>
+      <job-hub-toggle-button-group [options]="archivedTypeOptions" formControlName="archivedType"></job-hub-toggle-button-group>
+    </div>
+    <div class="col-12 col-md-5">
+      <div class="row justify-content-end">
+        <job-hub-select [options]="dateSortOptions" class="col-12 col-md-6" label="Start Date" placeholder="Most Recent" formControlName="sortByDate"></job-hub-select>
+      </div>
+    </div>
+  </form>
+  <div class="d-flex flex-column">
+    <job-hub-lead-table (selectLead)="navigateToLeadDetail($event)" [filterFormChanged$]="leadForm.valueChanges" hasActionColumn="true" dateField="createdAt" dateLabel="Posted"></job-hub-lead-table>
+  </div>
+</section>

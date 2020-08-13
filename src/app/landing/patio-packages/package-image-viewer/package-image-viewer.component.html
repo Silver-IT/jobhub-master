@@ -1,0 +1,14 @@
+<div class="d-flex flex-column">
+  <div class="mb-30">
+    <div>
+      <job-hub-image-renderer [src]="selected || images[0]"></job-hub-image-renderer>
+    </div>
+  </div>
+  <div *ngIf="images.length > 1" class="row">
+    <ng-container *ngFor="let image of images">
+      <div class="col-6 col-md-3 mb-30">
+        <job-hub-image-renderer class="cursor-pointer" [height]="75" [src]="image" (click)="selected = image"></job-hub-image-renderer>
+      </div>
+    </ng-container>
+  </div>
+</div>

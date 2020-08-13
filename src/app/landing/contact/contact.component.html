@@ -1,0 +1,28 @@
+<job-hub-jumbotron image="assets/images/landing-page/contact/header.jpg"></job-hub-jumbotron>
+
+<job-hub-section-builder header="Keep in touch and" title="Contact us">
+  <div class="row position-relative">
+    <job-hub-spinner *ngIf="isSaving"></job-hub-spinner>
+    <form class="col-12 col-md-6 mx-auto" [formGroup]="contactForm">
+      <job-hub-text-input formControlName="fullName" placeholder="Full name"></job-hub-text-input>
+      <job-hub-text-input type="email" formControlName="email" placeholder="Email address"></job-hub-text-input>
+      <job-hub-phone-number-input formControlName="phone"></job-hub-phone-number-input>
+      <job-hub-address-auto-complete-input formControlName="address" placeholder="Address" (latLngChanged)="addressChanged($event)"></job-hub-address-auto-complete-input>
+      <job-hub-select [options]="sourceFoundUsOptions" placeholder="How did you find our company?" formControlName="sourceFoundUs"></job-hub-select>
+      <job-hub-textarea formControlName="message" placeholder="Comment" rows="4"></job-hub-textarea>
+      <div class="d-flex justify-content-center mt-50">
+        <button class="btn btn-primary" [disabled]="contactForm.invalid || isSaving || isSaved" (click)="captchaRef.execute()">
+          {{ isSaved ? 'Succeed!' : (isSaving ? 'Sending' : 'Submit') }}
+        </button>
+      </div>
+
+      <re-captcha
+        #captchaRef="reCaptcha"
+        (resolved)="$event && sendContactUs()"
+        size="invisible"
+        [siteKey]="recaptchaKey"></re-captcha>
+    </form>
+  </div>
+</job-hub-section-builder>
+
+<job-hub-branding></job-hub-branding>

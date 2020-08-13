@@ -1,0 +1,29 @@
+<section class="bg-color-athens-gray d-flex flex-column">
+  <nav class="navbar p-0 px-20">
+    <div class="d-flex align-items-center justify-content-between w-100 h-100">
+      <a class="navbar-brand d-none d-md-inline" [routerLink]="[ROUTES.admin.root, ROUTES.admin.projects] | routeToAbsolute"><img width="97px" src="assets/images/logo.svg" alt="Logo"></a>
+      <a class="d-inline d-md-none" (click)="sidebar.toggle()"><img src="assets/images/icons/menu-black.svg" alt="Menu"></a>
+      <job-hub-admin-search-input></job-hub-admin-search-input>
+      <div class="d-flex align-items-center h-100">
+        <job-hub-notification-menu></job-hub-notification-menu>
+        <job-hub-inbox-menu></job-hub-inbox-menu>
+      </div>
+    </div>
+  </nav>
+  <div class="section-content d-flex">
+    <job-hub-admin-sidebar class="position-absolute"></job-hub-admin-sidebar>
+
+    <div class="d-flex flex-column flex-grow-1 content-section position-relative">
+
+      <div #admin_panel_container [id]="ScrollPosition.AdminPanelContainer" class="router-wrapper flex-grow-1 overflow-auto pretty-scroll position-relative">
+        <router-outlet></router-outlet>
+      </div>
+
+      <footer class="bg-color-catskill-white d-flex align-items-center px-30">
+        <a class="mr-1"><img src="assets/images/jhg-logo.svg" alt="Job Hub Group"></a>
+        <span class="font-9 color-regent-gray">© 2020 Job Hub Group. All rights reserved.</span>
+      </footer>
+
+    </div>
+  </div>
+</section>

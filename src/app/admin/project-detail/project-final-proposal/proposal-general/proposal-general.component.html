@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-12 col-md-10">
+    <job-hub-proposal-form
+    [proposal]="finalProposal" [small]="false"
+    [project]="project"
+    (proposalChange)="formChange($event)"
+    [customer]="project.customer"
+    [readonly]="finalProposal.status === FinalProposalStatus.Accepted"></job-hub-proposal-form>
+  </div>
+  <div class="col-12 col-md-2 mt-30 mt-md-0">
+    <div class="client-sticky-sidebar text-center">
+      <button class="btn btn-primary btn-lt-md-block mb-20" (click)="preview()">Preview Proposal</button>
+      <job-hub-request-chat userRole="Customer" [readonly]="!(project | isProjectEditable : true)" [project]="project" allowViewProfile="true" [user]="project.user"></job-hub-request-chat>
+    </div>
+  </div>
+</div>

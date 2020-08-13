@@ -1,0 +1,34 @@
+@import "../../../assets/theme";
+
+:host ::ng-deep {
+  form .form-group {
+    input, select {
+      &.form-control {
+        background-color: white;
+      }
+    }
+  }
+}
+
+section {
+  @include absolute_fit_parent;
+  .footer-area {
+    height: 85px;
+  }
+}
+
+.sticky {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999999;
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3);
+  button.btn.btn-primary {
+    height: 46px;
+    padding: 0 50px;
+  }
+}

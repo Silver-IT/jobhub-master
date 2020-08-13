@@ -1,0 +1,11 @@
+<div class="py-40">
+  <div class="d-flex justify-content-end mb-20">
+    <button class="btn btn-primary btn-mini" (click)="addNewUser()">+ Invite</button>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-4 col-lg-3 mb-20" *ngFor="let user of users">
+      <job-hub-user-item [user]="user" (edit)="openEditModal($event)" (delete)="askToDelete($event)"></job-hub-user-item>
+    </div>
+  </div>
+</div>
+<job-hub-spinner *ngIf="isLoading"></job-hub-spinner>

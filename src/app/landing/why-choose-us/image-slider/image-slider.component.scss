@@ -1,0 +1,33 @@
+@import "../../../../assets/theme";
+
+.image-slider {
+  border-radius: 3px;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+:host ::ng-deep {
+  .swiper-pagination-bullet {
+    width: 16px;
+    height: 16px;
+    background-color: $niagara;
+    opacity: .6;
+    transition: ease all .3s;
+    border: none !important;
+    &.swiper-pagination-bullet-active {
+      width: 16px;
+      height: 16px;
+      opacity: 1;
+    }
+  }
+  swiper>.swiper.s-wrapper .swiper-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  swiper>.swiper.s-wrapper .swiper-pagination .swiper-pagination-handle {
+    display: flex;
+    align-items: center;
+  }
+
+}

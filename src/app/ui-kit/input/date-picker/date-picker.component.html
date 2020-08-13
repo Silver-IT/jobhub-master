@@ -1,0 +1,10 @@
+<div class="form-group" [class.label-input-group]="label">
+  <label class="form-label text-left">
+    {{ label }}
+    <input class="form-control" [matDatepicker]="picker" placeholder="Select Date" [(ngModel)]="value" (ngModelChange)="change($event)" [readonly]="true">
+    <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="readonly">
+      <i class="d-inline-block mb-5" matDatepickerToggleIcon><img src="assets/images/icons/calendar.svg" alt="Calendar"></i>
+    </mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </label>
+</div>

@@ -1,0 +1,20 @@
+<job-hub-jumbotron image="assets/images/landing-page/services/header.jpg"></job-hub-jumbotron>
+
+<job-hub-section-builder header="Get Inspired with" title="Our Services">
+  <div class="row mb-90">
+    <div class="col-12 col-md-4 col-lg-3">
+      <ul class="list-unstyled list">
+        <li class="py-15" *ngFor="let item of categories">
+          <a class="color-dove-gray" routerLinkActive="text-primary" [routerLink]="'services/'+item.link | routeToAbsolute">{{ item.name }}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-12 col-md-8 col-lg-9">
+      <div class="pl-0 pl-md-20 mt-50 mt-md-0">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</job-hub-section-builder>
+
+<job-hub-branding></job-hub-branding>

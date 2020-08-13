@@ -1,0 +1,14 @@
+@import "../../../assets/theme";
+
+section {
+  @include absolute_fit_parent;
+  .section-content {
+    flex-grow: 1;
+  }
+}
+
+nav {
+  height: 64px;
+  background-color: white;
+  border-bottom: 1px solid $mercury;
+}

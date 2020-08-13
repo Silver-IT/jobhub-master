@@ -1,0 +1,30 @@
+<job-hub-estimate-review-warning-alert *ngIf="!estimate.id"></job-hub-estimate-review-warning-alert>
+<job-hub-project-status-alert type="danger" text="This estimate declined by the customer." *ngIf="estimate.status === EstimateStatus.Declined"></job-hub-project-status-alert>
+<job-hub-project-status-alert type="info" text="This estimate is under review by customer" *ngIf="estimate.status === EstimateStatus.Pending"></job-hub-project-status-alert>
+
+<job-hub-estimate-form [estimate]="estimate"
+                       [project]="project$ | async"
+                       [renderSchedules]="true"
+                       [readonly]="true"
+                       [assignable]="!estimate?.id || isEditing"
+                       [contractors]="contractors"
+                       (createFinalProposal)="createFinalProposal()"
+                       (formChange)="form = $event"></job-hub-estimate-form>
+
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-center" *ngIf="estimate.id && estimate.status !== EstimateStatus.Declined && !(project$ | async)?.finalProposal">
+  <div class="d-flex flex-column flex-md-row w-100">
+    <button class="btn btn-warning text-white mt-20 px-50 btn-lt-md-block" *jobHubIfAssignedContractor="(project$ | async)?.assignedContractor?.id" (click)="onEdit()">{{ isEditing ? 'Save' : 'Edit' }}</button>
+    <ng-container *ngIf="estimate.status === EstimateStatus.Pending">
+      <button class="btn btn-warning text-white btn-lt-md-block mt-20 ml-0 ml-md-20"  *jobHubIfAssignedContractor="(project$ | async)?.assignedContractor?.id" (click)="continueToProposal()">Continue to Proposal</button>
+    </ng-container>
+  </div>
+  <job-hub-invitation-button [user]="customer"></job-hub-invitation-button>
+</div>
+
+<ng-container *ngIf="!estimate.id || estimate.status === EstimateStatus.Declined">
+  <button class="btn btn-primary btn-lt-md-block mt-20 px-50" *jobHubIfRoles="[UserRole.SuperAdmin]" (click)="sendEstimate()" [disabled]="!form || form.invalid || !form.value.contractorUserId">
+    {{ !estimate.id ? 'Send Estimate' : 'Update Estimate' }}
+  </button>
+  <button class="btn btn-warning btn-lt-md-block mt-20 px-50 ml-0 ml-md-10 text-white" *jobHubIfRoles="[UserRole.SuperAdmin]" (click)="edit.emit()">Edit</button>
+</ng-container>
+<job-hub-spinner *ngIf="isLoading"></job-hub-spinner>

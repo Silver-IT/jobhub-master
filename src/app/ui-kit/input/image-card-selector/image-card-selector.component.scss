@@ -1,0 +1,33 @@
+@import "../../../../assets/theme";
+
+.image-card {
+  position: relative;
+  border-radius: 3px;
+  box-shadow: 0 2px 8px 0 rgba(224,229,238,0.4);
+  color: $silver;
+  transition: ease all .3s;
+  span {
+    @include circle(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid white;
+    position: absolute;
+    left: 20px;
+    top: 15px;
+    img {
+      display: none;
+    }
+  }
+  &:hover {
+    background-color: $niagara;
+    color: white;
+  }
+  &.active {
+    background-color: $niagara;
+    color: white;
+    span img {
+      display: block;
+    }
+  }
+}

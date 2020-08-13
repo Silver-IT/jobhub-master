@@ -1,0 +1,6 @@
+<div class="d-flex align-items-center px-15 py-15 bg-color-catskill-white cursor-pointer" *ngFor="let calendar of calendars" (click)="selectCalendar.emit(calendar)">
+  <div class="mr-10">
+    <img src="assets/images/icons/calendars/google-calendar.svg" alt="Google Calendar">
+  </div>
+  <span class="font-14 font-weight-medium color-dove-gray">{{ calendar.summary }}</span>
+</div>

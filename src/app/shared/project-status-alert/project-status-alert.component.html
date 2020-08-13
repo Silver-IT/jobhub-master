@@ -1,0 +1,19 @@
+<div class="alert d-flex justify-content-between mb-20" [ngClass]="'alert-' + type"
+     [class.bg-color-cosmos]="type === 'danger'"
+     [class.bg-color-tangerine]="type === 'warning'"
+     [class.bg-color-humming-bird]="type === 'info'"
+     role="alert">
+  <div class="d-flex align-items-center">
+    <div class="mr-10">
+      <img class="img-fluid" src="assets/images/icons/toastr/help.svg" alt="Help" *ngIf="type === 'info'">
+      <img class="img-fluid" src="assets/images/icons/toastr/question.svg" alt="Warning" *ngIf="type === 'warning'">
+      <img class="img-fluid" src="assets/images/icons/toastr/danger.svg" alt="Danger" *ngIf="type === 'danger'">
+    </div>
+    <div class="d-flex justify-content-between align-items-center flex-grow-1">
+      <div class="font-12">
+        <p class="mb-0 font-weight-bold">{{ title }}</p>
+        <p class="mb-0">{{ text }}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<a class="close" [mat-dialog-close]="false"><span class="material-icons">close</span></a>
+<h5 mat-dialog-title class="text-center mt-20 px-50">{{title}}</h5>
+<div mat-dialog-content class="py-20 text-center color-dove-gray pretty-scroll">{{content}}</div>
+<div class="d-flex justify-content-center" mat-dialog-actions>
+  <button class="btn btn-danger mr-20" [mat-dialog-close]="true">Yes</button>
+  <button class="btn btn-info" [mat-dialog-close]="false">No</button>
+</div>

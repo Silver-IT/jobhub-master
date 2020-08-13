@@ -1,0 +1,28 @@
+<a class="close" mat-dialog-close><span class="material-icons">close</span></a>
+<h5 mat-dialog-title class="text-center mt-20 px-50 color-mine-shaft">Confirm skip estimate</h5>
+<div mat-dialog-content class="pt-10 px-50 pretty-scroll">
+  <p class="color-dove-gray font-14 text-center mx-20 mb-30">
+    Select assigned contractor and visit date
+  </p>
+  <div class="mb-20">
+    <form [formGroup]="form">
+      <job-hub-select [options]="contractorOptions" label="Assigned to" formControlName="contractorUserId"></job-hub-select>
+      <div class="d-flex flex-column align-items-center my-50">
+        <p class="color-dove-gray" *ngIf="(form.value.from && form.value.to); else emptyDescription">
+          {{ form.value.from | date : 'MMM d, y \' at \' h:mm a' }}
+        </p>
+        <ng-template #emptyDescription>
+          <p class="color-dove-gray">
+            Please select site visited date and time slot
+          </p>
+        </ng-template>
+        <button class="btn btn-primary" (click)="selectSiteVisitedDate()">Select from Calendar</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div mat-dialog-actions class="d-flex justify-content-center">
+  <button class="btn btn-primary" [disabled]="!form.valid" (click)="skipEstimate()">Apply</button>
+</div>
+
+<job-hub-spinner *ngIf="isSaving"></job-hub-spinner>

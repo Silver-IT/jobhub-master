@@ -1,0 +1,25 @@
+@import "../../../../assets/theme";
+
+.idea-image {
+  position: relative;
+  width: 86px;
+  height: 86px;
+  overflow: hidden;
+  @include image_fit();
+
+  span {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    img {
+      width: 25px;
+    }
+  }
+}
+
+.tab-title {
+  @include flex(width, 150px);
+  @include media-breakpoint-down(md) {
+    flex: 0;
+  }
+}

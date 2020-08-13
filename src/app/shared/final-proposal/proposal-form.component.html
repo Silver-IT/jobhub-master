@@ -1,0 +1,256 @@
+
+<form class="font-14 color-mine-shaft" [formGroup]="form">
+  <p class="font-weight-medium mb-10" [class.text-primary]="!small">{{ project.user | fullName }}</p>
+  <div class="font-12 mb-40">
+    <p class="mb-0">{{ addressLine1 }}</p>
+    <p class="mb-0" *ngIf="addressLine2">{{ addressLine2 }}</p>
+    <p class="mb-0">{{ project.user.phone }}</p>
+  </div>
+
+  <p class="font-weight-bold mb-0">Subject:</p>
+  <p class="font-weight-medium mb-30">{{ project.name }}</p>
+
+  <p>We are excited to provide our proposal for the installation of <span class="font-weight-medium" [class.text-primary]="!small">{{ layoutTypeNames | accessoriesText : SeparatorType.Comma }}</span> for the <span class="text-primary font-weight-medium">{{ project.user.lastName }}</span> Residence. J & D Landscaping has been a certified hardscaping contractor for over 15 years, specializing in paver walkways, patios, driveways, and retaining walls for both residential and commercial applications.</p>
+  <p class="mb-40">J & D Landscaping is a certified Techo-Pro installer, with over 2,500 completed hardscape projects throughout Connecticut and Massachusetts. We are an efficient, close-knit team of hardscape and paver installation professionals. We look forward to bringing your project to completion in a cost-effective and timely manner following all industry best practices.</p>
+
+  <p class="font-weight-bold mb-15">The J & D Landscaping Process</p>
+  <p class="mb-50">At J & D Landscaping, we believe in keeping our customers involved and informed during the design and construction process. From the time of the initial engagement, until the project is complete, we will provide full visibility into our work, our schedule and any issues or challenges that we encounter along the way along with appropriate resolution plans and recommendations. We utilize a five-phase process to design and implement a plan for construction. Even for projects that are lower in scope, we use this process to ensure that our customer receives a best-in-class product. </p>
+
+  <ng-container *ngFor="let item of landscapingProcess; let last = last;">
+    <div class="d-flex">
+      <div class="mr-15">
+        <img [src]="item.image" alt="consult">
+      </div>
+      <div>
+        <p class="font-weight-medium mb-0">{{ item.title }}</p>
+        <p [class.mb-40]="last">{{ item.description }}<span class="font-weight-medium" *ngIf="item.layoutTypeNames" [class.text-primary]="!small">{{ item.layoutTypeNames }}</span>.</p>
+      </div>
+    </div>
+  </ng-container>
+  <job-hub-proposal-comment-input class="pb-30" id="{{prefix}}_existingSiteAssessment" label="Existing Site Assessment" innerLabel="Description" formControlName="existingSiteAssessment" [readonly]="readonly"></job-hub-proposal-comment-input>
+
+  <p class="font-weight-bold mb-15">Project Design Considerations</p>
+  <p class="mb-25">Based on our knowledge of the hardscape industry, we recommend keeping the following in mind:</p>
+
+  <job-hub-proposal-comment-input class="pb-30" id="{{prefix}}_paversSize" label="Size of Materials" innerLabel="Description" formControlName="paversSize" [readonly]="readonly"></job-hub-proposal-comment-input>
+  <job-hub-proposal-comment-input class="pb-30" id="{{prefix}}_paversColor" label="Color of Materials" innerLabel="Description" formControlName="paversColor" [readonly]="readonly"></job-hub-proposal-comment-input>
+  <job-hub-proposal-comment-input class="pb-30" id="{{prefix}}_paversQuality" label="Quality of Materials" innerLabel="Description" formControlName="paversQuality" [readonly]="readonly"></job-hub-proposal-comment-input>
+
+  <p class="font-weight-medium" [class.text-primary]="!small">Layouts</p>
+
+  <ng-container formGroupName="layouts" *ngFor="let layout of layouts.controls; let i = index;">
+    <div [formArrayName]="i">
+      <ng-container *ngIf="!layout.get('isEditing').value || readonly">
+        <job-hub-proposal-comment-input [useExternalEditor]="true" (edit)="layout.get('isEditing').setValue(true)" class="pb-30" [isEditing]="false" (remove)="layouts.removeAt(i); costEstimates.removeAt(i);" id="{{prefix}}_layouts_{{i}}_comment" [optional]="true" [label]="layout.get('type').value | optionLabel : projectOptions.projectAccessoryTypes" formControlName="comment" [readonly]="readonly">
+          <job-hub-photo-uploader formControlName="attachments" [size]="40" align="start" [readonly]="readonly"></job-hub-photo-uploader>
+        </job-hub-proposal-comment-input>
+      </ng-container>
+      <ng-container *ngIf="layout.get('isEditing').value && !readonly">
+        <div class="row">
+          <div class="col-12 col-md-6 d-flex align-items-center">
+            <job-hub-select class="flex-1" [options]="projectOptions.projectAccessoryTypes" id="{{prefix}}_layouts_{{i}}_type" label="Project Type" formControlName="type"></job-hub-select>
+            <a class="cursor-pointer ml-20 mb-20" (click)="layouts.removeAt(i); costEstimates.removeAt(i);" *ngIf="!readonly"><img src="assets/images/icons/remove.svg" alt="Remove"></a>
+          </div>
+        </div>
+        <job-hub-textarea label="Description" id="{{prefix}}_layouts_{{i}}_comment" formControlName="comment" placeholder="Layout description"></job-hub-textarea>
+        <job-hub-photo-uploader formControlName="attachments" [size]="40" align="start" [readonly]="readonly"></job-hub-photo-uploader>
+        <button class="btn btn-primary btn-small btn-lt-md-block mb-20 mr-0 mr-md-20 mb-20" [disabled]="!layout.valid" (click)="layout.get('isEditing').setValue(false)">Save</button>
+        <button class="btn btn-danger bg-color-japonica btn-small btn-lt-md-block mb-20" [disabled]="!layout.valid" (click)="layouts.removeAt(i)">Cancel</button>
+      </ng-container>
+    </div>
+  </ng-container>
+  <button class="btn btn-warning btn-lt-md-block text-white btn-small mb-40" *ngIf="!readonly" (click)="addLayout()">Add New Layout</button>
+
+  <p class="font-weight-bold mb-15">Construction Procedure</p>
+  <p class="mb-25">It is essential that during the construction of any new hardscaping project that the following procedures are completed to industry standards ensuring a quality long-lasting project.</p>
+
+  <job-hub-proposal-comment-input class="mb-40" id="{{prefix}}_existingMaterialRemoval" label="Removal of existing materials" formControlName="existingMaterialRemoval" [readonly]="readonly"></job-hub-proposal-comment-input>
+  <ng-container formGroupName="procedures" *ngFor="let procedure of procedures.controls; let i = index;">
+    <div *ngIf="!procedure.get('isEditing').value || readonly" [formArrayName]="i">
+      <p class="font-weight-bold" [class.text-primary]="!small">{{procedure.value.type | optionLabel}}</p>
+      <ng-container *ngFor="let step of procedure.get('steps').controls; let j = index;" formGroupName="steps">
+        <div [formArrayName]="j">
+          <job-hub-proposal-comment-input [light]="true" (remove)="procedure.get('steps').removeAt(j)" *ngIf="!step.get('isEditing').value || readonly" class="mb-30" innerLabel="Description" [optional]="true" [isEditing]="false" [readonly]="readonly" [label]="step.value.title" formControlName="comment">
+          </job-hub-proposal-comment-input>
+          <div *ngIf="step.get('isEditing').value && !readonly">
+            <div class="row">
+              <div class="col-12 col-md-6">
+                <job-hub-text-input label="Title" placeholder="Procedure title" formControlName="title"></job-hub-text-input>
+              </div>
+            </div>
+            <job-hub-textarea label="Description" formControlName="comment" placeholder="Procedure comment"></job-hub-textarea>
+            <div class="d-flex flex-column flex-md-row">
+              <button class="btn btn-primary btn-small btn-lt-md-block mb-20 mr-20" (click)="step.get('isEditing').setValue(false)">Save</button>
+              <button class="btn btn-warning btn-small btn-lt-md-block text-white mb-20" (click)="procedure.get('steps').removeAt(j)">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <button class="btn btn-warning btn-lt-md-block text-white btn-small mb-40" *ngIf="!readonly" (click)="addProcedureStep(procedure)">Add new item</button>
+    </div>
+    <div *ngIf="procedure.get('isEditing').value && !readonly" [formArrayName]="i">
+      <div class="row">
+        <div class="col-12 col-md-4">
+          <job-hub-select label="Project" id="{{prefix}}_procedures_{{i}}_type" [options]="projectOptions.projectAccessoryTypes" formControlName="type"></job-hub-select>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-small btn-lt-md-block mb-20" [disabled]="!procedure.valid" (click)="procedure.get('isEditing').setValue(false); procedure.get('steps').setValue([])">Save</button>
+    </div>
+  </ng-container>
+  <button class="btn btn-warning btn-lt-md-block text-white mt-20 mb-40" *ngIf="!readonly" (click)="addProcedure()">Add New Procedure</button>
+
+  <job-hub-proposal-comment-input innerLabel="Work plan description" [readonly]="readonly" id="{{prefix}}_workPlan" label="Work Plan" formControlName="workPlan" description="We will work with the customer to put together  a project plan that fits their schedule. We have developed an initial schedule that provides for project completion and clean up. This schedule is provided as a guideline. The dates are placeholders and will be adjusted based on the anticipated start and required end dates.">
+    <div class="mt-20">
+      <div class="row" *ngIf="!small">
+        <job-hub-text-input label="Assigned to" class="col-12 col-lg-4" [readonly]="true" [value]="project.assignedContractor.firstName + ' ' + project.assignedContractor.lastName"></job-hub-text-input>
+        <job-hub-date-picker label="Approx start date" class="col-12 col-lg-4" id="{{prefix}}_startDate" [readonly]="readonly" formControlName="startDate"></job-hub-date-picker>
+        <job-hub-date-picker label="Approx complete date" class="col-12 col-lg-4" id="{{prefix}}_endDate" [readonly]="readonly" formControlName="endDate"></job-hub-date-picker>
+      </div>
+      <div class="row mb-25" *ngIf="small">
+        <div class="col-12 col-lg-4 mb-20 mb-lg-0">
+          <p class="color-mine-shaft mb-10">Approx Start date:</p>
+          <p class="font-24 text-primary font-weight-medium mb-0">{{ form.get('startDate').value | date }}</p>
+        </div>
+        <div class="col-12 col-lg-4">
+          <p class="color-mine-shaft mb-10">Approx Complete date:</p>
+          <p class="font-24 text-primary font-weight-medium mb-0">{{ form.get('endDate').value | date }}</p>
+        </div>
+      </div>
+      <div class="p-15 pb-10 mb-25 bg-primary-transparent rounded" *ngIf="small">
+        <span class="font-weight-medium text-primary">
+          These dates are only approximate dates and are subject to change due to weather. Your project consultant will reach out to you with a more firm date as we near the start of your project.
+        </span>
+      </div>
+      <job-hub-photo-uploader formControlName="attachments" [size]="40" align="start" [readonly]="readonly"></job-hub-photo-uploader>
+    </div>
+  </job-hub-proposal-comment-input>
+
+  <p class="font-weight-bold mb-15 mt-50">Cost Estimate</p>
+  <div class="cost-table">
+    <div class="cost-table-header bg-color-blue-lagoon d-flex align-items-center text-white font-12">
+      <div class="px-15"><span>Description</span></div>
+      <div class="px-15"><span>Cost</span></div>
+    </div>
+    <div class="cost-table-content">
+      <div class="cost-table-row d-flex flex-column flex-lg-row align-items-start py-15" formGroupName="costEstimates" *ngFor="let estimate of costEstimates.controls; let i = index;">
+        <ng-container [formArrayName]="i">
+          <ng-container *ngIf="estimate.get('isEditing').value && !readonly">
+            <div class="px-15">
+              <div class="d-flex align-items-center">
+                <job-hub-select [options]="projectOptions.projectAccessoryTypes" id="{{prefix}}_costEstimates_{{i}}_type" label="Project Type" formControlName="type"></job-hub-select>
+                <a class="cursor-pointer ml-20" *ngIf="!readonly" (click)="costEstimates.removeAt(i); layouts.removeAt(i);"><img src="assets/images/icons/remove.svg" alt="Remove"></a>
+              </div>
+              <job-hub-textarea formControlName="comment" label="Project Description"  id="{{prefix}}_costEstimates_{{i}}_comment" placeholder="Description"></job-hub-textarea>
+            </div>
+            <div class="px-15 d-flex flex-column">
+              <job-hub-text-input type="number" label="Amount" placeholder="Amount" min="0"  id="{{prefix}}_costEstimates_{{i}}_cost" formControlName="cost"></job-hub-text-input>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="!estimate.get('isEditing').value || readonly">
+            <div class="px-15">
+              <div class="d-flex">
+                <p class="font-13 font-weight-medium mb-0" [class.text-primary]="!small">{{estimate.get('type').value | optionLabel : projectOptions.projectAccessoryTypes}}</p>
+                <a class="cursor-pointer ml-20" *ngIf="!readonly" (click)="costEstimates.removeAt(i); layouts.removeAt(i);"><img src="assets/images/icons/remove.svg" alt="Remove"></a>
+              </div>
+              <p class="font-13 mb-0">{{ estimate.get('comment').value }}</p>
+            </div>
+            <div class="px-15 d-flex align-items-center justify-content-between mt-20 mt-lg-0">
+              <div *ngIf="!small" class="d-flex w-100 justify-content-between">
+                <div>
+                  <p class="font-12 font-weight-medium text-primary mb-0">Amount</p>
+                  <p class="mb-0">{{ estimate.get('cost').value | currency }}</p>
+                </div>
+                <div>
+                  <mat-slide-toggle *ngIf="readonly" formControlName="accept" [disabled]="true"></mat-slide-toggle>
+                </div>
+              </div>
+              <div *ngIf="small" class="d-flex justify-content-between w-100">
+                <p class="font-18 font-weight-medium text-primary mb-0">{{estimate.get('cost').value | currency}}</p>
+                <div class="align-items-end d-flex flex-column">
+                  <mat-slide-toggle formControlName="accept"></mat-slide-toggle>
+                  <span class="text-warning font-12 mt-10">{{estimate.get('accept').value ? 'Remove Accessory?' : 'Add Accessory?'}}</span>
+                </div>
+              </div>
+              <a class="cursor-pointer" (click)="estimate.get('isEditing').setValue(true)" *ngIf="!readonly">
+                <img src="assets/images/icons/edit.svg" alt="Edit">
+              </a>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="pt-10 pb-15 px-15" *ngIf="!readonly">
+      <button type="button" class="btn btn-primary btn-lt-md-block btn-small mb-15 mb-md-0" (click)="saveEstimates()" [disabled]="costEstimates.invalid">Save</button>
+      <button type="button" class="btn btn-warning btn-lt-md-block text-white btn-small ml-0 ml-md-20" (click)="addLayout()">Add New</button>
+    </div>
+  </div>
+
+  <div class="mb-50 mt-30">
+    <div class="row align-items-center py-10">
+      <div class="col-sm-6 col-md-9 color-dove-gray font-13 text-right font-weight-bold">Subtotal</div>
+      <div class="col-sm-6 col-md-3 text-primary font-20 font-weight-medium text-right">{{subTotal | currency}}</div>
+    </div>
+    <div class="row align-items-center py-10">
+      <div class="col-sm-6 col-md-9 color-dove-gray font-13 text-right font-weight-bold">Tax*</div>
+      <div [class.justify-content-end]="small"
+           [class.justify-content-between]="!small"
+           class="col-sm-6 col-md-3 text-primary font-20 font-weight-medium d-flex align-items-center flex-wrap">
+        <mat-slide-toggle formControlName="applyTax" labelPosition="before" *ngIf="!small" [disabled]="small || readonly">Apply</mat-slide-toggle>
+        <span>{{tax | currency}}</span>
+      </div>
+    </div>
+    <ng-container *ngIf="readonly">
+      <div *ngIf="form.get('discount').value != 0" class="row align-items-center py-10">
+        <div class="col-sm-6 col-md-9 color-dove-gray font-13 text-right font-weight-bold">Discount</div>
+        <div class="col-sm-6 col-md-3 text-primary font-20 font-weight-medium text-right">{{form.get('discount').value | currency}}</div>
+      </div>
+    </ng-container>
+    <div *ngIf="!readonly" class="row align-items-center py-10">
+      <div class="col-sm-6 col-md-9 color-dove-gray font-13 text-right font-weight-bold">Discount?</div>
+      <div class="col-sm-6 col-md-3 text-right">
+        <input class="form-control text-right bg-white text-primary" type="number" placeholder="$" formControlName="discount" *ngIf="isEditingDiscount"/>
+        <button *ngIf="!isEditingDiscount" (click)="isEditingDiscount = true" class="btn btn-add bg-primary text-white">+</button>
+      </div>
+    </div>
+    <div class="row align-items-center py-10 bg-primary-transparent">
+      <div class="col-sm-6 col-md-4 color-dove-gray font-13 text-right font-weight-bold" [class.col-md-9]="!small">Total</div>
+      <div class="col-sm-6 col-md-3 text-primary font-24 font-weight-medium text-right">{{total | currency}}</div>
+    </div>
+  </div>
+
+  <p class="font-weight-bold mb-25">Payment Schedule</p>
+  <p class="font-weight-medium mb-0">Compensation</p>
+  <p class="mb-0"><span class="text-primary font-weight-medium">Contract signing:</span> 10% of the contract amount</p>
+  <p class="mb-0"><span class="text-primary font-weight-medium">Materials arrive onsite and the project has started:</span> 40%</p>
+  <p class="mb-25"><span class="text-primary font-weight-medium">The project has been completed and signed off on:</span>  50%</p>
+
+  <p class="font-weight-medium mb-0">Invoices</p>
+  <p class="mb-25">Unless otherwise agreed with the client, our invoices are due upon completion of the project.</p>
+
+  <p class="font-weight-medium mb-0">Payment</p>
+  <p class="mb-40">Payment can be made by ACH, wire, credit card or check. For payment by ACH or wire, we will provide appropriate bank routing and account information in advance of the first payment. Payments made by check must be received by J & D Landscaping by the invoice date.</p>
+
+  <p class="font-weight-bold mb-25">J&D Landscape Past Projects</p>
+  <p class="mb-25">J & D Landscaping has installed hardscaping for residential, commercial and municipal customers throughout Connecticut and Massachusetts. We provide a flexible range of services that include the installation of walkways, patios, parking areas, pool patios, retaining walls and other hardscape related projects. Below are just a few examples of some projects that are similar to the size and scope of your project.  To view more projects please visit our Instagram page that is consistently updated with new projects as they have been completed.  More project photos are available on Instagram at <a class="text-primary" href="https://www.instagram.com/jdlandscapingllc/" target="_blank">@JDLandscapingLLC</a></p>
+  <div class="mb-20">
+    <job-hub-portfolio-project-on-proposal *ngFor="let project of pastProjects" [project]="project"></job-hub-portfolio-project-on-proposal>
+  </div>
+
+  <p class="font-weight-bold mb-25">References</p>
+  <p class="mb-25">J & D Landscaping can provide a list of additional references if requested, additional project photos to the references listed below and any other additional information the customer requests.</p>
+  <div class="mb-25">
+    <job-hub-portfolio-project-on-proposal *ngFor="let project of referenceProjects" [project]="project"></job-hub-portfolio-project-on-proposal>
+  </div>
+
+  <p class="mb-40">Thank you for your time and consideration and please don’t hesitate to reach out for additional information.</p>
+
+  <job-hub-signature></job-hub-signature>
+  <p class="mb-40">{{ project.assignedContractor | fullName }}</p>
+
+  <div class="d-flex flex-column">
+    <p class="font-weight-medium text-primary mb-0">J & D Landscaping</p>
+    <a class="text-primary">860-324-6218</a>
+    <a class="text-primary" href="https://www.jdlandscaping.net" target="_blank">jdlandscaping.net</a>
+    <a class="text-primary" href="mailto:{{ project.assignedContractor.email }}">{{ project.assignedContractor.email }}</a>
+  </div>
+</form>

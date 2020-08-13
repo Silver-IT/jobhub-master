@@ -1,0 +1,10 @@
+@import "../../../../assets/theme";
+
+job-hub-time-picker::ng-deep {
+  .form-group {
+    background-color: $athens-gray;
+    input {
+      background-color: $athens-gray !important;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+<div class="project-wrapper d-flex flex-column-reverse flex-lg-row justify-content-between py-20 px-15 mb-25">
+  <div class="font-14 color-mine-shaft text-center text-lg-left">
+    <p class="font-weight-medium text-primary mb-10">{{ project.name }}</p>
+    <p class="mb-0" *ngIf="project.email">{{ project.email }}</p>
+    <p class="mb-0" *ngIf="project.phone">{{ project.phone }}</p>
+    <p class="mb-0 mt-20">{{ project.comment }}</p>
+  </div>
+  <div class="image-wrapper ml-0 ml-lg-50 mb-20 mb-lg-0">
+    <img class="img-fluid" [src]="project.image" [alt]="project.name">
+  </div>
+</div>

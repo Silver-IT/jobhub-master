@@ -1,0 +1,31 @@
+<a class="close" [mat-dialog-close]="null"><span class="material-icons">close</span></a>
+<h5 mat-dialog-title class="text-center mt-20 px-50 color-mine-shaft">{{ data.selectedDate | date }}</h5>
+
+<div class="px-40 pt-10">
+  <p class="color-dove-gray text-center mb-40">Select from the available hour blocks</p>
+  <div class="row mb-30">
+    <div class="col-12 col-md-6">
+      <button class="btn btn-primary btn-block" [mat-dialog-close]="ScheduleDuration.Minutes30">30 Minutes Schedule</button>
+    </div>
+    <div class="col-12 col-md-6">
+      <button class="btn btn-primary btn-block" [mat-dialog-close]="ScheduleDuration.Minutes60">1 Hour Schedule</button>
+    </div>
+  </div>
+</div>
+
+<div mat-dialog-content class="px-70 pt-10 pb-20 pretty-scroll">
+
+  <div *ngIf="data.events && data.events.length">
+    <p class="color-dove-gray text-center mb-30">Jobs of the day planned</p>
+    <div *ngFor="let item of data.events" class="d-flex align-items-center justify-content-between bg-color-athens-gray p-15 mb-5 rounded">
+      <div class="d-flex align-items-center">
+        <job-hub-schedule-icon [schedule]="item"></job-hub-schedule-icon>
+        <div class="d-flex flex-column ml-25">
+          <a class="font-13 font-weight-bold color-mine-shaft cursor-pointer">{{ item.data.project.name }}</a>
+          <span class="font-11 color-dove-gray">{{ item.from | date : 'h:mm a' }} - {{ item.to | date: 'h:mm a' }}</span>
+        </div>
+      </div>
+      <div></div>
+    </div>
+  </div>
+</div>

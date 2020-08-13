@@ -1,0 +1,8 @@
+<div class="form-group w-100" [class.label-input-group]="label">
+  <ng-container class="form-label" *ngFor="let option of clonedOptions">
+    <label class="d-flex mt-20 cursor-pointer" (click)="toggleOption($event, option)">
+      <mat-checkbox [(ngModel)]="option.selected"></mat-checkbox>
+      <mat-label class="font-weight-normal color-dove-gray ml-10 pt-0">{{ option.label }}</mat-label>
+    </label>
+  </ng-container>
+</div>

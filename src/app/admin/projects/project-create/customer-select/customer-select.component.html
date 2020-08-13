@@ -1,0 +1,20 @@
+<div>
+  <form class="col-12 col-md-8 mx-auto">
+    <span class="mr-10 position-absolute search-icon"><img src="assets/images/icons/search.svg" alt="Search"></span>
+    <job-hub-text-input class="text-left" label="Search" placeholder="Customer Name" [(ngModel)]="keyword" [ngModelOptions]="{ standalone: true }"></job-hub-text-input>
+  </form>
+  <div class="col-12">
+    <div class="font-14 font-weight-medium text-left color-regent-gray pb-4 pt-30">Customers</div>
+    <ng-container *ngFor="let customer of customers">
+      <div class="row bg-white p-3 cursor-pointer align-items-center" (click)="customerSelect.emit(customer.id)" *ngIf="customer.firstName.toLowerCase().indexOf(keyword.toLowerCase()) >= 0 || customer.lastName.toLowerCase().indexOf(keyword.toLowerCase()) >= 0">
+        <div class="col-12 d-flex align-items-center">
+          <job-hub-avatar [src]="customer.avatar"></job-hub-avatar>
+          <div class="text-left pl-30">
+            <div class="text-primary font-13 font-weight-bold">{{ customer.firstName }} {{ customer.lastName }}</div>
+            <div class="font-10 color-dove-gray font-weight-medium pt-1">{{ customer.email }}</div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

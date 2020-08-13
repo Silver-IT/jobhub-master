@@ -1,0 +1,13 @@
+@import "../../../../assets/theme";
+
+.spinner {
+  @include absolute_fit_parent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  .spinner-overlay {
+    @include absolute_fit_parent;
+    background-color: rgba(255, 255, 255, 0.26);
+  }
+}

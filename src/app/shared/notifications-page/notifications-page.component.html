@@ -1,0 +1,31 @@
+<section class="py-30">
+  <div class="container">
+    <div class="d-flex justify-content-between mb-30">
+      <p class="font-weight-medium color-mine-shaft mb-0">Notifications</p>
+      <a class="text-primary font-12" (click)="readAll()">Mark all as read</a>
+    </div>
+
+    <div class="bg-white rounded shadow-1">
+      <div class="position-relative py-50" *ngIf="isLoading">
+        <job-hub-spinner></job-hub-spinner>
+      </div>
+
+      <div class="py-50" *ngIf="!isLoading && !(events$ | async)?.length">
+        <p class="font-13 font-weight-medium color-dove-gray text-center mb-0">No notifications to display</p>
+      </div>
+      <div class="notification-item d-flex flex-column flex-md-row justify-content-between align-items-center p-4 position-relative" (click)="notificationSelect(item)" *ngFor="let item of (events$ | async)">
+        <div class="d-flex flex-column flex-md-row align-items-center flex-grow-1 text-center text-md-left">
+          <job-hub-notification-avatar [event]="item"></job-hub-notification-avatar>
+          <div class="font-13 ml-15 d-flex flex-column flex-md-row mt-20 mt-md-0">
+            <a class="font-weight-medium color-mine-shaft link-underline" (click)="notificationSelect(item)">{{ item | notification }}</a><span class="d-none d-md-block">&nbsp;</span>
+            <span class="color-dove-gray">{{ item.message }}</span>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center justify-content-md-end">
+          <span class="color-aqua-island font-13 mr-0 mr-md-35">{{ item.createdAt | timeAgo }}</span>
+          <job-hub-icon icon="close" class="cursor-pointer no-arrow read-button" (click)="readEvent(item.id, $event)"></job-hub-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

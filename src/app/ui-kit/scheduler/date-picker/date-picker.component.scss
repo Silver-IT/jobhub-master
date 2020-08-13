@@ -1,0 +1,51 @@
+@import "../../../../assets/theme";
+
+.date-picker-wrapper {
+  padding: 0 38px;
+}
+
+.custom-day {
+  position: relative;
+  text-align: center;
+  padding: 0.185rem 0.25rem;
+  border-radius: 0.25rem;
+  display: inline-block;
+  font-size: 14px;
+  color: $mine-shaft;
+  font-weight: 500;
+  width: 24px;
+  height: 24px;
+  &.selected {
+    @include circle(24px);
+    background-color: $tangerine;
+    color: white !important;
+  }
+  &.has-schedule {
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      display: block;
+      background-color: $niagara;
+      @include circle(4px);
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+}
+
+.weekend {
+  color: $japonica !important;
+}
+
+.not-current-month {
+  color: $mercury;
+}
+
+.text-warning {
+  color: $tangerine !important;
+}
+
+.text-muted {
+  opacity: 0.5;
+}

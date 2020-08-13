@@ -1,0 +1,232 @@
+<section class="py-50 px-15 px-lg-75 position-relative">
+  <job-hub-spinner *ngIf="isLoading"></job-hub-spinner>
+  <form [formGroup]="form" (ngSubmit)="update()">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-25">
+      <p class="color-mine-shaft font-18 font-weight-medium mb-20 mb-md-0 tab-title">General Details</p>
+      <ng-container *jobHubIfRoles="[UserRole.SuperAdmin]">
+        <div class="d-flex flex-column flex-md-row justify-content-end w-100">
+          <button type="button" class="btn btn-warning btn-lt-md-block mr-3 mb-15 mb-md-0 text-white" (click)="continueToPayment()" *ngIf="project.status === ProjectStatus.ConsultationScheduled">Continue to Payment</button>
+          <button type="button" class="btn btn-warning btn-lt-md-block mr-3 mb-15 mb-md-0 text-white" (click)="skipEstimate()" *ngIf="project.status === ProjectStatus.ConsultationScheduled">Skip Estimate</button>
+          <button type="button" class="btn btn-primary btn-lt-md-block" (click)="createEstimate()" *ngIf="project.status === ProjectStatus.ConsultationScheduled">Create Estimate</button>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <job-hub-text-input id="{{prefix}}_name" label="Project name" placeholder="Project name" formControlName="name" [readonly]="!(project | isProjectEditable)"></job-hub-text-input>
+      </div>
+      <div class="col-12 col-md-4">
+        <job-hub-address-auto-complete-input id="{{prefix}}_address" label="Project location" placeholder="Project location" formControlName="address" [readonly]="!(project | isProjectEditable)" (latLngChanged)="addressChanged($event)"></job-hub-address-auto-complete-input>
+      </div>
+      <div class="col-12 col-md-4">
+        <job-hub-select id="{{prefix}}_timelineType" [options]="projectOptions.projectTimelineTypes" label="Time frame for completion" formControlName="timelineType" [readonly]="!(project | isProjectEditable)"></job-hub-select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-3">
+        <job-hub-select [options]="projectOptions.opinion" label="Interested in financing" formControlName="interestedInFinancing" [readonly]="!(project | isProjectEditable)"></job-hub-select>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <job-hub-yes-no-picker label="3D Design required" formControlName="designRequired" [readonly]="!(project | isProjectEditable)"></job-hub-yes-no-picker>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <job-hub-select [options]="projectOptions.cleanupRequiredTypes" label="Project cleanup" formControlName="cleanUpType" [readonly]="!(project | isProjectEditable)"></job-hub-select>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <job-hub-text-input id="{{prefix}}_budget" type="number" min="1" label="Approx project budget" placeholder="Approx project budget" formControlName="budget" [readonly]="!(project | isProjectEditable)"></job-hub-text-input>
+      </div>
+    </div>
+
+    <p class="color-mine-shaft font-18 font-weight-medium my-25">Project Details</p>
+
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-3">
+        <job-hub-select id="{{prefix}}_projectType" [options]="projectOptions.projectAccessoryTypes" label="Project type" formControlName="projectType" [readonly]="!(project | isProjectEditable)"></job-hub-select>
+      </div>
+      <div class="col-12 col-md-6 col-lg-9">
+        <job-hub-multi-select id="{{prefix}}_materials" [options]="projectOptions.materialTypes" label="Type of materials" formControlName="materials" [readonly]="!(project | isProjectEditable)"></job-hub-multi-select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-lg-4">
+        <job-hub-select id="{{prefix}}_locationType" [options]="projectOptions.projectLocationTypes" label="Project location on property" formControlName="locationType" [readonly]="!(project | isProjectEditable)"></job-hub-select>
+      </div>
+      <div class="col-12 col-lg-4">
+        <job-hub-text-input id="{{prefix}}_projectSize" label="Approx size" placeholder="Approx size" formControlName="projectSize" [readonly]="!(project | isProjectEditable)"></job-hub-text-input>
+      </div>
+      <div class="col-12 col-lg-4">
+        <job-hub-select id="{{prefix}}_shapeType" [options]="projectOptions.projectShapeTypes" label="Shape" formControlName="shapeType" [readonly]="!(project | isProjectEditable)"></job-hub-select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-lg-6">
+        <job-hub-textarea label="Landscaping request - details" placeholder="Landscaping request" formControlName="requestDetails" [readonly]="!(project | isProjectEditable)"></job-hub-textarea>
+      </div>
+      <div class="col-12 col-lg-6">
+        <job-hub-textarea label="Project description" placeholder="Project description" formControlName="comment" [readonly]="!(project | isProjectEditable)"></job-hub-textarea>
+      </div>
+    </div>
+
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center my-25">
+      <p class="color-mine-shaft font-18 font-weight-medium mb-20 mb-md-0">Accessory Details</p>
+      <div>
+        <button type="button" class="btn btn-primary btn-mini" (click)="addAccessory()" *ngIf="project | isProjectEditable">Add another accessory?</button>
+        <button type="button" class="btn btn-danger bg-color-japonica btn-mini ml-20" (click)="deleteAccessory(0)" *ngIf="accessories.length && project | isProjectEditable">Delete accessory</button>
+      </div>
+    </div>
+
+    <ng-container formGroupName="accessories" *ngFor="let accessory of accessories.controls; let i = index">
+      <div class="pb-10" [formGroupName]="i">
+        <div class="d-flex justify-content-end mb-15" *ngIf="i > 0">
+          <button type="button" class="btn btn-danger bg-color-japonica btn-mini" (click)="deleteAccessory(i)" *ngIf="project | isProjectEditable">Delete accessory</button>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-6 col-lg-3">
+            <job-hub-select id="{{prefix}}_accessories_{{i}}_type" [options]="projectOptions.projectAccessoryTypes" label="Type of accessory" formControlName="type" [readonly]="!(project | isProjectEditable)"></job-hub-select>
+          </div>
+          <div class="col-12 col-md-6 col-lg-9">
+            <job-hub-multi-select [options]="projectOptions.materialTypes" label="Type of materials" formControlName="materials" [readonly]="!(project | isProjectEditable)"></job-hub-multi-select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-6 col-lg-3">
+            <job-hub-select [options]="projectOptions.projectLocationTypes" label="Project location on property" formControlName="locationType" [readonly]="!(project | isProjectEditable)"></job-hub-select>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <job-hub-text-input label="Approx size" placeholder="Enter size" formControlName="size" [readonly]="!(project | isProjectEditable)"></job-hub-text-input>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <job-hub-select [options]="projectOptions.projectShapeTypes" label="Shape" formControlName="shape" [readonly]="!(project | isProjectEditable)"></job-hub-select>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <job-hub-text-input label="Whats currently there?" placeholder="Enter current state" formControlName="groundState" [readonly]="!(project | isProjectEditable)"></job-hub-text-input>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <job-hub-textarea label="Project description" placeholder="Project description" formControlName="comment" [readonly]="!(project | isProjectEditable)"></job-hub-textarea>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <p class="color-mine-shaft font-18 font-weight-medium my-25">Design Details</p>
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-3">
+        <job-hub-auto-complete [category]="TagCategory.BrandManufacturer" label="Brand / Manufacturer" placeholder="Brand / Manufacturer" formControlName="manufacturer" [readonly]="!(project | isProjectEditable)"></job-hub-auto-complete>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <job-hub-auto-complete [category]="TagCategory.ProductName" label="Product name" placeholder="Product name" formControlName="productName" [readonly]="!(project | isProjectEditable)"></job-hub-auto-complete>
+      </div>
+      <div class="col-12 col-lg-6">
+        <job-hub-multi-select [options]="projectOptions.preferredColors" label="Preferred colors" formControlName="preferredColors" [readonly]="!(project | isProjectEditable)"></job-hub-multi-select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-3">
+        <job-hub-auto-complete [category]="TagCategory.PreferredSize" label="Preferred sizes" placeholder="Larger blocks" formControlName="preferredSize" [readonly]="!(project | isProjectEditable)"></job-hub-auto-complete>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <job-hub-auto-complete [category]="TagCategory.PreferredTexture" label="Preferred texture" placeholder="Smooth" formControlName="preferredTexture" [readonly]="!(project | isProjectEditable)"></job-hub-auto-complete>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <job-hub-select [options]="projectOptions.preferredPricePoints" label="Preferred price point" placeholder="Basic Paver - Economy" formControlName="preferredPricePoint" [readonly]="!(project | isProjectEditable)"></job-hub-select>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <job-hub-text-input label="Additional designs" placeholder="Different color border" formControlName="additionalDesigns" [readonly]="!(project | isProjectEditable)"></job-hub-text-input>
+      </div>
+    </div>
+
+    <p class="color-mine-shaft font-18 font-weight-medium my-25">Site Details</p>
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-3">
+        <job-hub-select id="{{prefix}}_machineAccess" [options]="projectOptions.machineAccessTypes" label="Machine access" formControlName="machineAccess" [readonly]="!(project | isProjectEditable)"></job-hub-select>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <job-hub-select id="{{prefix}}_soilType" [options]="projectOptions.soilTypes" label="Soil type" formControlName="soilType" [readonly]="!(project | isProjectEditable)"></job-hub-select>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <job-hub-select id="{{prefix}}_propertyGrade" [options]="projectOptions.propertyGradeTypes" label="Property grade" formControlName="propertyGrade" [readonly]="!(project | isProjectEditable)"></job-hub-select>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <job-hub-select id="{{prefix}}_drainageType" [options]="projectOptions.drainageTypes" label="Drainage" formControlName="drainageType" [readonly]="!(project | isProjectEditable)"></job-hub-select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <job-hub-text-input label="Know exterior utilities" placeholder="Power to shed" formControlName="exteriorUtilities" [readonly]="!(project | isProjectEditable)"></job-hub-text-input>
+      </div>
+      <div class="col-12 col-md-4">
+        <job-hub-text-input label="Known exterior hazards" placeholder="Septic tank, unknown where gas line is" formControlName="exteriorHazards" [readonly]="!(project | isProjectEditable)"></job-hub-text-input>
+      </div>
+      <div class="col-12 col-md-4">
+        <job-hub-text-input label="Known exterior inconveniences" placeholder="Sprinklers / electric dog fence" formControlName="exteriorInconveniences" [readonly]="!(project | isProjectEditable)"></job-hub-text-input>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-lg-3">
+        <job-hub-text-input label="Material storage" placeholder="Driveway" formControlName="materialStorage" [readonly]="!(project | isProjectEditable)"></job-hub-text-input>
+      </div>
+      <div class="col-12 col-lg-9">
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <job-hub-text-input label="Material haul out" placeholder="Dirt can stay on site" formControlName="materialHaulOut" [readonly]="!(project | isProjectEditable)"></job-hub-text-input>
+          </div>
+          <div class="col-12 col-md-6">
+            <job-hub-text-input label="Downspouts" placeholder="3 down spouts near patios that need to be buried" formControlName="downSpouts" [readonly]="!(project | isProjectEditable)"></job-hub-text-input>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <job-hub-textarea label="Shrub removal" placeholder="N/A" formControlName="shrubRemoval" [readonly]="!(project | isProjectEditable)"></job-hub-textarea>
+      </div>
+    </div>
+
+    <p class="color-mine-shaft font-18 font-weight-medium my-25">Attachments</p>
+    <job-hub-photo-uploader align="start" formControlName="attachments" [readonly]="!(project | isProjectEditable)"></job-hub-photo-uploader>
+
+    <p class="color-mine-shaft font-18 font-weight-medium my-25">Idea Board</p>
+    <div class="d-flex flex-wrap">
+      <p class="color-dove-gray" *ngIf="!ideas.length">No ideas selected</p>
+      <div class="idea-image mr-10 mb-10 rounded cursor-pointer" *ngFor="let item of ideas" (click)="previewIdeaImage(item.url)">
+        <span><img src="assets/images/icons/heart/heart-filled.svg" alt="Heart"></span>
+        <img [src]="item.url" alt="Idea">
+      </div>
+    </div>
+
+    <div class="mt-40 d-flex flex-column flex-md-row justify-content-between">
+      <div class="d-flex flex-column flex-md-row">
+        <button class="btn btn-primary btn-lt-md-block mb-15 mb-md-0" *ngIf="project | isProjectEditable" [disabled]="!isEdited">Save Changes</button>
+        <ng-container *jobHubIfRoles="[UserRole.SuperAdmin]">
+          <button type="button" class="btn btn-warning text-white btn-lt-md-block ml-0 ml-md-20" (click)="createEstimate()" *ngIf="project.status === ProjectStatus.ConsultationScheduled">Create Estimate</button>
+        </ng-container>
+      </div>
+      <div>
+        <job-hub-invitation-button [user]="customer"></job-hub-invitation-button>
+      </div>
+    </div>
+  </form>
+  <div class="mt-30" *ngIf="project.finalProposal && project.finalProposal.status === FinalProposalStatus.Declined">
+    <job-hub-project-status-alert type="danger" title="Final Proposal declined"></job-hub-project-status-alert>
+    <p class="color-valencia font-12">Reason selected: {{proposalDeclineReasons}}<br>
+      <span  *ngIf="project.finalProposal.declineComment.length">Other: {{project.finalProposal.declineComment}}</span>
+    </p>
+  </div>
+  <div class="mt-30" *ngIf="project.estimate && project.estimate.status === EstimateStatus.Declined">
+    <job-hub-project-status-alert type="danger" title="Estimate declined"></job-hub-project-status-alert>
+    <p class="color-valencia font-12">Reason selected: {{estimateDeclineReasons}}<br>
+      <span *ngIf="project.estimate.declineComment.length">Other: {{project.estimate.declineComment}}</span>
+    </p>
+  </div>
+
+</section>

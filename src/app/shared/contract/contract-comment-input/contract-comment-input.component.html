@@ -1,0 +1,11 @@
+<p class="font-weight-bold mb-15">{{ label }}</p>
+
+<p class="mb-25 color-mine-shaft" *ngIf="description">{{ description }}</p>
+
+<p class="font-14 color-mine-shaft" *ngIf="!isEditing || readonly">{{ value }}</p>
+<job-hub-textarea *ngIf="isEditing && !readonly" noLabel="true" placeholder="Description" [(ngModel)]="value" (ngModelChange)="change($event)"></job-hub-textarea>
+<ng-content></ng-content>
+<div class="mb-50">
+  <button type="button" class="btn btn-primary btn-small" (click)="isEditing = !isEditing" *ngIf="!readonly" [disabled]="isEditing && !value">{{ isEditing ? 'Save' : 'Edit' }}</button>
+  <button type="button" class="btn btn-danger btn-small ml-20" (click)="notNecessary()" *ngIf="optional && isEditing && !readonly">Not Necessary</button>
+</div>

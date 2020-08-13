@@ -1,0 +1,16 @@
+@import "../../../../assets/theme";
+
+.drop-area {
+  border: 1px dashed $niagara;
+}
+
+ng-progress::ng-deep {
+  .ng-bar-placeholder {
+    overflow: hidden;
+    background-color: $mercury;
+  }
+}
+
+.progress-container {
+  height: 53px;
+}

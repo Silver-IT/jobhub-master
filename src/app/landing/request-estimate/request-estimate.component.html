@@ -1,0 +1,28 @@
+<job-hub-jumbotron image="assets/images/landing-page/request-estimate/header.jpg"></job-hub-jumbotron>
+
+<section class="text-center pt-100 pb-50 position-relative">
+  <div class="container">
+    <p class="text-primary">Step {{ step }} of {{ total }}</p>
+    <h2 class="color-mine-shaft mb-35">{{ title }}</h2>
+    <p class="color-dove-gray mb-50 px-0 px-xl-150">{{ description }}</p>
+
+    <div class="row">
+      <div class="col-12 col-md-6 mx-auto" [class.col-md-12]="step === 3">
+        <ng-container [ngSwitch]="step">
+          <job-hub-project-general [addressAutoComplete]="true" *ngSwitchCase="1"></job-hub-project-general>
+          <job-hub-personal-detail *ngSwitchCase="2"></job-hub-personal-detail>
+          <job-hub-idea-select *ngSwitchCase="3" (skip)="skip()"></job-hub-idea-select>
+          <job-hub-complete-account *ngSwitchCase="4"></job-hub-complete-account>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center py-50 bg-white" [class.sticky]="isSticky">
+      <button class="btn btn-primary mr-20" (click)="back()" *ngIf="step > 1">Back</button>
+      <button class="btn btn-primary mr-20" (click)="skip()" *ngIf="step === 3">Skip</button>
+      <button class="btn btn-primary" (click)="next()" [disabled]="isLoading">{{ step < total ? 'Next' : 'Complete' }}</button>
+    </div>
+    <div class="pt-45 pb-100" *ngIf="isSticky"></div>
+  </div>
+  <job-hub-spinner *ngIf="isLoading"></job-hub-spinner>
+</section>

@@ -1,0 +1,9 @@
+<div class="d-flex" [class.justify-content-end]="message | isMine">
+  <div class="chat-bubble d-flex flex-column p-10 mb-25 rounded" [class.mine]="message | isMine">
+    <span class="font-10 font-weight-medium color-mine-shaft mb-10">{{ user | fullName }}</span>
+    <div class="d-flex align-items-end">
+      <div class="font-14 color-dove-gray flex-1" [innerHTML]="message.text | checkMultiline"></div>
+      <span class="text-primary font-9 ml-20">{{ message.createdAt | date : 'hh:mm a' }}</span>
+    </div>
+  </div>
+</div>

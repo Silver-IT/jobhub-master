@@ -1,0 +1,9 @@
+@import "../../../../assets/theme";
+
+.branding-section {
+  background-image: url("/assets/images/landing-page/home/branding.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-bottom: 4px solid $niagara;
+}

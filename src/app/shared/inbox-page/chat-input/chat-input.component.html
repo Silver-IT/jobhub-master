@@ -1,0 +1,8 @@
+<form [formGroup]="form" (ngSubmit)="submit()" (keydown.control.enter)="submit()">
+  <div class="d-flex align-items-end">
+    <job-hub-textarea formControlName="message" class="w-100" label="Message" placeholder="Enter message here..." rows="1"></job-hub-textarea>
+    <button class="btn btn-primary btn-send ml-15 ml-md-45" [disabled]="form.invalid">
+      <img src="assets/images/icons/send.svg" alt="Send">
+    </button>
+  </div>
+</form>

@@ -1,0 +1,16 @@
+<div class="nav-dropdown h-100 d-flex justify-content-center align-items-center" #dropdown="ngbDropdown" ngbDropdown (openChange)="openChanged($event)">
+  <div class="d-flex align-items-center">
+    <span class="alert-circle d-flex align-items-center justify-content-center text-white font-weight-bold font-7 bg-color-japonica" *ngIf="(total$ | async)">{{ total$ | async }}</span>
+    <job-hub-icon class="cursor-pointer no-arrow"
+                  [color]="isOpened ? 'white' : 'dove-gray'"
+                  icon="alert"
+                  id="dropdown"
+                  ngbDropdownToggle></job-hub-icon>
+  </div>
+  <div class="position-absolute left" ngbDropdownMenu aria-labelledby="dropdown">
+    <job-hub-notification-box
+      [events]="events$ | async"
+      [isLoading]="isLoading"
+      (closeBox)="dropdown.close()"></job-hub-notification-box>
+  </div>
+</div>

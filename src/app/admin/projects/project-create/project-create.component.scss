@@ -1,0 +1,9 @@
+:host ::ng-deep {
+  form .form-group {
+    input, select, textarea {
+      &.form-control {
+        background-color: white;
+      }
+    }
+  }
+}

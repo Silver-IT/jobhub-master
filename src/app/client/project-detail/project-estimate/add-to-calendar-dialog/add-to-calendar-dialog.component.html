@@ -1,0 +1,29 @@
+<a class="close" mat-dialog-close><span class="material-icons">close</span></a>
+<h5 mat-dialog-title class="text-center mt-20 px-50 color-mine-shaft">Site visit scheduled</h5>
+<p class="font-14 color-dove-gray text-center">Expect site visit on <span class="color-mine-shaft">{{ data.from | date : 'EEEE MMM d' }} around {{ data.from | date : 'h a' }}</span>.</p>
+<div mat-dialog-content class="pt-20 px-60 text-center pretty-scroll">
+  <div class="row" *ngIf="!stepSelectCalendar">
+    <div class="col">
+      <div class="d-flex justify-content-center align-items-center px-15 py-15 bg-color-catskill-white cursor-pointer" (click)="loginWithGoogle()">
+        <div class="mr-10">
+          <img src="assets/images/icons/calendars/google-calendar.svg" alt="Google Calendar">
+        </div>
+        <span class="font-14 font-weight-medium color-dove-gray">Add event to Google calendar</span>
+      </div>
+    </div>
+<!--    <div class="col">-->
+<!--      <div class="d-flex align-items-center px-15 py-15 bg-color-catskill-white cursor-pointer">-->
+<!--        <div class="mr-10">-->
+<!--          <img src="assets/images/icons/calendars/custom-calendar.svg" alt="Custom Calendar">-->
+<!--        </div>-->
+<!--        <span class="font-14 font-weight-medium color-dove-gray">Download calendar.app file</span>-->
+<!--      </div>-->
+<!--    </div>-->
+  </div>
+  <job-hub-calendar-list *ngIf="stepSelectCalendar" [calendars]="calendars" (selectCalendar)="addEventToCalendar($event)"></job-hub-calendar-list>
+</div>
+<div mat-dialog-actions class="d-flex justify-content-center mt-35">
+  <button class="btn btn-primary px-40" matDialogClose="null">Close</button>
+</div>
+
+<job-hub-spinner *ngIf="isLoading"></job-hub-spinner>

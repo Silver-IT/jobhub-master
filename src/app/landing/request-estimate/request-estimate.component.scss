@@ -1,0 +1,25 @@
+@import "../../../assets/theme";
+
+button {
+  transition: ease all .3s;
+}
+
+.sticky {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3);
+  button.btn.btn-primary {
+    height: 46px;
+    padding: 0 50px;
+
+    @include media-breakpoint-down(sm) {
+      padding: 0 20px;
+    }
+  }
+}

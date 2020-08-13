@@ -1,0 +1,45 @@
+<job-hub-table [rows]="recordings"
+               [columns]="columns"
+               [pageSize]="take"
+               [length]="total"
+               [loading]="isLoading"
+               (page)="onPage($event)"
+               emptyDescription="No records to display.">
+  <ng-template #imageColumn let-project="row">
+    <job-hub-avatar size="24" src="assets/images/logos/log-rocket.svg"></job-hub-avatar>
+  </ng-template>
+
+  <ng-template #sessionColumn let-recording="row">
+    <div class="d-flex flex-column pr-10">
+      <span class="font-13 text-mine-shaft mb-1">{{ recording.recordingId }}</span>
+    </div>
+  </ng-template>
+
+  <ng-template #userColumn let-recording="row">
+    <div class="d-flex flex-column pr-20">
+      <span class="font-13 text-mine-shaft mb-1">{{ recording.email || 'Anonymous' }}</span>
+    </div>
+  </ng-template>
+
+  <ng-template #resolvedColumn let-recording="row">
+    <div class="d-flex flex-column pr-20">
+      <span class="font-13 text-mine-shaft mb-1">{{ recording.isResolved ? 'Resolved' : '' }}</span>
+    </div>
+  </ng-template>
+
+  <ng-template #dateColumn let-recording="row">
+    <div class="d-flex flex-column pr-20">
+      <span class="font-13 text-mine-shaft mb-1">{{ recording.createdAt | date : 'medium' }}</span>
+    </div>
+  </ng-template>
+
+  <ng-template #actionColumn let-recording="row">
+    <div class="d-flex justify-content-center pr-20">
+      <a class="font-13 font-weight-medium text-primary mb-1 mr-20" target="_blank" href="https://app.logrocket.com/seb2rp/jd-landscaping/s/{{ recording.recordingId }}">
+        <img src="assets/images/icons/circle-play.svg" alt="Play">
+      </a>
+      <mat-slide-toggle [(ngModel)]="recording.isResolved" (ngModelChange)="onToggleResolveStatus($event, recording.id)"></mat-slide-toggle>
+    </div>
+  </ng-template>
+
+</job-hub-table>

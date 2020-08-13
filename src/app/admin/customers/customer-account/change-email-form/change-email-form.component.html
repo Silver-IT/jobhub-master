@@ -1,0 +1,11 @@
+<form [formGroup]="form" class="d-flex flex-column">
+  <div class="mb-20 font-12">
+    Current Email: <span class="text-weight-Bold">{{user.email}}</span>
+  </div>
+  <job-hub-text-input label="New Email" placeholder="New Email Address" formControlName="email"></job-hub-text-input>
+  <a class="text-primary font-12 font-weight-medium" (click)="profileView.emit()">View Profile</a>
+  <div class="text-center mt-20">
+    <button class="btn btn-primary" (click)="updateEmail()" [disabled]="form.invalid">Update Email Address</button>
+  </div>
+  <job-hub-spinner *ngIf="isLoading"></job-hub-spinner>
+</form>

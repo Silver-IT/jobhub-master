@@ -1,0 +1,6 @@
+<div class="form-group w-100">
+  <label class="d-flex p-15 cursor-pointer bg-color-catskill-white">
+    <mat-checkbox [(ngModel)]="value" (ngModelChange)="valueChange.emit(value)"></mat-checkbox>
+    <mat-label class="font-weight-normal color-dove-gray ml-10 pt-0">{{ label }}</mat-label>
+  </label>
+</div>

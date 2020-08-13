@@ -1,0 +1,26 @@
+<job-hub-jumbotron title="Idea Board" image="assets/images/landing-page/idea-board/header.jpg"></job-hub-jumbotron>
+
+<section class="mt-100 mb-50" [id]="ScrollPosition.LandingPageIdeaBoard">
+  <div class="container d-flex flex-column align-items-center">
+    <p class="color-dove-gray text-center mb-65 px-0 px-xl-150">Check out our Hardscape idea board, this section is filled with 1000’s of photos of projects we have completed and allows you to “click and save” the photos you like the best so that when you're ready to request an estimate we already have an idea of what you have in mind. If you have an account with us already please sign in, if not please create an account.</p>
+    <form [formGroup]="form">
+      <job-hub-select [options]="availableProjectAccessoryTypes" placeholder="Services" formControlName="projectType"></job-hub-select>
+    </form>
+  </div>
+</section>
+
+<section>
+  <ng-container *ngFor="let block of blocks">
+    <job-hub-home-page-idea-board [hasLearnMoreButton]="false" [ideas]="block" [isLoading]="isLoading" (cardLiked)="cardLiked($event)"></job-hub-home-page-idea-board>
+  </ng-container>
+  <div class="d-flex justify-content-center mb-25 mt-100" *ngIf="blockCount >= 2">
+    <a class="text-warning cursor-pointer" [routerLink]="[ROUTES.landingPages.requestEstimate] | routeToAbsolute" ngxScrollTo="root">Want to see more images?</a>
+  </div>
+  <div class="d-flex justify-content-center mb-100" [class.mt-100]="blockCount < 2">
+    <button class="btn btn-normal btn-primary mr-20" (click)="loadMore()" *ngIf="blockCount < 2">See More</button>
+    <job-hub-request-estimate-button [center]="false"></job-hub-request-estimate-button>
+  </div>
+</section>
+
+<job-hub-branding></job-hub-branding>
+

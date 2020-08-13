@@ -1,0 +1,27 @@
+<h5 class="color-mine-shaft mb-25">Pavers vs Concrete</h5>
+<p class="color-dove-gray mb-50">
+  Debating between Pavers or concrete for your patios, walkway, pool scape or driveway? Let’s take a look at the
+  difference between Pavers and Concrete
+</p>
+<div *ngFor="let item of cardsAry">
+  <job-hub-pavers-vs-concret-item-card [cardImgUrl]="item.imgUrl" [cardTitle]="item.title"
+                                       [cardDescription]="item.description"></job-hub-pavers-vs-concret-item-card>
+</div>
+
+<div class="row">
+  <div class="col-12 col-sm-6 col-md-4" *ngFor="let item of examples">
+    <div class="rounded">
+      <img class="img-fluid" [src]="item.url" [alt]="item.label">
+    </div>
+    <p class="text-center font-14 color-dove-gray mt-10 mb-40">{{ item.label }}</p>
+  </div>
+</div>
+<div class="text-primary font-weight-medium mt-50">
+  <h2 class="font-weight-medium text-center text-md-left">
+    The answer is simple.<br>Concrete Can’t Compete!
+  </h2>
+</div>
+
+<div class="d-flex justify-content-center justify-content-md-start">
+  <job-hub-request-estimate-button [center]="false" class="d-block mt-50"></job-hub-request-estimate-button>
+</div>

@@ -1,0 +1,27 @@
+@import "../../../assets/theme";
+
+.read-button {
+  position: relative;
+  z-index: 999;
+}
+
+.notification-item {
+  @include hover_effect($black-squeeze);
+}
+
+
+@include media-breakpoint-down(sm) {
+
+  job-hub-icon {
+    position: absolute !important;
+    top: 20px;
+    right: 20px;
+  }
+
+  job-hub-notification-avatar::ng-deep {
+    .avatar {
+      width: 100px !important;
+      height: 100px !important;
+    }
+  }
+}

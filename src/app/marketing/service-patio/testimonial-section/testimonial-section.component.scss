@@ -1,0 +1,58 @@
+@import "../../../../assets/theme";
+
+.testimonial-item {
+  border-radius: 3px;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.2);
+  overflow: visible !important;
+}
+
+.profile-image {
+  position: absolute;
+  @include circle(177px);
+  @include image_fit();
+  top: -88px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+:host ::ng-deep {
+  swiper > .swiper.s-wrapper {
+    width: 768px;
+    margin: auto;
+    padding: 90px 5px 60px;
+  }
+  swiper>.swiper.s-wrapper .swiper-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    margin-top: 90px;
+  }
+  swiper > .swiper.s-wrapper .swiper-pagination .swiper-pagination-handle {
+    min-width: 38px;
+  }
+  .swiper-container-horizontal > .swiper-pagination-bullets {
+    bottom: -10px;
+  }
+  .swiper-pagination-bullet {
+    width: 20px;
+    height: 20px;
+    background-color: $niagara;
+    opacity: .6;
+    transition: ease all .3s;
+    border: none !important;
+    &.swiper-pagination-bullet-active {
+      width: 30px;
+      height: 30px;
+      opacity: 1;
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  :host ::ng-deep {
+    swiper > .swiper.s-wrapper {
+      width: 100%;
+    }
+  }
+}

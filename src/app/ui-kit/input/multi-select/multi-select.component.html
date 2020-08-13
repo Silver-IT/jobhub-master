@@ -1,0 +1,21 @@
+<div class="form-group" [class.label-input-group]="label">
+  <label class="form-label" ngbDropdown placement="bottom-right" #dropdown="ngbDropdown" [container]="container">
+    <span>{{ label }}</span>
+    <div class="d-flex flex-wrap tags-wrapper" [class.cursor-pointer]="!readonly" (click)="openDropdown(dropdown)">
+      <span class="d-flex align-items-center font-12 text-white rounded bg-warning shadow-3 pr-10 pl-10 mr-10 mb-5 tag" *ngFor="let item of value; let i = index">
+        <job-hub-icon class="cursor-pointer mr-10" icon="close" color="white" (click)="removeItem($event, i)" *ngIf="!readonly"></job-hub-icon>
+        {{ item | optionLabel }}
+      </span>
+    </div>
+    <input class="d-none" [class.cursor-pointer]="!readonly" [placeholder]="placeholder" [value]="value | optionLabel : clonedOptions : true" (click)="openDropdown(dropdown)" readonly>
+    <job-hub-icon class="no-arrow cursor-pointer" icon="arrow-down" color="mine-shaft" ngbDropdownToggle *ngIf="!readonly"></job-hub-icon>
+    <div class="w-100 multi-select" ngbDropdownMenu aria-labelledby="dropdown">
+      <ul class="list-unstyled mb-0">
+        <li *ngFor="let option of clonedOptions" class="px-15 py-2 cursor-pointer d-flex align-items-center" (click)="toggleOption($event, option)">
+          <mat-checkbox class="mb-0 mr-10" [(ngModel)]="option.selected"></mat-checkbox>
+          <span class="font-weight-normal color-dove-gray pt-1">{{ option.label }}</span>
+        </li>
+      </ul>
+    </div>
+  </label>
+</div>

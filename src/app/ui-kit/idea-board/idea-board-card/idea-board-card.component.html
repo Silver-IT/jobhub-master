@@ -1,0 +1,15 @@
+<div class="position-relative image-card" [class.cursor-pointer]="clickable">
+
+  <div class="overlay-wrapper z-index-1 d-flex align-items-center justify-content-center">
+    <div class="overlay" [class.selected]="idea?.selected" (click)="view.emit(idea)"></div>
+    <div class="actions z-index-1 flex-column align-items-center" [class.d-flex]="idea?.selected" *ngIf="!editable">
+      <job-hub-like-button [liked]="idea?.selected" (likedChange)="toggleSelected()"></job-hub-like-button>
+    </div>
+  </div>
+
+  <ng-container *ngIf="editable">
+    <job-hub-action-dropdown color="white" (archive)="delete.emit(idea)" (edit)="edit.emit(idea)"></job-hub-action-dropdown>
+  </ng-container>
+
+  <img class="img-fluid" [src]="idea.url" [alt]="idea.id">
+</div>

@@ -1,0 +1,5 @@
+@import "../../../assets/theme";
+
+.img-min-60 {
+  @include flex(width, 60px);
+}

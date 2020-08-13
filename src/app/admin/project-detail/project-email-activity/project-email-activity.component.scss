@@ -1,0 +1,26 @@
+@import "../../../../assets/theme";
+
+.emails-table, .events-table {
+  border-radius: 4px;
+}
+
+.emails-table-header {
+  height: 36px;
+}
+
+.emails-table-row {
+  height: 50px;
+}
+
+.dot {
+  @include circle(6px);
+  &.success {
+    background-color: $niagara;
+  }
+  &.failed {
+    background-color: $japonica;
+  }
+  &.warning {
+    background-color: $tangerine;
+  }
+}

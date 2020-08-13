@@ -1,0 +1,18 @@
+<ng-progress id="router_progress"></ng-progress>
+<div class="alert d-flex align-items-center shadow-1 bg-color-humming-bird position-absolute w-100" role="alert" *ngIf="hasUpdate" (click)="reloadSite()">
+  <div class="d-flex align-items-center container">
+    <div class="mr-10">
+      <img class="img-fluid" src="assets/images/icons/toastr/help.svg" alt="Help">
+    </div>
+    <div class="d-flex justify-content-between align-items-center flex-grow-1 text-info w-100">
+      <div class="font-12">
+        <p class="mb-0">Platform Update: Please click here to update your browser</p>
+      </div>
+      <div class="d-flex align-items-center">
+        <a class="text-info font-13 underline cursor-pointer" (click)="reloadSite()">Reload</a>
+      </div>
+    </div>
+  </div>
+</div>
+<job-hub-toastr></job-hub-toastr>
+<router-outlet></router-outlet>

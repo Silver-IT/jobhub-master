@@ -1,0 +1,11 @@
+@import "../../../assets/theme";
+
+.btn-primary {
+  background-color: $niagara;
+  color: white;
+  border-color: $niagara;
+}
+
+.big-dot {
+  @include circle(12px);
+}

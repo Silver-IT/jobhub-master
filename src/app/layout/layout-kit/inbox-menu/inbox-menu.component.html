@@ -1,0 +1,7 @@
+<div class="icon-menu-item position-relative h-100 d-flex justify-content-center align-items-center" routerLinkActive="show">
+  <div class="d-flex align-items-center" [routerLink]="[ROUTES.common.inbox]">
+    <span class="alert-circle d-flex align-items-center justify-content-center text-white font-weight-bold font-7 bg-color-japonica" *ngIf="total">{{ total }}</span>
+    <job-hub-icon class="inactive cursor-pointer" color="dove-gray" icon="inbox"></job-hub-icon>
+    <job-hub-icon class="active cursor-pointer" color="white" icon="inbox"></job-hub-icon>
+  </div>
+</div>

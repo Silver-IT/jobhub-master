@@ -1,0 +1,115 @@
+<div class="shadow-2 rounded overflow-hidden">
+  <mwl-calendar-month-view
+    (dayClicked)="dayClicked($event)"
+    [headerTemplate]="header"
+    [cellTemplate]="cell"
+    [openDayEventsTemplate]="openDayEventsTemplate"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    [activeDayIsOpen]="activeDayIsOpen"
+    (eventTimesChanged)="eventTimesChanged($event)">
+  </mwl-calendar-month-view>
+  <job-hub-spinner *ngIf="isLoading"></job-hub-spinner>
+</div>
+
+<ng-template #header let-days="days" let-locale="locale" let-trackByWeekDayHeaderDate="trackByWeekDayHeaderDate">
+  <div class="d-flex rounded-top overflow-hidden">
+    <div *ngFor="let day of days" class="flex-1 bg-color-blue-lagoon text-white font-12 py-2 px-20">
+      <span>{{ day.date | calendarDate: 'monthViewColumnHeader' : locale }}</span>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template
+  #cell
+  let-day="day"
+  let-openDay="openDay"
+  let-locale="locale"
+  let-tooltipPlacement="tooltipPlacement"
+  let-highlightDay="highlightDay"
+  let-unhighlightDay="unhighlightDay"
+  let-eventClicked="eventClicked"
+  let-tooltipTemplate="tooltipTemplate"
+  let-tooltipAppendToBody="tooltipAppendToBody"
+  let-tooltipDelay="tooltipDelay"
+  let-trackByEventId="trackByEventId"
+  let-validateDrag="validateDrag">
+  <div class="px-10 pt-5" [attr.aria-label]="{ day: day, locale: locale } | calendarA11y: 'monthCell'">
+    <span class="font-weight-medium font-13 d-flex align-items-center justify-content-center jh-cal-day">{{day.date | calendarDate: 'monthViewDayNumber':locale}}</span>
+  </div>
+  <div class="jh-cal-events px-10 mt-10 pb-10" *ngIf="day.events.length > 0">
+    <div *ngFor="let event of day.events.slice(0, 2); trackBy: trackByEventId"
+         class="jh-cal-event rounded d-flex justify-content-between align-items-center"
+         mwlDraggable
+         dragActiveClass="cal-drag-active" [style.background-color]="(event.meta | calendarScheduleColor).bgColor"
+         [class.cal-temp-event]="event.meta.isTemp"
+         [class.cal-draggable]="event.draggable"
+         [dropData]="{ event: event }"
+         [dragAxis]="{ x: event.draggable, y: event.draggable }"
+         [validateDrag]="validateDrag"
+         [mwlCalendarTooltip]="event.title | calendarEventTitle: 'monthTooltip':event"
+         (click)="customEventClicked({ event: event, sourceEvent: $event, day: day })">
+      <div class="d-flex align-items-center">
+        <span class="mr-5"><job-hub-schedule-icon [size]="16" [schedule]="event.meta"></job-hub-schedule-icon></span>
+        <a class="font-10 font-weight-medium color-mine-shaft" [class.cursor-pointer]="hasLink" (click)="navigateToProjectDetailPage(event.meta.data.project.id)">{{ event.title }}
+          <span class="ml-5" *ngIf="event.meta.type === ScheduleType.ProjectStart">{{ day.date | nthDay : event.start : event.end }}</span>
+        </a>
+      </div>
+      <job-hub-icon icon="close" class="cursor-pointer" width="8" *ngIf="event.meta.isTemp" (click)="removeEvent({ event: event, sourceEvent: $event })"></job-hub-icon>
+      <span class="dot" *ngIf="!event.meta.isTemp" [style.background-color]="(event.meta | calendarScheduleColor).color"></span>
+    </div>
+    <span class="color-silver font-10 font-weight-medium pl-10" *ngIf="day.events.length > 2">{{ day.events.length - 2 }} more...</span>
+  </div>
+</ng-template>
+
+<ng-template
+  #openDayEventsTemplate
+  let-date="date"
+  let-events="events"
+  let-eventClicked="eventClicked"
+  let-isOpen="isOpen"
+  let-trackByEventId="trackByEventId"
+  let-validateDrag="validateDrag">
+  <div class="bg-white pt-1 px-1 border-bottom" [@collapse] *ngIf="isOpen" role="application">
+    <span tabindex="-1" role="alert"></span>
+    <span tabindex="0" role="landmark"></span>
+    <div *ngFor="let event of events; trackBy: trackByEventId"
+         [ngClass]="event?.cssClass"
+         [style.background-color]="(event.meta | calendarScheduleColor).bgColor"
+         mwlDraggable
+         [class.cal-draggable]="event.draggable"
+         dragActiveClass="cal-drag-active"
+         [dropData]="{ event: event }"
+         [dragAxis]="{ x: event.draggable, y: event.draggable }"
+         [validateDrag]="validateDrag">
+      <div class="d-flex align-items-center justify-content-between py-5 px-15 mb-1 rounded">
+        <div class="d-flex align-items-start">
+          <span class="mr-10 mt-5"><job-hub-schedule-icon [size]="16" [schedule]="event.meta"></job-hub-schedule-icon></span>
+          <div class="d-flex flex-column">
+            <div class="d-flex align-items-center">
+              <a class="font-10 font-weight-bold color-mine-shaft" [class.cursor-pointer]="hasLink" (click)="navigateToProjectDetailPage(event.meta.data.project.id)">{{ event.title }}</a>
+              <span class="font-10 color-dove-gray ml-10">{{ event.meta.data.project?.address }}</span>
+            </div>
+            <div class="d-flex align-items-center mt-5">
+              <span class="small-dot mr-10" [style.background-color]="(event.meta | calendarScheduleColor).color"></span>
+              <span class="font-10 font-weight-medium color-dove-gray" *ngIf="event.meta.type !== ScheduleType.ProjectStart">{{ event.start | date : 'hh:mm a' }} - {{ event.end | date : 'hh:mm a' }}</span>
+              <span class="font-10 font-weight-medium color-dove-gray" *ngIf="event.meta.type === ScheduleType.ProjectStart">{{ event.start | date : 'MMM dd' }} - {{ event.end | date : 'MMM dd' }}</span>
+
+              <ng-container *ngIf="event.meta.data.user">
+                <span class="small-dot mx-10" [style.background-color]="(event.meta | calendarScheduleColor).color"></span>
+                <span class="font-10 font-weight-medium color-dove-gray">{{ event.meta.data.user | fullName }}</span>
+                <span class="small-dot mx-10" [style.background-color]="(event.meta | calendarScheduleColor).color"></span>
+                <span class="font-10 font-weight-medium color-dove-gray">{{ event.meta.data.user.email }}</span>
+                <span class="small-dot mx-10" [style.background-color]="(event.meta | calendarScheduleColor).color"></span>
+                <span class="font-10 font-weight-medium color-dove-gray">{{ event.meta.data.user.phone }}</span>
+              </ng-container>
+
+            </div>
+          </div>
+        </div>
+        <span class="dot" [style.background-color]="(event.meta | calendarScheduleColor).color"></span>
+      </div>
+    </div>
+  </div>
+</ng-template>

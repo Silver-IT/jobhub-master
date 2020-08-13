@@ -1,0 +1,119 @@
+<section [id]="ScrollPosition.AdminProjectDetail" class="bg-white d-flex flex-column px-15 px-xl-75 shadow-1 z-index-1">
+  <div class="row align-items-center flex-grow-1">
+    <ng-container *ngIf="(project$ | async) as project">
+      <div class="col-12 col-lg-8">
+        <div class="d-flex flex-column flex-lg-row justify-content-between align-items-center">
+          <div class="d-flex flex-column flex-lg-row align-items-center">
+            <job-hub-avatar class="my-30 my-lg-0" size="120" [type]="project.projectType"></job-hub-avatar>
+            <div class="d-flex flex-column ml-0 ml-lg-25 text-center text-lg-left">
+              <span class="color-tundora font-12 mb-5">Posted by {{ project.user | fullName }}</span>
+              <span class="text-primary font-18 font-weight-medium mb-5">{{ project.name }}</span>
+              <span class="color-tundora font-12 cursor-pointer mb-5" (click)="openMapDialog()">{{ project.address }}</span>
+              <a href="tel:{{project.user.phone}}" class="color-tundora font-12 cursor-pointer">{{ project.user.phone }}</a>
+            </div>
+          </div>
+          <div class="mt-10 mt-md-0">
+            <job-hub-send-message-button class="btn-chat d-block text-center" [projectId]="project.id" [user]="project.user" *ngIf="me.id === project.contractor?.user?.id; else sendEmailButton"></job-hub-send-message-button>
+            <ng-template #sendEmailButton>
+              <a href="mailto:{{project.user.email}}" class="btn btn-primary btn-small btn-chat text-white">Send Email</a>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4 text-center text-lg-left">
+        <div class="d-flex flex-column border-left pl-0 pl-lg-20 pb-20 pb-lg-0">
+          <span class="color-tundora font-12 mb-5 mt-10 mt-lg-0">Status <span *ngIf="project.contractSignedDate"> - Contract Signed</span> </span>
+          <span class="text-primary font-18 font-weight-medium mb-5">{{project | projectStatusDescription }}</span>
+          <span class="color-tundora font-12">{{ project.updatedAt | date }}</span>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</section>
+<div class="pointer-nav bg-white d-flex px-15 px-xl-75">
+  <ul class="pointer-nav-tabs d-flex m-0 px-0 font-12 color-tundora">
+    <li class="pointer-nav-item" [routerLink]="ROUTES.admin.project.brief"  routerLinkActive="active">
+      <div class="main pl-20 pr-10 cursor-pointer font-13 text-center">
+        Project Brief
+      </div>
+      <div class="triangle-left">
+        <div class="inner-triangle"></div>
+      </div>
+    </li>
+    <li class="pointer-nav-item" [class.disabled]="!estimate" [routerLink]="ROUTES.admin.project.estimate"  routerLinkActive="active">
+      <div class="main pl-20 pr-10 cursor-pointer font-13 text-center">
+        Estimate
+      </div>
+      <div class="triangle-left">
+        <div class="inner-triangle"></div>
+      </div>
+    </li>
+    <li class="pointer-nav-item" [class.disabled]="!finalProposal" [routerLink]="ROUTES.admin.project.finalProposal"  routerLinkActive="active">
+      <div class="main pl-20 pr-10 cursor-pointer font-13 text-center">
+        Final Proposal
+      </div>
+      <div class="triangle-left">
+        <div class="inner-triangle"></div>
+      </div>
+    </li>
+    <li class="pointer-nav-item" [class.disabled]="!(project | isMilestonePaid : MilestoneType.Deposit)" [routerLink]="ROUTES.admin.project.chooseMaterial"  routerLinkActive="active">
+      <div class="main pl-20 pr-10 cursor-pointer font-13 text-center">
+        Choose Materials
+      </div>
+      <div class="triangle-left">
+        <div class="inner-triangle"></div>
+      </div>
+    </li>
+    <li class="pointer-nav-item" [class.disabled]="!(project | isMilestonePaid : MilestoneType.Deposit)" [routerLink]="ROUTES.admin.project.orderMaterial"  routerLinkActive="active">
+      <div class="main pl-20 pr-10 cursor-pointer font-13 text-center">
+        Order Materials
+      </div>
+      <div class="triangle-left">
+        <div class="inner-triangle"></div>
+      </div>
+    </li>
+    <li class="pointer-nav-item" [class.disabled]="!(project | isMilestonePaid : MilestoneType.Deposit)" [routerLink]="ROUTES.admin.project.cbyd"  routerLinkActive="active">
+      <div class="main pl-20 pr-10 cursor-pointer font-13 text-center">
+        CBYD
+      </div>
+      <div class="triangle-left">
+        <div class="inner-triangle"></div>
+      </div>
+    </li>
+    <li class="pointer-nav-item" *ngIf="project.contractSignedDate" [routerLink]="ROUTES.admin.project.contract"  routerLinkActive="active">
+      <div class="main pl-20 pr-10 cursor-pointer font-13 text-center">
+        Contract
+      </div>
+      <div class="triangle-left">
+        <div class="inner-triangle"></div>
+      </div>
+    </li>
+    <li class="pointer-nav-item" [class.disabled]="project.finalProposal?.status !== FinalProposalStatus.Accepted" [routerLink]="ROUTES.admin.project.management"  routerLinkActive="active">
+      <div class="main pl-20 pr-10 cursor-pointer font-13 text-center">
+        Project Management
+      </div>
+      <div class="triangle-left">
+        <div class="inner-triangle"></div>
+      </div>
+    </li>
+    <li class="pointer-nav-item" [routerLink]="ROUTES.admin.project.emailActivity"  routerLinkActive="active">
+      <div class="main pl-20 pr-10 cursor-pointer font-13 text-center">
+        Email Activity
+      </div>
+      <div class="triangle-left">
+        <div class="inner-triangle"></div>
+      </div>
+    </li>
+    <li class="pointer-nav-item" [routerLink]="ROUTES.admin.project.customerActivity"  routerLinkActive="active">
+      <div class="main pl-20 pr-10 cursor-pointer font-13 text-center">
+        Customer Activity
+      </div>
+      <div class="triangle-left">
+        <div class="inner-triangle"></div>
+      </div>
+    </li>
+  </ul>
+</div>
+<section>
+  <router-outlet></router-outlet>
+</section>

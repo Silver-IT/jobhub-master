@@ -1,0 +1,5 @@
+<div class="cursor-pointer rounded d-flex align-items-center justify-content-center"
+     (click)="selectSlot.emit(this.slot)"
+     [ngClass]="selected ? 'bg-primary text-white' : 'bg-color-catskill-white color-dove-gray'">
+  <span class="font-14 font-weight-medium">{{ slot.from | date : 'hh:mm a' }} - {{ slot.to | date : 'hh:mm a' }}</span>
+</div>

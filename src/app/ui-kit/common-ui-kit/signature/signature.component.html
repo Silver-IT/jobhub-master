@@ -1,0 +1,4 @@
+<div *ngIf="(user$ | async) as user">
+  <img class="img-fluid" src="assets/images/joe-signature.svg" *ngIf="user.email === adminJoe" alt="Joe Masciovecchio">
+  <img class="img-fluid" src="assets/images/nick-signature.png" *ngIf="user.email === adminNick" alt="Nick Masciovecchio">
+</div>

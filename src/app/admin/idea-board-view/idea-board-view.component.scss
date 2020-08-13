@@ -1,0 +1,6 @@
+@import "../../../assets/theme";
+
+section {
+  overflow: hidden;
+  @include flex(height, calc(100vh - 105px));
+}

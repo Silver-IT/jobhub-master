@@ -1,0 +1,84 @@
+<div class="row mb-80">
+  <div class="col-12 col-lg-6 pr-15 pr-md-0 pr-lg-50">
+    <h2 class="color-mine-shaft mb-15">Tell us about your project</h2>
+    <p class="color-dove-gray mb-50">We make planning, getting a quote and managing your project simple and efficient through the use of our online platform.</p>
+
+    <ul class="list-unstyled green-dot-list color-dove-gray ml-20 ml-md-60">
+      <li>
+        <h6 class="font-weight-bold text-primary mb-15">Start by telling us about your project</h6>
+        <p>With the information provided by you, a project consultant will be able to give you a rough estimate of what your project will cost and answer any questions you may have.</p>
+      </li>
+      <li>
+        <h6 class="font-weight-bold text-primary mb-15">Choose your materials</h6>
+        <p>With thousands of photos and designs to view from past J & D Landscaping projects we make saving what you like simple through our idea board and allowing a project consultant to better understand what you have in mind.</p>
+      </li>
+      <li>
+        <h6 class="font-weight-bold text-primary mb-15">Schedule a call</h6>
+        <p>We understand how frustrating it can be to call companies, get no response and play phone tag so we made talking to a project consultant simple, simply schedule a call for when it's convenient for both parties though our online scheduling tool.</p>
+      </li>
+    </ul>
+  </div>
+  <div class="col-12 col-lg-6">
+    <div class="pl-0 pl-lg-50">
+      <job-hub-image-slider [images]="registrationImages"></job-hub-image-slider>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-80 flex-lg-row flex-column-reverse">
+  <div class="col-12 col-lg-6 pr-0 pr-lg-50">
+    <div>
+      <job-hub-image-slider [images]="estimateImages"></job-hub-image-slider>
+    </div>
+  </div>
+  <div class="col-12 col-lg-6 pl-15 pl-md-0 pl-lg-80">
+    <h2 class="color-mine-shaft mb-15">Hire J&D Landscaping</h2>
+    <p class="color-dove-gray mb-50">We understand there is a lot of back and forth, when it comes to designing a project, between size, budgets, colors and much more. The process can be quick for some and years for others, so we wanted to make the entire process easier for everyone by providing them an account where everything can be stored, edited, reviewed, ideas saved, they can easily reach out to us and of course hire us. Our Hardscape Hub provides you all the tools you need to ensure a smooth project when working with J & D Landscaping.</p>
+
+    <ul class="list-unstyled green-dot-list color-dove-gray ml-20 ml-md-60">
+      <li>
+        <h6 class="font-weight-bold text-primary mb-15">Review Estimate</h6>
+        <p>We understand many homeowners struggle with budgeting and planning their hardscape project, they simply don’t know what projects cost. Many have to get an estimate and then save for the next few years. That’s why the first step of working with J & D Landscaping is getting a virtual estimate. </p>
+      </li>
+      <li>
+        <h6 class="font-weight-bold text-primary mb-15">Set up Site Visit</h6>
+        <p>After you’ve reviewed your estimate and determined its within your budget, its time for a Site visit with a project consultant who will help you design your project, provide ideas, work within your budget and educate you on the entire process.  Simply click “Schedule site visit” and pick a time that works best for you.</p>
+      </li>
+      <li>
+        <h6 class="font-weight-bold text-primary mb-15">Review Proposal and Hire J & D Landscaping</h6>
+        <p>Based on the discussions from the site visit your project consultant will provide you a final proposal with the options discussed on site. Choose what projects you would like to move forward with and agree to the terms and conditions to get on our schedule.</p>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 col-lg-6 pr-15 pr-md-0 pr-lg-50">
+    <h2 class="color-mine-shaft mb-15">Manage your project</h2>
+    <p class="color-dove-gray mb-50">Your hardscaping project is an investment that needs to be managed and protected, it's important that there is transparency when it comes to payments, schedules and that you can easily reach your project consultant. That's why our Hardscape Hub has built in features allowing you to plan, hire and manage your project from start to finish easier than ever.</p>
+
+    <ul class="list-unstyled green-dot-list color-dove-gray ml-20 ml-md-60">
+      <li>
+        <h6 class="font-weight-bold text-primary mb-15">Simplified Payments</h6>
+        <p>When it comes to placing your deposit to lock-in a date or simply making a milestone payment we make it simple for you to pay securely. </p>
+      </li>
+      <li>
+        <h6 class="font-weight-bold text-primary mb-15">Simplified contracts, planning and scheduling</h6>
+        <p>Sign contracts digitally, Receive and view 3D drawings online, view your estimated schedule slot and much more.</p>
+      </li>
+      <li>
+        <h6 class="font-weight-bold text-primary mb-15">Easily communicate with your project consultant</h6>
+        <p>With built in messaging it's easy for you to reach your project consultant. Easily discuss design ideas, choose colors, ask questions and get updates throughout your project.</p>
+      </li>
+    </ul>
+  </div>
+  <div class="col-12 col-lg-6">
+    <div class="pl-0 pl-lg-50">
+      <job-hub-image-slider [images]="managementImages"></job-hub-image-slider>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center pt-80">
+  <button class="btn btn-primary" ngxScrollTo="why_choose_us_tab" [routerLink]="['..', ROUTES.landingPages.whyChooseUs.installationProcess]">View Installation process</button>
+</div>

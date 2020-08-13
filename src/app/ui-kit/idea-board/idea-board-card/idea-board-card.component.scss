@@ -1,0 +1,38 @@
+@import "../../../../assets/theme";
+
+.overlay-wrapper {
+  @include absolute_fit_parent;
+  .overlay {
+    @include absolute_fit_parent;
+    background-color: transparent;
+    &.selected {
+      background-color: transparent;
+    }
+  }
+  .actions {
+    display: none;
+  }
+}
+
+job-hub-action-dropdown {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  z-index: 99;
+}
+
+.image-card {
+  overflow: hidden;
+  img {
+    transition: ease transform .5s;
+  }
+  &:hover {
+    .actions {
+      display: flex;
+    }
+    img {
+      transform: scale(1.5);
+      transition: ease transform .5s;
+    }
+  }
+}

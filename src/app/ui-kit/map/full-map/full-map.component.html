@@ -1,0 +1,11 @@
+<agm-map [style.height.px]="height"
+         [zoom]="16"
+         [mapTypeControl]="mapTypeControl"
+         [mapDraggable]="mapDraggable"
+         [fitBounds]="!!markers.length"
+         [styles]="mapRetroStyle">
+  <agm-marker *ngFor="let marker of markers"
+              [agmFitBounds]="true"
+              [latitude]="marker.latitude"
+              [longitude]="marker.longitude" iconUrl="/assets/images/icons/map-marker.svg"></agm-marker>
+</agm-map>

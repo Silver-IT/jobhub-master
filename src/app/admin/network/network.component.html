@@ -1,0 +1,15 @@
+<section class="p-15 p-md-30">
+  <div class="d-flex flex-column flex-md-row justify-content-between mb-20">
+    <p class="font-18 color-mine-shaft mb-15 mb-md-0 font-weight-medium">Network Contractors</p>
+    <button class="btn btn-primary btn-small" [routerLink]="[ROUTES.admin.network.create]">+ New Contractor</button>
+  </div>
+
+  <job-hub-contractor-table (selectContractor)="navigateToContractorDetail($event)"></job-hub-contractor-table>
+
+  <div class="d-flex justify-content-between mt-30 mb-20">
+    <p class="font-18 color-mine-shaft mb-0 font-weight-medium">Categories</p>
+    <button class="btn btn-primary btn-small" [routerLink]="[ROUTES.admin.network.category, ROUTES.admin.network.create]">+ New Category</button>
+  </div>
+
+  <job-hub-category-table (selectCategory)="navigateToCategoryDetail($event)"></job-hub-category-table>
+</section>

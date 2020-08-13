@@ -1,0 +1,25 @@
+@import "../../../../assets/theme";
+
+.btn-payment {
+  &:focus {
+    background-color: $catskill-white;
+    color: $mine-shaft;
+  }
+
+  &:hover {
+    background-color: $niagara;
+    color: white;
+  }
+
+  .icon {
+    height: 40px;
+  }
+
+  width: 208px;
+  height: 155px;
+
+  .recommended-badge {
+    @include border-radius(3px);
+    bottom: -10px;
+  }
+}

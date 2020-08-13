@@ -1,0 +1,45 @@
+@import "../../../assets/theme";
+
+section {
+  .room-list {
+    @include flex(width, 300px);
+    .active {
+      background-color: rgba(230,246,245,0.8);
+    }
+  }
+  .room-detail {
+    flex: 1;
+  }
+}
+
+.dot {
+  @include circle(16px);
+  background-color: $tangerine;
+  span {
+    font-size: 9px;
+    font-weight: 500;
+    color: white;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  section {
+    .room-list {
+      @include flex(width, 250px);
+    }
+  }
+}
+
+
+@include media-breakpoint-down(sm) {
+  .dot {
+    position: absolute;
+    bottom: 7px;
+    right: 10px;
+  }
+  section {
+    .room-list {
+      @include flex(width, 55px);
+    }
+  }
+}

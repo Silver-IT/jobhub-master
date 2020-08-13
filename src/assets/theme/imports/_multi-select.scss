@@ -1,0 +1,14 @@
+.multi-select {
+  ul li {
+    @include hover_effect($humming-bird);
+  }
+
+  &.dropdown-menu {
+    margin-top: 10px;
+    max-height: 200px;
+    @include pretty-scroll;
+  }
+  mat-checkbox label {
+    margin-bottom: 0;
+  }
+}

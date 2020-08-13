@@ -1,0 +1,19 @@
+<form>
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <job-hub-text-input label="First name" placeholder="First name" readonly="true" [value]="user.firstName"></job-hub-text-input>
+    </div>
+    <div class="col-12 col-md-6">
+      <job-hub-text-input label="Last name" placeholder="Last name" readonly="true" [value]="user.lastName"></job-hub-text-input>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <job-hub-text-input type="email" label="Email address" placeholder="Email address" readonly="true" [value]="user?.email"></job-hub-text-input>
+      <a class="text-primary font-12 font-weight-medium" (click)="changeEmail.emit()">Change email</a>
+    </div>
+    <div class="col-12 col-md-6">
+      <job-hub-phone-number-input label="Phone number" [value]="user.phone" readonly="true"></job-hub-phone-number-input>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,16 @@
+<div class="toastr-wrapper">
+  <div *ngFor="let item of toastrs; let i = index" @fly_toastr
+       [ngClass]="item.type | toastrColor : 'bg'"
+       class="alert d-flex align-items-center shadow-1" role="alert">
+    <div class="mr-10 img-wrapper">
+      <img class="img-fluid" [src]="item.type | toastrColor : 'image'" [alt]="item.type">
+    </div>
+    <div class="d-flex justify-content-between align-items-center flex-grow-1">
+      <div>
+        <p class="font-weight-bold mb-0" *ngIf="item.title">{{ item.title }}</p>
+        <p class="mb-0" [innerHTML]="item.text"></p>
+      </div>
+      <job-hub-icon icon="close" [color]="item.type | toastrColor : 'icon'" class="cursor-pointer" (click)="close(item, i)"></job-hub-icon>
+    </div>
+  </div>
+</div>

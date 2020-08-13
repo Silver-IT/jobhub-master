@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-12 col-md-8 order-1 order-md-0">
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <job-hub-text-input label="Full name" placeholder="Full name" formControlName="fullName"></job-hub-text-input>
+        </div>
+        <div class="col-12 col-md-6">
+          <job-hub-phone-number-input label="Phone number" placeholder="Phone number" formControlName="phone"></job-hub-phone-number-input>
+        </div>
+        <div class="col-12 col-lg-6">
+          <job-hub-text-input label="Email address" placeholder="Email address" formControlName="email"></job-hub-text-input>
+        </div>
+        <div class="col-12 col-lg-6">
+          <job-hub-address-auto-complete-input formControlName="address" label="Address" placeholder="Address" (latLngChanged)="addressChanged($event)"></job-hub-address-auto-complete-input>
+        </div>
+        <div class="col-12 col-md-6">
+          <job-hub-select label="Source found" placeholder="Come from" [options]="sourceFoundUsOptions" formControlName="sourceFoundUs"></job-hub-select>
+        </div>
+        <div class="col-12 col-md-6">
+          <job-hub-select label="Coming from" placeholder="Come from" [options]="leadTypeOptions" formControlName="type"></job-hub-select>
+        </div>
+        <div class="col-12">
+          <job-hub-textarea label="Message" placeholder="Message from customer" formControlName="message"></job-hub-textarea>
+        </div>
+      </div>
+      <div class="d-flex mb-30 mt-30 mb-md-0">
+        <button class="btn btn-primary btn-lt-md-block mr-20" (click)="updateLeadDetail()">Update Lead</button>
+        <button class="btn btn-primary btn-lt-md-block" *ngIf="lead.status === LeadStatus.Lead" (click)="createProject()">Create Project</button>
+      </div>
+      <job-hub-spinner *ngIf="isLoading"></job-hub-spinner>
+    </form>
+    <div class="mt-40">
+      <job-hub-project-table *ngIf="customer" [customerId]="customer.id" (selectProject)="navigateToProjectDetail($event)"></job-hub-project-table>
+    </div>
+  </div>
+  <div class="col-12 col-md-4 order-0 order-md-1 mb-25 mb-md-0">
+    <job-hub-map [latitude]="form.get('latitude').value" [longitude]="form.get('longitude').value"></job-hub-map>
+    <job-hub-customer-profile [user]="customer" *ngIf="customer"></job-hub-customer-profile>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<a class="close" [mat-dialog-close]="null"><span class="material-icons">close</span></a>
+<h5 mat-dialog-title class="text-center mt-20 px-50 color-mine-shaft">Select day from calendar</h5>
+<div mat-dialog-content class="pt-10 pb-20 pretty-scroll d-flex justify-content-center position-relative">
+  <ngb-datepicker [dayTemplate]="customDay" [(ngModel)]="model" [markDisabled]="isDisabled" (ngModelChange)="selectDate()" (navigate)="navigate($event)" firstDayOfWeek="7"></ngb-datepicker>
+  <job-hub-spinner *ngIf="isLoading"></job-hub-spinner>
+</div>
+<div mat-dialog-actions class="d-flex flex-column flex-md-row justify-content-center">
+  <button class="btn btn-primary text-white btn-lt-md-block" [disabled]="!selectedDate" [mat-dialog-close]="selectedDate">Next</button>
+</div>
+
+<ng-template #customDay let-date let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled" let-focused="focused">
+  <span class="custom-day"
+        [class.has-schedule]="hasSchedule(date)"
+        [class.weekend]="isWeekend(date)"
+        [class.focused]="focused"
+        [class.passed]="isPassedDay(date)"
+        [class.text-warning]="isToday(date)"
+        [class.selected]="selected"
+        [class.not-current-month]="date.month !== currentMonth"
+        [class.text-muted]="disabled">
+    {{ date.day }}
+  </span>
+</ng-template>

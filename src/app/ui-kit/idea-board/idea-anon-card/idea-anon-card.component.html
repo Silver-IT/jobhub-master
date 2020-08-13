@@ -1,0 +1,10 @@
+<div class="position-relative image-card">
+  <div class="overlay-wrapper z-index-1 d-flex align-items-center justify-content-center">
+    <div class="overlay" *ngIf="!idea?.selected"></div>
+    <div class="actions z-index-1 flex-column align-items-center" [class.d-flex]="idea?.selected">
+      <job-hub-like-button [liked]="idea?.selected" (likedChange)="toggleLike($event)"></job-hub-like-button>
+      <button class="btn btn-primary btn-mini mt-20" (click)="navigateToServicesPage()" *ngIf="hasLearnMoreButton">Learn more</button>
+    </div>
+  </div>
+  <job-hub-image-renderer [height]="height" [src]="idea?.url"></job-hub-image-renderer>
+</div>

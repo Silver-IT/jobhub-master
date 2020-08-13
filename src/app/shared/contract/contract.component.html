@@ -1,0 +1,110 @@
+<div class="font-14 color-mine-shaft">
+  <p class="font-weight-medium mb-0">{{ project.user | fullName }}</p>
+  <div class="font-12 mb-40">
+    <p class="mb-0">{{ addressLine1 }}</p>
+    <p class="mb-0" *ngIf="addressLine2">{{ addressLine2 }}</p>
+    <p class="mb-0">{{ project.user.phone }}</p>
+  </div>
+
+  <p class="mb-40">Thank you for considering J&D Landscaping, LLC for this contract. The contracting parties are you, <span>{{project.user | fullName}}</span> and <span>J&D Landscaping, LLC</span>. My name is <span>{{ project.assignedContractor | fullName }}</span>. I am a principle of J&D Landscaping, LLC. I am a licensed Home Improvement Contractor by the State of Connecticut. My license number is <span class="font-weight-medium">HIC.0650813</span>.</p>
+
+  <div class="mb-40">
+    <p class="font-weight-bold font-14 mb-20">Project details and price breakdown</p>
+    <div class="mb-25" *ngFor="let layout of finalProposal.layouts">
+      <p class="font-weight-medium mb-0">{{ layout.type | optionLabel }}</p>
+      <p class="mb-25 color-mine-shaft">{{ layout.comment }}</p>
+    </div>
+  </div>
+
+  <section class="mb-40">
+    <p class="font-weight-bold mb-15">Construction Procedure</p>
+    <p class="mb-25">It is essential that during the construction of any new hardscaping project that the following procedures are completed to industry standards ensuring a quality long-lasting project.</p>
+
+    <p class="font-weight-medium mb-0">Removal of existing materials</p>
+    <p class="mb-30">{{finalProposal.existingMaterialRemoval}}</p>
+
+    <div *ngFor="let procedure of finalProposal.procedures">
+      <p class="font-weight-medium">{{procedure.type | optionLabel}}</p>
+      <div class="mb-25" *ngFor="let step of procedure.steps">
+        <p class="font-weight-medium mb-0">{{step.title}}</p>
+        <p>{{step.comment}}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-40">
+    <p class="font-weight-bold mb-14">Project time frame to start would be</p>
+    <p class="mb-20">We will work with the customer to put together  a project plan that fits their schedule. We have developed an initial schedule that provides for project completion and clean up. This schedule is provided as a guideline. The dates are placeholders and will be adjusted based on the anticipated start and required end dates.</p>
+    <p class="mb-20">The project would be completed in three (3) days and our current schedule is aprox 3 weeks out from execution of the project.</p>
+    <p class="mb-40">The customer has 3 days to cancel the contract from date of review as per state of CT consumer protection act.</p>
+  </section>
+
+  <p class="font-weight-bold mb-15 mt-50">Cost Estimate</p>
+  <div class="cost-table">
+    <div class="cost-table-header bg-color-blue-lagoon d-flex align-items-center text-white font-12">
+      <div class="px-15"><span>Description</span></div>
+      <div class="px-15"><span>Cost</span></div>
+    </div>
+    <div class="cost-table-content">
+      <div class="cost-table-row d-flex align-items-start py-15" *ngFor="let estimate of finalProposal.costEstimates">
+        <div class="px-15">
+          <div class="d-flex">
+            <p class="font-13 font-weight-medium text-primary mb-0">{{estimate.type | optionLabel}}</p>
+          </div>
+          <p class="font-13 mb-0">{{ estimate.comment }}</p>
+        </div>
+        <div class="px-15 d-flex align-items-center justify-content-between">
+          <p class="font-18 font-weight-medium text-primary mb-0">{{estimate.cost | currency}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-50 mt-30">
+    <div class="row align-items-center py-10">
+      <div class="col-sm-6 col-md-9 color-dove-gray font-13 text-right font-weight-bold">Subtotal</div>
+      <div class="col-sm-6 col-md-3 text-primary font-20 font-weight-medium text-right">{{subTotal | currency}}</div>
+    </div>
+    <div class="row align-items-center py-10">
+      <div class="col-sm-6 col-md-9 color-dove-gray font-13 text-right font-weight-bold">Tax</div>
+      <div class="col-sm-6 col-md-3 text-primary font-20 font-weight-medium text-right">{{tax | currency}}</div>
+    </div>
+    <ng-container *ngIf="readonly">
+      <div *ngIf="finalProposal.discount != 0" class="row align-items-center py-10">
+        <div class="col-sm-6 col-md-9 color-dove-gray font-13 text-right font-weight-bold">Discount</div>
+        <div class="col-sm-6 col-md-3 text-primary font-20 font-weight-medium text-right">{{finalProposal.discount | currency}}</div>
+      </div>
+    </ng-container>
+    <div class="row align-items-center py-10 bg-primary-transparent">
+      <div class="col-sm-6 col-md-9 color-dove-gray font-13 text-right font-weight-bold">Total</div>
+      <div class="col-sm-6 col-md-3 text-primary font-24 font-weight-medium text-right">{{total | currency}}</div>
+    </div>
+  </div>
+
+  <p class="font-weight-bold mb-25">Payment Schedule</p>
+  <p class="font-weight-medium mb-0">Payable as follows:</p>
+  <p class="mb-0"><span class="font-weight-medium">10%</span> deposit will lock in a date on the schedule.</p>
+  <p class="mb-0"><span class="font-weight-medium">40%</span> at the stage of the project,</p>
+  <p class="mb-25"><span class="font-weight-medium">and the remainder upon completion</span>.</p>
+  <p>Payments are due on the invoice date, and the final payment is due upon completion. For all payments that are over 10 days late, we reserve the right to charge you interest of 1% per month. If you fail to pay your bill, and if we are forced to bring a legal action against you then you agree to pay the costs of collection including reasonable attorney’s fees and other litigation costs.</p>
+
+  <p class="font-weight-medium font-14 mb-0">{{project.assignedContractor | fullName}}</p>
+  <p class="font-weight-medium font-14 mb-20">HIC #0650813</p>
+
+  <div class="row">
+    <div class="col d-flex flex-column justify-content-center">
+      <p class="font-weight-medium text-primary mb-0">J & D Landscaping</p>
+      <a class="text-primary">860-324-6218</a>
+      <a class="text-primary" href="https://www.jdlandscaping.net" target="_blank">jdlandscaping.net</a>
+      <a class="text-primary" href="mailto:{{ project.assignedContractor.email }}">{{ project.assignedContractor.email }}</a>
+    </div>
+    <div class="col d-flex flex-column align-items-center">
+      <div class="w-100 mb-20">
+        <input *ngIf="!project.contractSignedDate" type="text" class="border-0 w-100 py-30 bg-regent-gray text-center" id="signatureInput" [(ngModel)]="typedName" placeholder="Type your account name to sign it..."/>
+        <input *ngIf="project.contractSignedDate" readonly="true" type="text" class="border-0 w-100 py-30 bg-regent-gray text-center" [value]="project.user | fullName"/>
+      </div>
+      <p class="font-weight-medium text-center" *ngIf="!project.contractSignedDate">{{project.user | fullName}} authorizing signature</p>
+      <p class="font-weight-medium text-center color-dove-gray" *ngIf="project.contractSignedDate">{{project.user | fullName}} signed at {{ project.contractSignedDate | date }}</p>
+    </div>
+  </div>
+</div>

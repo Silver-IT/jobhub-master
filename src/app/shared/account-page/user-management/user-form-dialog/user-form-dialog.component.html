@@ -1,0 +1,26 @@
+<a class="close" mat-dialog-close><span class="material-icons">close</span></a>
+<h5 mat-dialog-title class="text-center mt-20 px-50">{{ data?.id ? 'Change Permission level' : 'Invite New User' }}</h5>
+<div mat-dialog-content class="py-30 pretty-scroll">
+  <form [formGroup]="form">
+
+    <ng-container *ngIf="!data?.id">
+      <div class="row">
+        <div class="col">
+          <job-hub-text-input label="First Name" placeholder="First Name" formControlName="firstName"></job-hub-text-input>
+        </div>
+        <div class="col">
+          <job-hub-text-input label="Last Name" placeholder="Last Name" formControlName="lastName"></job-hub-text-input>
+        </div>
+      </div>
+      <job-hub-text-input type="email" label="Email" placeholder="Email Address" formControlName="email"></job-hub-text-input>
+      <job-hub-phone-number-input label="Phone number" formControlName="phone"></job-hub-phone-number-input>
+    </ng-container>
+
+    <p class="font-14 color-dove-gray text-center mb-25" *ngIf="data?.id">Select one of the following</p>
+    <job-hub-select [options]="roleOptions" label="Level" placeholder="Permission level" formControlName="role"></job-hub-select>
+  </form>
+</div>
+<div mat-dialog-actions class="d-flex justify-content-center">
+  <button class="btn btn-primary" [disabled]="!form.valid || isSaving" (click)="save()">{{ data?.id ? 'Save Changes' : 'Send Invitation' }}</button>
+</div>
+<job-hub-spinner *ngIf="isSaving"></job-hub-spinner>

@@ -1,0 +1,18 @@
+<a class="close" mat-dialog-close><span class="material-icons">close</span></a>
+<h5 mat-dialog-title class="text-center mt-20 px-50 color-mine-shaft">Make Payment</h5>
+<p class="color-dove-gray font-14 text-center mx-40">
+  Please select your payment method.
+</p>
+<div mat-dialog-content class="pt-10 px-50 pretty-scroll">
+  <div class="row mb-50">
+    <div class="col-12 col-md-4 col-lg-4 mb-20 mb-md-0 d-flex justify-content-center">
+      <job-hub-payment-button (handleClick)="gotoPayment(PaymentMethod.Bank)" icon="bank" label="ACH" description="Easily connect to your bank account & pay." recommended="true"></job-hub-payment-button>
+    </div>
+    <div class="col-12 col-md-4 col-lg-4 mb-20 mb-md-0 d-flex justify-content-center">
+      <job-hub-payment-button (handleClick)="gotoPayment(PaymentMethod.CreditCard)" icon="credit-card" label="Credit / Debit Card" description="Pay with all major credit  & debit cards."></job-hub-payment-button>
+    </div>
+    <div class="col-12 col-md-4 col-lg-4 d-flex justify-content-center">
+      <job-hub-payment-button (handleClick)="gotoPayment(PaymentMethod.Cash)" icon="cash" label="Cash / Check" description="Pay with cash or checks."></job-hub-payment-button>
+    </div>
+  </div>
+</div>

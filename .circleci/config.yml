@@ -1,0 +1,73 @@
+version: 2.1
+orbs:
+  node: circleci/node@1.1.6
+jobs:
+  test:
+    resource_class: xlarge
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: npm install
+            - run: npm run lint
+  staging-build-and-deploy:
+    resource_class: xlarge
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: npm install
+            - run: npm run lint
+            - run: npm run build:staging
+            - run:
+                name: deploy-staging
+                command: 'sudo apt-get update && sudo apt-get install -qq -y python-pip libpython-dev;
+                      curl -O https://bootstrap.pypa.io/get-pip.py && sudo python get-pip.py;
+                      sudo pip install -q awscli --upgrade;
+                      aws configure set default.s3.signature_version s3v4;
+                      aws configure set preview.cloudfront true;
+                      aws --region us-east-2 s3 sync ./dist/job-hub s3://jdlandscaping-staging --delete;
+                      aws cloudfront create-invalidation --distribution-id ${AWS_CF_DISTRIBUTION_ID_STAGING} --paths "/*";'
+  production-build-and-deploy:
+    resource_class: xlarge
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: npm install
+            - run: npm run lint
+            - run: npm run build:prod
+            - run:
+                name: deploy-prod
+                command: 'sudo apt-get update && sudo apt-get install -qq -y python-pip libpython-dev;
+                  curl -O https://bootstrap.pypa.io/get-pip.py && sudo python get-pip.py;
+                  sudo pip install -q awscli --upgrade;
+                  aws configure set default.s3.signature_version s3v4;
+                  aws configure set preview.cloudfront true;
+                  aws --region us-east-2 s3 sync ./dist/job-hub s3://jdlandscaping-beta --delete;
+                  aws cloudfront create-invalidation --distribution-id ${AWS_CF_DISTRIBUTION_ID} --paths "/*";'
+workflows:
+  build:
+    jobs:
+      - test:
+          filters:
+            branches:
+              ignore:
+                - master
+                - prod
+      - staging-build-and-deploy:
+          filters:
+            branches:
+              only:
+                - master
+      - production-build-and-deploy:
+          filters:
+            branches:
+              only:
+                - prod

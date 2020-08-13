@@ -1,0 +1,10 @@
+<div class="package-card rounded p-15 pb-20 mb-30 position-relative cursor-pointer" (click)="navigate.emit(card.id)">
+  <div class="popular font-weight-bold d-flex align-items-center justify-content-center font-11 text-white bg-warning rounded" *ngIf="card?.popular">Most Popular</div>
+  <div>
+    <img class="img-fluid" [src]="card.image" [alt]="card.label">
+  </div>
+  <div class="mb-10 d-flex flex-column align-items-center justify-content-center">
+    <span class="font-18 text-primary mt-10">{{ card.label }}</span>
+    <button class="btn btn-primary btn-mini mt-20" (click)="navigate.emit(card.id)">See Details</button>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+@import "../../../../assets/theme";
+
+.button {
+  @include circle(55px);
+  cursor: pointer;
+  border: 2px solid white;
+
+  .normal {display: block}
+  .hover {display: none}
+  .like {display: none}
+
+  &:hover {
+    .normal {display: none}
+    .hover {display: block}
+  }
+
+  &.liked {
+    border: none;
+    .normal {display: none}
+    .hover {display: none}
+    .like {display: block}
+  }
+}

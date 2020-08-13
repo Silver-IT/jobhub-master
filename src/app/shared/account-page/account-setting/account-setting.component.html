@@ -1,0 +1,6 @@
+<div class="py-40 px-15 px-md-0">
+  <ng-container [ngSwitch]="form">
+    <job-hub-profile-form (changePassword)="form = FormType.PasswordForm" *ngSwitchCase="FormType.ProfileForm"></job-hub-profile-form>
+    <job-hub-change-password-form (updateProfile)="form = FormType.ProfileForm" *ngSwitchCase="FormType.PasswordForm"></job-hub-change-password-form>
+  </ng-container>
+</div>

@@ -1,0 +1,13 @@
+<div id="scrollable-idea-board" class="px-0 px-md-30 w-100 pretty-scroll" (scroll)="onScroll($event)">
+  <div [class.container]="hasContainer">
+    <job-hub-idea-board [editable]="editable"
+                        [clickable]="clickable"
+                        [ideas]="ideas"
+                        [isCustomer]="!!userId"
+                        (delete)="delete($event)"
+                        (edit)="edit($event)"
+                        col="5"></job-hub-idea-board>
+    <p *ngIf="!ideas.length" class="color-mine-shaft font-13 font-weight-medium my-50 text-center">No items to display.</p>
+  </div>
+</div>
+

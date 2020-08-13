@@ -1,0 +1,22 @@
+@import "../../../../assets/theme";
+
+:host {
+  @include host_grow;
+}
+
+.chart-renderer {
+  min-height: 300px;
+  margin-left: -35px;
+  margin-bottom: -70px;
+}
+
+:host {
+  ::ng-deep .gridline-path-vertical {
+    display: none;
+  }
+}
+
+.dot {
+  @include circle(5px);
+  background-color: $niagara;
+}

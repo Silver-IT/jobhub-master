@@ -1,0 +1,9 @@
+<div class="form-group" [class.label-input-group]="label">
+  <label class="form-label">
+    {{ label }}
+    <input type="tel" class="form-control" placeholder="Phone number" mask="(000) 000-0000"
+           [dropSpecialCharacters]="false"
+           [(ngModel)]="value"
+           (ngModelChange)="change($event)"/>
+  </label>
+</div>

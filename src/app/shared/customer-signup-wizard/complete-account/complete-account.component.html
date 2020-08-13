@@ -1,0 +1,20 @@
+<form [formGroup]="form">
+  <ng-container formGroupName="user">
+    <job-hub-text-input placeholder="First Name" formControlName="firstName"></job-hub-text-input>
+    <job-hub-text-input placeholder="Last Name" formControlName="lastName"></job-hub-text-input>
+    <job-hub-text-input type="email" placeholder="Email" formControlName="email"></job-hub-text-input>
+  </ng-container>
+  <job-hub-select [options]="sourceFoundUsOptions" placeholder="How did you find our company?" formControlName="sourceFoundUs"></job-hub-select>
+  <ng-container formGroupName="user">
+    <job-hub-text-input type="password" placeholder="Password" formControlName="password"></job-hub-text-input>
+    <job-hub-text-input type="password" placeholder="Confirm Password" formControlName="confirmPassword"></job-hub-text-input>
+
+    <div class="mt-35 text-left">
+      <mat-checkbox class="color-dove-gray" formControlName="terms">
+        <span class="d-flex flex-wrap">
+          I agree to the <a class="text-primary ml-5" (click)="showLegalNoticeDialog($event)">Terms of Service</a> <span class="mx-5">and</span> <a class="text-primary" (click)="showPrivacyDialog($event)">Privacy Policy</a>
+        </span>
+      </mat-checkbox>
+    </div>
+  </ng-container>
+</form>

@@ -1,0 +1,49 @@
+<section class="py-30">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-8 col-lg-9">
+        <p class="color-regent-gray font-weight-medium mb-20">Manage Project</p>
+        <div *ngFor="let milestone of milestones; let i = index;">
+          <ng-container [ngSwitch]="milestone.order">
+            <job-hub-deposit-milestone
+              *ngSwitchCase="MilestoneType.Deposit"
+              [showMode]="MilestoneShowMode.Admin"
+              [milestone]="milestone"
+              (confirmCashPayment)="confirmCashPayment($event)"
+              (editMilestone)="editMilestone($event)"
+              (requestPayment)="requestPayment($event)"></job-hub-deposit-milestone>
+            <job-hub-start-milestone
+              *ngSwitchCase="MilestoneType.Start"
+              [showMode]="MilestoneShowMode.Admin"
+              [disableActions]="milestones[i-1] && !milestones[i-1].paidDate"
+              [milestone]="milestone"
+              [project]="project"
+              (confirmCashPayment)="confirmCashPayment($event)"
+              (requestPayment)="requestPayment($event)"></job-hub-start-milestone>
+            <job-hub-final-milestone
+              *ngSwitchCase="MilestoneType.Final"
+              [showMode]="MilestoneShowMode.Admin"
+              [disableActions]="milestones[i-1] && !milestones[i-1].paidDate"
+              [milestone]="milestone"
+              [project]="project"
+              (confirmCashPayment)="confirmCashPayment($event)"
+              (editMilestone)="editMilestone($event)"
+              (removeHold)="removeHold($event)"
+              (removeAddOn)="removeAddOn($event)"
+              (removeRefund)="removeRefund($event)"
+              (requestPayment)="requestPayment($event)"></job-hub-final-milestone>
+          </ng-container>
+        </div>
+
+      </div>
+      <div class="col-12 col-md-4 col-lg-3">
+        <button *ngIf="milestones | reviewAvailable" class="btn btn-primary btn-small mb-3 w-100" (click)="requestReview()">Request Review</button>
+        <job-hub-request-chat userRole="Customer" [readonly]="!(project | isProjectEditable : true)" [project]="project" allowViewProfile="true" [user]="project.user"></job-hub-request-chat>
+        <div class="mt-40" *ngIf="!(project | isProjectEditable : true)">
+          <job-hub-request-chat userRole="Contractor" [readonly]="!(project | isProjectEditable : true)" [project]="project" [allowViewProfile]="false" [user]="project.assignedContractor"></job-hub-request-chat>
+        </div>
+      </div>
+    </div>
+    <job-hub-spinner *ngIf="isLoading"></job-hub-spinner>
+  </div>
+</section>

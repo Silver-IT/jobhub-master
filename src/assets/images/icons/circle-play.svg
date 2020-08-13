@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>08DA3ED9-A936-43C0-BBE6-CFBFA19FA350</title>
+    <g id="AdminSide-AccountSettings" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="AdminSide---userSessions" transform="translate(-1204.000000, -485.000000)">
+            <g id="userSession-row" transform="translate(138.000000, 472.000000)">
+                <g id="circle_play" transform="translate(1066.000000, 13.000000)">
+                    <g>
+                        <g id="check_teal" fill="#07A39D">
+                            <g id="circle_bg_blue">
+                                <circle id="Oval" cx="12" cy="12" r="12"></circle>
+                            </g>
+                        </g>
+                        <polygon id="Triangle" fill="#FFFFFF" transform="translate(13.000000, 12.000000) rotate(-270.000000) translate(-13.000000, -12.000000) " points="13 8 17 16 9 16"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

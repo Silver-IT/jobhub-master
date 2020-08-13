@@ -1,0 +1,82 @@
+ngb-datepicker {
+  overflow: hidden;
+  border: none !important;
+}
+
+ngb-datepicker-navigation {
+  padding: 10px 0;
+}
+
+.ngb-dp-arrow-btn {
+  box-shadow: none !important;
+  color: $dove-gray;
+}
+
+.ngb-dp-navigation-select {
+  select:first-child {
+    margin-right: 10px;
+  }
+}
+
+.ngb-dp-header, .ngb-dp-weekdays, .ngb-dp-months {
+  background-color: white !important;
+}
+
+.ngb-dp-week {
+  padding-top: 10px;
+}
+
+.ngb-dp-day {
+  margin: 12px 17px;
+}
+
+.ngb-dp-weekday {
+  margin: 0 17px 15px;
+  color: $niagara !important;
+  font-weight: 500;
+  font-size: 14px !important;
+  font-style: normal !important;
+}
+
+.nbg-dp-weekdays {
+  border-bottom: 1px solid $niagara !important;
+}
+
+.ngb-dp-arrow {
+  flex: none !important;
+}
+
+ngb-datepicker-navigation-select>.custom-select {
+  border: none;
+  height: 50px !important;
+  background-color: $catskill-white;
+  margin: 0 10px 0 10px;
+}
+
+.ngb-dp-header {
+  margin-bottom: 30px;
+}
+
+.ngb-dp-navigation-chevron {
+  border-width: .1em .1em 0 0 !important;
+}
+
+@include media-breakpoint-down(md) {
+  .ngb-dp-day {
+    width: 1.75rem !important;
+    height: 1.75rem !important;
+    margin: 4px 7px;
+  }
+
+  .ngb-dp-weekday {
+    margin: 0 5px 7px;
+  }
+
+  .ngb-dp-week {
+    padding-top: 0;
+  }
+
+  .ngb-dp-header {
+    margin-bottom: 10px;
+  }
+}

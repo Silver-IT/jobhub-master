@@ -1,0 +1,58 @@
+<job-hub-milestone-template [milestone]="milestone">
+  <div class="milestone-status col-12 col-lg-8 order-1 order-lg-0 text-primary font-12 d-column d-md-flex align-items-center mt-20 mb-20 mt-lg-0 mb-lg-0">
+
+    <!-- project completed start -->
+    <div class="d-flex align-items-center w-100" *ngIf="(!milestone.hold && milestone.paidDate) || (milestone.hold && milestone.hold.paidDate); else unpaid">
+      <img src="assets/images/icons/payment/circle-check.svg" alt="circle check">
+      <span class="pl-2 font-weight-medium">Completed on {{milestone.paidDate | date: 'MMM dd, yyyy'}}</span>
+    </div>
+    <!-- project completed paid end -->
+
+    <!-- either final milestone or hold is not paid start -->
+    <ng-template #unpaid>
+      <div *ngIf="milestone.paidDate && milestone.hold" class="px-2 font-weight-medium pb-3 pb-md-0">Paid on {{milestone.paidDate | date: 'MMM dd, yyyy'}}</div>
+      <job-hub-milestone-payment-control
+        [showMode]="showMode"
+        [readonly]="milestone.paidDate"
+        [disableActions]="disableActions"
+        [milestone]="milestone.paidDate ? milestone.hold : milestone"
+        (confirmCashPay)="confirmCashPayment.emit($event)"
+        (editMilestone)="editMilestone.emit($event)"
+        (requestPayment)="requestPayment.emit($event)"
+        (makePayment)="makePayment.emit($event)"></job-hub-milestone-payment-control>
+    </ng-template>
+    <!-- either final milestone or hold is not paid end -->
+
+  </div>
+
+  <div class="milestone-addons">
+    <!-- payment add-on items are available for the deposit and the final milestone. display only when it is not paid yet -->
+    <ng-container *ngIf="!milestone.paidDate">
+      <job-hub-milestone-add-on
+        *ngFor="let addOn of milestone.paymentAddOns"
+        [readonly]="showMode === MilestoneShowMode.Customer"
+        [type]="MilestoneAddOnType.Addon"
+        [amount]="addOn.amount"
+        [comment]="addOn.comment"
+        (remove)="removeAddOn.emit(addOn.id)"></job-hub-milestone-add-on>
+    </ng-container>
+
+    <!-- display hold-amount when it is not paid -->
+    <job-hub-milestone-add-on
+      *ngIf="milestone.hold && !milestone.hold.paidDate"
+      [readonly]="showMode === MilestoneShowMode.Customer"
+      [type]="MilestoneAddOnType.Hold"
+      [amount]="milestone.hold.amount"
+      [comment]="milestone.hold.comment"
+      (remove)="removeHold.emit(milestone.hold.id)"></job-hub-milestone-add-on>
+
+    <!-- display refund -->
+    <job-hub-milestone-add-on
+      *ngIf="project.refund"
+      [readonly]="showMode === MilestoneShowMode.Customer"
+      [type]="MilestoneAddOnType.Refund"
+      [amount]="project.refund.amount"
+      [comment]="project.refund.comment"
+      (remove)="removeRefund.emit(project.refund.id)"></job-hub-milestone-add-on>
+  </div>
+</job-hub-milestone-template>

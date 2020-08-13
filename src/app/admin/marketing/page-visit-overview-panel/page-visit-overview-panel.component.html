@@ -1,0 +1,35 @@
+<p class="color-mine-shaft mb-20 font-weight-medium">Most visited pages</p>
+<div class="d-flex flex-column bg-white rounded shadow-1 p-20 position-relative flex-grow-1">
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-20">
+    <p class="color-mine-shaft mb-15 mb-md-0 font-weight-medium">URL Sessions</p>
+    <job-hub-toggle-button-group [options]="viewOptions" [(selectedOption)]="view" (selectedOptionChange)="loadOverview()"></job-hub-toggle-button-group>
+  </div>
+  <job-hub-spinner *ngIf="isLoading"></job-hub-spinner>
+  <div class="d-flex flex-column flex-grow-1 justify-content-between">
+    <div *ngIf="view === ViewOption.List">
+      <div class="pretty-scroll pr-10">
+        <div *ngFor="let visit of pageVisits; let i = index" class="d-flex justify-content-between align-items-center mb-2 font-12">
+          <div class="d-flex align-items-center overview-row">
+            <span class="text-primary">{{ i + 1 }}.</span>
+            <div>
+              <span>{{ visit.page | optionLabel }}</span>
+              <span *ngIf="visit.sub"> - {{ visit.sub | optionLabel }}</span>
+            </div>
+          </div>
+          <span class="text-primary font-weight-medium">{{ visit.count }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="chart-renderer" *ngIf="view === ViewOption.Graph">
+      <ngx-charts-bar-vertical
+        *ngIf="!isLoading"
+        [roundEdges]="false"
+        [scheme]="colors"
+        [yAxis]="true"
+        [results]="statistic"
+        [gradient]="true"
+        [legend]="false">
+      </ngx-charts-bar-vertical>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<section class="py-50 px-15 px-lg-75">
+  <p class="w-100 color-mine-shaft font-18 font-weight-medium mb-20">Email Status</p>
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <div class="emails-table overflow-hidden bg-white">
+        <div class="emails-table-header bg-color-blue-lagoon text-white font-12 row">
+          <div class="col-7 d-flex align-items-center pl-50">Subject</div>
+          <div class="col-5 d-flex align-items-center">Sent Time</div>
+        </div>
+        <div class="emails-table-row d-flex align-items-center justify-content-center color-dove-gray font-12" *ngIf="emails.length === 0; else emailList">(No Emails)</div>
+        <ng-template #emailList>
+          <div (click)="selectEmail(email.id)" class="emails-table-row row cursor-pointer" [class.bg-color-aqua-island]="email.selected" *ngFor="let email of emails">
+            <div class="col-7 d-flex align-items-center">
+              <span class="pl-10"><img src="assets/images/icons/mail.svg" alt="mail"></span>
+              <div class="d-flex flex-column justify-content-center pl-10">
+                <span class="font-13 font-weight-bold color-mine-shaft">{{email.subject}}</span>
+              </div>
+            </div>
+            <div class="col-5 pl-20 font-12 d-flex align-items-center">
+              {{email.createdAt | date : 'MMM d, yyyy - hh:mm a'}}
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <div class="events-table p-40 bg-white">
+        <div class="text-center font-12 color-dove-gray" *ngIf="!events; else eventList">(No Email Selected)</div>
+        <ng-template #eventList>
+          <div class="d-flex flex-column py-10" *ngFor="let event of events">
+            <div class="d-flex justify-content-between mb-20">
+              <div class="d-flex align-items-center">
+                <span class="dot mr-10"
+                      [class.success]="event.type === EmailEventType.Processed || event.type === EmailEventType.Open || event.type === EmailEventType.Click || event.type === EmailEventType.Delivered"
+                      [class.warning]="event.type === EmailEventType.Deferred"
+                      [class.failed]="event.type === EmailEventType.Bounce || event.type === EmailEventType.Drop"></span>
+                <span class="font-14 font-weight-medium color-mine-shaft">{{ event | emailEventTitle }}</span>
+              </div>
+              <span class="font-12 font-weight-light color-dove-gray">{{event.processedAt | date : 'MMM d, yyyy - hh:mm a'}}</span>
+            </div>
+            <p class="font-12 font-weight-light pl-2" *ngIf="event.reason">{{event.reason}}</p>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <job-hub-spinner *ngIf="isLoading"></job-hub-spinner>
+</section>

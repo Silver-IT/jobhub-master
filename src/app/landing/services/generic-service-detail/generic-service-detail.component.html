@@ -1,0 +1,8 @@
+<h5 class="color-mine-shaft mb-25">{{ title }}</h5>
+<p class="color-dove-gray mb-35" [innerHTML]="description"></p>
+<job-hub-static-idea-board [ideas]="ideas" [hasBeforeAfter]="hasBeforeAfter"></job-hub-static-idea-board>
+
+<div class="d-flex justify-content-center mt-100">
+  <button class="btn btn-primary btn-normal mr-20" *ngIf="moreLink" (click)="navigateToIdeaBoard()">View More</button>
+  <job-hub-request-estimate-button [center]="false"></job-hub-request-estimate-button>
+</div>

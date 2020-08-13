@@ -1,0 +1,30 @@
+<form [formGroup]="form" (ngSubmit)="updateProfile()">
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <job-hub-text-input label="First name" placeholder="First name" formControlName="firstName"></job-hub-text-input>
+    </div>
+    <div class="col-12 col-md-6">
+      <job-hub-text-input label="Last name" placeholder="Last name" formControlName="lastName"></job-hub-text-input>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <job-hub-text-input type="email" label="Email address" placeholder="Email address" readonly="true" [value]="user?.email"></job-hub-text-input>
+    </div>
+    <div class="col-12 col-md-6">
+      <job-hub-phone-number-input label="Phone number" formControlName="phone"></job-hub-phone-number-input>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <job-hub-text-input type="password" label="Password" placeholder="Password" value="**********" readonly="true"></job-hub-text-input>
+      <a class="text-primary font-12 font-weight-medium" (click)="changePassword.emit()">Change password</a>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center mt-50">
+    <button class="btn btn-primary btn-lt-md-block" [disabled]="form.invalid || isLoading">Save changes</button>
+  </div>
+
+  <job-hub-spinner *ngIf="isLoading"></job-hub-spinner>
+</form>

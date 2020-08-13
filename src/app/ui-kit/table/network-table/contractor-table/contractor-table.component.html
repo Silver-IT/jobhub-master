@@ -1,0 +1,28 @@
+<job-hub-table [rows]="contractors"
+               [columns]="columns"
+               [loading]="isLoading"
+               [length]="total"
+               [pageSize]="take"
+               (page)="onPage($event)"
+               emptyDescription="No companies to display.">
+  <ng-template #imageColumn let-contractor="row">
+    <job-hub-avatar [src]="contractor.logoUrl"></job-hub-avatar>
+  </ng-template>
+
+  <ng-template #nameColumn let-contractor="row">
+    <div class="d-flex flex-column pr-20">
+      <a class="font-13 font-weight-bold text-primary mb-1" (click)="selectContractor.emit(contractor.id)">{{ contractor.companyName }}</a>
+      <span class="font-10 font-weight-medium color-dove-gray">{{ contractor.address }}</span>
+    </div>
+  </ng-template>
+
+  <ng-template #categoryColumn let-contractor="row">
+    <span class="font-13 color-mine-shaft">{{ dictCategory[contractor.category] }}</span>
+  </ng-template>
+
+
+  <ng-template *ngIf="!readonly" #actionColumn>
+    <job-hub-action-dropdown></job-hub-action-dropdown>
+  </ng-template>
+
+</job-hub-table>

@@ -1,0 +1,33 @@
+@import "../../../../assets/theme";
+
+:host {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.icon-menu-item {
+  width: 58px;
+  .active {
+    display: none;
+  }
+  .inactive {
+    display: block;
+  }
+  &.show {
+    background-color: $niagara;
+    .active {
+      display: block;
+    }
+    .inactive {
+      display: none;
+    }
+  }
+}
+
+.alert-circle {
+  @include circle(16px);
+  position: absolute;
+  top: 15px;
+  right: 12px;
+}

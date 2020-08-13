@@ -1,0 +1,8 @@
+<div class="user-item text-center bg-white rounded p-30 pb-15 d-flex flex-column align-items-center h-100 position-relative">
+  <job-hub-action-dropdown *ngIf="user.id !== me.id" (edit)="edit.emit(user)" (archive)="delete.emit(user)"></job-hub-action-dropdown>
+  <job-hub-avatar size="65" [src]="user.avatar"></job-hub-avatar>
+  <div class="d-flex flex-column">
+    <span class="font-14 font-weight-medium color-mine-shaft mb-5 mt-20">{{ user | fullName }} <span class="font-11 color-mercury font-weight-normal" *ngIf="user.id === me.id">(you)</span></span>
+    <span class="font-12 font-weight-medium text-primary">{{ user.role | optionLabel }}</span>
+  </div>
+</div>

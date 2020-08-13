@@ -1,0 +1,23 @@
+<div class="time-line mb-100">
+  <div *ngFor="let group of timeline; let groupLast = last">
+    <div class="event-wrapper pt-0">
+      <span class="point point-start"></span>
+      <!-- DO NOT REMOVE BELOW LINES -->
+      <div class="text-primary font-16 font-weight-medium pt-20">{{ group.label }}</div>
+      <div></div>
+      <!-- DO NOT REMOVE ABOVE LINES -->
+    </div>
+
+    <div class="event-wrapper" *ngFor="let item of group.events; let i = index; let last = last">
+      <span class="point"></span>
+      <span class="point-line" *ngIf="!last || !groupLast"></span>
+      <div class="event-card-wrapper">
+        <div class="year">{{ item.label }}</div>
+        <div class="event-card" [innerHTML]="item.text"></div>
+      </div>
+      <div class="pt-40">
+        <img class="img-fluid" [src]="item.image" [alt]="item.label">
+      </div>
+    </div>
+  </div>
+</div>

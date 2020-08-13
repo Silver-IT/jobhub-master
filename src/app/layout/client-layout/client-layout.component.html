@@ -1,0 +1,27 @@
+<section class="bg-color-athens-gray d-flex flex-column">
+  <nav class="navbar p-0">
+    <div class="container h-100">
+      <div class="d-flex align-items-center">
+        <a class="navbar-brand" [routerLink]="[ROUTES.app.root, ROUTES.app.myProjects] | routeToAbsolute"><img width="97px" src="assets/images/logo.svg" alt="Logo"></a>
+        <a class="color-mine-shaft font-12 ml-10 d-none d-lg-block" routerLink="/">Return to website</a>
+      </div>
+      <div class="d-flex align-items-center flex-row-reverse flex-md-row h-100">
+        <ul class="navbar-nav flex-row font-12 h-100">
+          <li class="nav-item px-20 d-none d-md-flex align-items-center" *ngFor="let item of menus">
+            <a class="nav-link color-tundora" [routerLink]="[ROUTES.app.root, item.route] | routeToAbsolute" routerLinkActive="text-primary font-weight-medium">{{ item.label }}</a>
+          </li>
+          <job-hub-profile-dropdown></job-hub-profile-dropdown>
+        </ul>
+        <job-hub-inbox-menu></job-hub-inbox-menu>
+        <job-hub-notification-menu></job-hub-notification-menu>
+      </div>
+    </div>
+  </nav>
+  <ng-container *ngIf="(user$ | async) as user">
+    <job-hub-global-notification *ngIf="!user.isEmailVerified"></job-hub-global-notification>
+  </ng-container>
+  <div [id]="ScrollPosition.CustomerPanelContainer" class="section-content overflow-auto position-relative">
+    <router-outlet></router-outlet>
+  </div>
+  <job-hub-app-footer></job-hub-app-footer>
+</section>

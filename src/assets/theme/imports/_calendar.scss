@@ -1,0 +1,118 @@
+.cal-week-view .cal-current-time-marker {
+  background-color: $tangerine;
+  height: 2px;
+}
+.cal-week-view {
+  border-top: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.cal-week-view .cal-time-events {
+  border: none;
+  max-height: calc(100vh - 315px);
+  @include pretty-scroll();
+}
+
+.cal-week-view .cal-ends-within-day .cal-event {
+  background-color: white;
+  border-radius: 3px;
+  border: none;
+  //height: 59px;
+  padding-bottom: 3px;
+}
+.cal-week-view .cal-hour-segment {
+  display: flex;
+  align-items: center;
+}
+.cal-week-view .cal-hour-odd {
+  background-color: white;
+}
+.cal-week-view .cal-time {
+  color: $dove-gray;
+  font-weight: 500;
+  font-size: 13px;
+  background-color: white;
+  padding-top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  //height: 60px;
+  height: 90px;
+}
+
+.cal-month-view .cal-days {
+  border: none;
+  & > div:last-child > div {
+    border-bottom: none;
+  }
+}
+
+mwl-calendar-month-cell {
+  background-color: white !important;
+  .jh-cal-day {
+    color: $dove-gray;
+    @include circle(26px);
+  }
+  &.cal-weekend .jh-cal-day {
+    color: $japonica
+  }
+  &.cal-out-month .jh-cal-day {
+    color: $mercury;
+  }
+  &.cal-today .jh-cal-day {
+    color: white;
+    background-color: $tangerine;
+  }
+
+  .jh-cal-event {
+    padding: 7px 6px;
+    margin-bottom: 5px;
+    .dot {
+      @include circle(6px);
+    }
+  }
+}
+
+.cal-week-view .cal-all-day-events {
+  border: none !important;
+  border-bottom: 1px solid $niagara !important;
+  //height: 61px;
+}
+
+.cal-week-view .cal-all-day-events .cal-events-row {
+  //height: 54px;
+  margin-bottom: 2px;
+}
+
+.cal-week-view .cal-all-day-events .cal-starts-within-week .cal-event, .cal-week-view .cal-event, .cal-week-view .cal-all-day-events .cal-event {
+  border: none;
+  background-color: $black-squeeze;
+  //height: 54px;
+  padding: 0 20px;
+}
+
+.cal-open {
+  background-color: rgb(230 246 245 / 50%) !important;
+}
+
+.cal-past .jh-cal-day {
+  color: $silver;
+}
+
+.cal-temp-event {
+  border: 1px solid $niagara !important;
+}
+
+.cal-week-view .cal-hour-segment.cal-after-hour-start .cal-time {
+  display: flex;
+}
+
+.cal-week-view .cal-time-events .cal-day-column {
+  .cal-hour {
+  }
+}
+
+.cal-day-event-shadow {
+  box-shadow: 1px 1px 1px 1px rgba(7, 163, 157, 0.2)
+}

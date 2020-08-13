@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="col-12" [ngClass]="'col-md-' + 12 / cols" *ngFor="let item of options">
+    <div class="image-card p-10 mb-10 cursor-pointer" (click)="selectCard(item)" [class.active]="item.selected">
+      <job-hub-image-renderer height="77" [src]="item.image"></job-hub-image-renderer>
+      <span><img src="assets/images/icons/check-circle.svg" alt="check"></span>
+      <div class="font-weight-medium mt-10 text-center">
+        {{ item.label }}
+      </div>
+    </div>
+  </div>
+</div>

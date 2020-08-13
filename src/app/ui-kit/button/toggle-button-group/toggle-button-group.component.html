@@ -1,0 +1,4 @@
+<div class="btn-group shadow-3 rounded">
+  <button class="btn btn-white font-weight-medium btn-mini shadow-none" *ngFor="let option of options"
+          [class.btn-primary]="option.value === selectedOption" (click)="select(option.value)">{{ option.label }}</button>
+</div>

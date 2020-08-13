@@ -1,0 +1,15 @@
+@import "../../../../assets/theme";
+
+:host {
+  @include host_grow;
+}
+
+.overview-row {
+  span:first-child {
+    @include flex(width, 20px);
+  }
+}
+
+.pretty-scroll {
+  height: 220px;
+}

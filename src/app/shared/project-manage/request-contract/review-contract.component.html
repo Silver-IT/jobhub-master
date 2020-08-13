@@ -1,0 +1,8 @@
+<div class="bg-white pb-30 mt-35 position-relative" [class.pt-3]="!project.contractSignedDate" [class.pt-30]="project.contractSignedDate">
+  <h3 class="mb-30 text-center font-22 color-mine-shaft" *ngIf="!project.contractSignedDate">Need Contract?</h3>
+  <div class="d-flex justify-content-center w-100 text-center px-20">
+    <button class="btn btn-primary btn-small btn-lt-md-block" [routerLink]="[ROUTES.app.root, ROUTES.app.project, project.id, ROUTES.app.contract] | routeToAbsolute">{{ !project.contractSignedDate ? 'Review Project Contract' : 'View Contract' }}</button>
+  </div>
+
+  <job-hub-spinner *ngIf="isSaving"></job-hub-spinner>
+</div>

@@ -1,0 +1,30 @@
+<section class="bg-color-catskill-white py-100">
+  <div class="container">
+    <h3 class="font-30 color-mine-shaft font-weight-bold mb-50">{{ data.label }}</h3>
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-4">
+        <div [innerHTML]="data.description" class="mb-20"></div>
+        <p class="font-14 font-weight-bold color-mine-shaft mb-50">Installed Prices</p>
+
+        <div *ngFor="let item of data.info" class="mb-50">
+          <span class="font-14 font-weight-medium text-primary mb-20" [innerHTML]="item.label"></span>
+          <ul class="list-unstyled green-dot-list pl-40" *ngIf="item.options">
+            <li *ngFor="let option of item.options" class="font-14 color-dove-gray d-flex align-items-center">
+              <span class="label-min">{{ option.label }}</span>
+              <span *ngIf="option?.price" class="text-primary font-weight-medium">{{ option?.price | currency : 'USD' : 'symbol-narrow' : '4.0-0' }}</span>
+            </li>
+          </ul>
+        </div>
+        <p class="font-14 color-dove-gray mb-30">Speak to a project consultant to learn more and to discuss the details of your project.</p>
+        <div class="d-flex flex-column align-items-start">
+          <button class="btn btn-primary mb-10 btn-normal" (click)="schedule()">Schedule Consultation</button>
+          <span class="text-warning font-10">* Some restrictions apply</span>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-8 pl-15 pl-md-30 mt-30 mt-md-0">
+        <job-hub-package-image-viewer [images]="data.images"></job-hub-package-image-viewer>
+      </div>
+    </div>
+
+  </div>
+</section>

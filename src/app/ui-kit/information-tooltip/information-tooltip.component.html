@@ -1,0 +1,7 @@
+<span class="cursor-pointer" [placement]="placement" [ngbPopover]="popContent" triggers="mouseenter:mouseleave">
+  <img src="assets/images/icons/tooltip.svg" alt="Help">
+</span>
+
+<ng-template #popContent>
+  <div class="font-12 color-mine-shaft text-center">{{content}}</div>
+</ng-template>

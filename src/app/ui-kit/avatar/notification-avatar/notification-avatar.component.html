@@ -1,0 +1,6 @@
+<ng-container [ngSwitch]="event.type">
+  <job-hub-avatar [size]="size" *ngSwitchCase="EventType.UserRegisteredEvent"></job-hub-avatar>
+  <ng-container *ngSwitchDefault>
+    <job-hub-avatar [size]="size" [type]="event.meta.projectType || event.meta.project.projectType"></job-hub-avatar>
+  </ng-container>
+</ng-container>

@@ -1,0 +1,15 @@
+job-hub-client-layout job-hub-notification-menu {
+  @include media-breakpoint-down(md) {
+    .dropdown-menu.left {
+      right: -110px;
+    }
+  }
+}
+
+job-hub-admin-layout job-hub-notification-menu {
+  @include media-breakpoint-down(md) {
+    .dropdown-menu.left {
+      right: -62px;
+    }
+  }
+}

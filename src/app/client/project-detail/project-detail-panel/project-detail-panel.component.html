@@ -1,0 +1,110 @@
+<section class="py-30">
+  <div class="container">
+    <div class="row flex-column-reverse flex-md-row">
+      <div class="col-12 col-md-8 col-lg-9">
+        <p class="color-regent-gray font-weight-medium mb-20 d-none d-md-block">Project Brief</p>
+        <ng-container [ngSwitch]="project | projectStatus">
+          <job-hub-project-status-alert type="danger" text="Estimate Declined" *ngSwitchCase="ProjectStatus.EstimateDeclined"></job-hub-project-status-alert>
+          <job-hub-project-status-alert type="danger" text="Final Proposal Declined" *ngSwitchCase="ProjectStatus.FinalProposalDeclined"></job-hub-project-status-alert>
+        </ng-container>
+        <p class="color-mine-shaft font-weight-bold font-13 mt-20 mt-md-0">Project Details</p>
+        <form [formGroup]="form">
+          <div class="row">
+            <div class="col-12 col-md-6 col-lg-3">
+              <job-hub-select [options]="projectOptions.projectTimelineTypes" label="Current project lead time" formControlName="timelineType" [readonly]="true"></job-hub-select>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <job-hub-select [options]="projectOptions.opinion" label="Interested in financing" formControlName="interestedInFinancing" [readonly]="true"></job-hub-select>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <job-hub-yes-no-picker label="3D Design required" formControlName="designRequired" [readonly]="true"></job-hub-yes-no-picker>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <job-hub-select [options]="projectOptions.cleanupRequiredTypes" label="Project cleanup" formControlName="cleanUpType" [readonly]="true"></job-hub-select>
+            </div>
+          </div>
+
+          <job-hub-textarea label="Project description" placeholder="Project description" formControlName="comment" [readonly]="true"></job-hub-textarea>
+
+          <ng-container formGroupName="accessories" *ngFor="let accessory of accessories.controls; let i = index">
+            <div class="pt-20 pb-10" [formGroupName]="i">
+              <p class="color-mine-shaft font-weight-bold font-13">{{ accessory.value.type | optionLabel : projectOptions.projectAccessoryTypes }}</p>
+              <div class="row">
+                <div class="col-12 col-lg-6">
+                  <job-hub-multi-select [options]="projectOptions.materialTypes" label="Type of materials" formControlName="materials" [readonly]="true"></job-hub-multi-select>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <div class="row">
+                    <div class="col-12 col-md-6">
+                      <job-hub-select [options]="projectOptions.projectLocationTypes" label="Type of materials" formControlName="locationType" [readonly]="true"></job-hub-select>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <job-hub-text-input label="Approx size" placeholder="Enter size" formControlName="size" [readonly]="true"></job-hub-text-input>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-lg-6 col-xl-3">
+                  <job-hub-text-input label="Whats currently there?" placeholder="Enter current state" formControlName="groundState" [readonly]="true"></job-hub-text-input>
+                </div>
+                <div class="col-12 col-lg-6 col-xl-3">
+                  <job-hub-select [options]="projectOptions.projectShapeTypes" label="Shape" formControlName="shape" [readonly]="true"></job-hub-select>
+                </div>
+              </div>
+              <job-hub-textarea label="Project description" placeholder="Project description" formControlName="comment" [readonly]="true"></job-hub-textarea>
+            </div>
+          </ng-container>
+
+          <p class="color-mine-shaft font-weight-bold font-13">Site Details</p>
+          <div class="row">
+            <div class="col-12 col-md-6 col-lg-3">
+              <job-hub-select [options]="projectOptions.machineAccessTypes" label="Machine access" formControlName="machineAccess" [readonly]="true"></job-hub-select>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <job-hub-select [options]="projectOptions.soilTypes" label="Soil type" formControlName="soilType" [readonly]="true"></job-hub-select>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <job-hub-select [options]="projectOptions.propertyGradeTypes" label="Property grade" formControlName="propertyGrade" [readonly]="true"></job-hub-select>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <job-hub-select [options]="projectOptions.drainageTypes" label="Drainage" formControlName="drainageType" [readonly]="true"></job-hub-select>
+            </div>
+          </div>
+
+          <p class="color-mine-shaft font-weight-bold font-13 mt-30">Attachments</p>
+          <job-hub-photo-uploader align="start" [readonly]="true" formControlName="attachments"></job-hub-photo-uploader>
+        </form>
+      </div>
+      <div class="col-12 col-md-4 col-lg-3">
+        <div class="client-sticky-sidebar">
+          <!-- Mobile view title start -->
+          <p class="color-regent-gray font-weight-medium mb-20 d-block d-md-none">Project Brief</p>
+          <!-- Mobile view title end -->
+          <ng-container [ngSwitch]="project | projectStatus">
+            <button *ngSwitchCase="ProjectStatus.ReviewEstimate" class="btn btn-warning text-white btn-small w-100" [routerLink]="[ROUTES.app.estimate]">Review Estimate</button>
+            <button *ngSwitchCase="ProjectStatus.SiteVisitScheduled" class="btn btn-primary btn-small w-100" [routerLink]="[ROUTES.app.estimate]">Site visit Scheduled</button>
+
+            <ng-container *ngSwitchCase="
+              ((project | projectStatus) === ProjectStatus.ReviewFinalProposal
+              || (project | projectStatus) === ProjectStatus.ContractRequested
+              || (project | projectStatus) === ProjectStatus.ReviewContract) ? (project | projectStatus) : null">
+              <button class="btn btn-warning text-white btn-small w-100" [routerLink]="[ROUTES.app.proposal]">Review Final Proposal</button>
+            </ng-container>
+
+            <button *ngSwitchCase="
+              ((project | projectStatus) === ProjectStatus.FinalProposalAccepted
+              || (project | projectStatus) === ProjectStatus.ProjectScheduled
+              || (project | projectStatus) === ProjectStatus.ProjectCompleted) ? (project | projectStatus) : null" class="btn btn-primary btn-small w-100" [routerLink]="[ROUTES.app.payment]">Management</button>
+          </ng-container>
+          <div class="mt-20 mt-md-45" *ngIf="project.latitude && project.longitude">
+            <job-hub-map [latitude]="project.latitude" [longitude]="project.longitude"></job-hub-map>
+          </div>
+          <div *ngIf="project.assignedContractor" class="mt-20 mt-md-45">
+            <job-hub-request-chat [project]="project" [user]="project.assignedContractor"></job-hub-request-chat>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

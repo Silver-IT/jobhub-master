@@ -1,0 +1,23 @@
+<a class="close" mat-dialog-close><span class="material-icons">close</span></a>
+<h5 mat-dialog-title class="text-center mt-20 px-50">Create a free account to save photos and view more images</h5>
+<div mat-dialog-content class="py-30 pretty-scroll">
+  <form [formGroup]="form" class="px-70">
+    <job-hub-text-input placeholder="First Name" formControlName="firstName"></job-hub-text-input>
+    <job-hub-text-input placeholder="Last Name" formControlName="lastName"></job-hub-text-input>
+    <job-hub-text-input type="email" placeholder="Email Address" formControlName="email"></job-hub-text-input>
+    <job-hub-phone-number-input formControlName="phone"></job-hub-phone-number-input>
+    <job-hub-text-input type="password" placeholder="Password" formControlName="password"></job-hub-text-input>
+    <job-hub-text-input type="password" placeholder="Confirm Password" formControlName="confirmPassword"></job-hub-text-input>
+    <div class="mt-20">
+      <mat-checkbox class="color-dove-gray" formControlName="terms">
+        I agree to the <a mat-dialog-close class="text-primary" [routerLink]="ROUTES.landingPages.legalNotice | routeToAbsolute">Terms of Service</a> and <a mat-dialog-close class="text-primary" [routerLink]="ROUTES.landingPages.privacy | routeToAbsolute">Privacy Policy</a>
+      </mat-checkbox>
+    </div>
+  </form>
+</div>
+<job-hub-spinner *ngIf="isLoading"></job-hub-spinner>
+<div mat-dialog-actions class="d-flex justify-content-center">
+  <button class="btn btn-primary" [disabled]="isLoading || form.invalid" (click)="register()">Create Account</button>
+</div>
+
+

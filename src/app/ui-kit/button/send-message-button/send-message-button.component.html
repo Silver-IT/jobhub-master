@@ -1,0 +1,4 @@
+<button class="btn btn-primary btn-lt-md-block btn-small mt-20 position-relative" (click)="sendMessage()">
+  {{ text }}
+  <job-hub-spinner [diameter]="20" *ngIf="isLoading"></job-hub-spinner>
+</button>

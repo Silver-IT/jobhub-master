@@ -1,0 +1,32 @@
+<job-hub-jumbotron image="assets/images/landing-page/hiring/header.jpg" title="We are hiring"></job-hub-jumbotron>
+
+<job-hub-section-builder header="We are hiring" title="Job list" align="left">
+  <div class="position-relative">
+    <job-hub-spinner *ngIf="isLoading"></job-hub-spinner>
+  </div>
+
+  <div class="d-none d-lg-flex justify-content-between text-primary pl-25 pr-180 mr-150 mb-20">
+    <span>Position</span>
+    <span>Type</span>
+    <span>Salary</span>
+  </div>
+
+  <div class="card color-mine-shaft mb-15 pt-35 px-25 py-20" *ngFor="let item of jobs">
+    <div class="d-flex flex-column flex-lg-row align-items-start">
+      <div class="pr-0 pr-lg-120">
+        <div class="d-flex flex-column flex-lg-row justify-content-between font-18 mb-20">
+          <div class="font-weight-medium">{{ item.title }}</div>
+          <div>{{ item | jobType }}</div>
+
+          <div>
+            {{ item.salary | currency }} / {{ item.salaryType | lowercase }}
+          </div>
+        </div>
+        <div>{{ item.description }}</div>
+      </div>
+      <button class="btn btn-primary mt-20 mt-lg-0" (click)="openApplyDialog(item)">Apply to job</button>
+    </div>
+  </div>
+</job-hub-section-builder>
+
+<job-hub-branding></job-hub-branding>

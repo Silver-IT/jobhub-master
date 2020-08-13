@@ -1,0 +1,41 @@
+<div class="sidebar bg-white pt-10 shadow-2" [class.collapsed]="isCollapsed" (mouseenter)="isCollapsed = false" (mouseleave)="isCollapsed = true">
+  <a class="btn-collapse d-none d-md-block" (click)="toggle()"><img src="assets/images/admin-sidebar/collapse.svg" alt="Collapse"></a>
+  <div class="d-flex flex-column justify-content-between h-100">
+    <ul class="list-unstyled pl-20 overflow-hidden">
+      <li *ngFor="let item of menus" class="d-flex align-items-center py-10">
+        <a class="d-flex" [routerLink]="[item.route]" routerLinkActive="active" (click)="isCollapsed = true">
+          <img class="inactive" [src]="'assets/images/admin-sidebar/' + item.icon + '.svg'" [alt]="item.label">
+          <img class="active" [src]="'assets/images/admin-sidebar/' + item.icon + '-active.svg'" [alt]="item.label">
+          <span class="font-12 ml-10">{{ item.label }}</span>
+        </a>
+      </li>
+    </ul>
+
+    <ul class="list-unstyled mb-0 pl-20" [class.border-top]="!isCollapsed">
+      <li class="d-flex align-items-center py-10" ngbDropdown placement="top-left" [class.overflow-hidden]="isCollapsed">
+        <a class="d-flex no-arrow" ngbDropdownToggle>
+          <img class="inactive" src="assets/images/admin-sidebar/settings.svg" alt="Settings">
+          <img class="active" src="assets/images/admin-sidebar/settings-active.svg" alt="Settings">
+          <span class="font-12 ml-10">Settings</span>
+        </a>
+        <div class="position-absolute" ngbDropdownMenu aria-labelledby="dropdown">
+          <button ngbDropdownItem [routerLink]="[ROUTES.common.account.root, ROUTES.common.account.accountSetting]">
+            <job-hub-avatar [size]="32" [src]="(user$ | async)?.avatar"></job-hub-avatar>
+            <ng-container *ngIf="(user$ | async) as user">
+              <span>{{ user.firstName + ' ' + user.lastName }}</span>
+            </ng-container>
+          </button>
+          <button ngbDropdownItem>
+            <job-hub-icon icon="earning"></job-hub-icon>
+            <span>Earnings</span>
+          </button>
+          <div class="dropdown-divider"></div>
+          <button ngbDropdownItem (click)="logout()">
+            <job-hub-icon icon="logout"></job-hub-icon>
+            <span>Logout</span>
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

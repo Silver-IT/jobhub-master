@@ -1,0 +1,24 @@
+<job-hub-table [rows]="projects"
+               [columns]="columns"
+               [pageSize]="take"
+               [length]="total"
+               [loading]="isLoading"
+               (page)="onPage($event)"
+               emptyDescription="No contracts to display.">
+  <ng-template #imageColumn let-project="row">
+    <job-hub-avatar [type]="project.projectType"></job-hub-avatar>
+  </ng-template>
+
+  <ng-template #nameColumn let-project="row">
+    <div class="d-flex flex-column pr-20">
+      <a class="font-13 font-weight-bold text-primary mb-1" (click)="selectContract.emit(project.id)">{{ project.name }}</a>
+    </div>
+  </ng-template>
+
+  <ng-template #signColumn let-project="row">
+    <div class="d-flex flex-column pr-20">
+      <a class="font-13 color-mine-shaft mb-1">{{ project.contractSignedDate ? (project.contractSignedDate | date) : '' }}</a>
+    </div>
+  </ng-template>
+
+</job-hub-table>

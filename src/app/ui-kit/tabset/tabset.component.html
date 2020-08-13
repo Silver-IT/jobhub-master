@@ -1,0 +1,5 @@
+<ul class="nav nav-tabs d-flex flex-column flex-lg-row justify-content-between">
+  <li class="nav-item mb-10 mb-lg-0" *ngFor="let item of tabs">
+    <a class="nav-link" (click)="select(item)" [class.active]="selected?.value === item.value">{{ item.label }}</a>
+  </li>
+</ul>

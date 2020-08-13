@@ -1,0 +1,21 @@
+@import "../../../../assets/theme";
+
+:host {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.nav-dropdown {
+  width: 58px;
+  &.show {
+    background-color: $niagara;
+  }
+}
+
+.alert-circle {
+  @include circle(16px);
+  position: absolute;
+  top: 15px;
+  right: 12px;
+}

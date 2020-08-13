@@ -1,0 +1,24 @@
+<div class="d-flex align-items-center p-15 justify-content-between row"
+     [class.bg-color-black-squeeze]="schedule.type === ScheduleType.ProjectStart"
+     [class.bg-white]="schedule.type !== ScheduleType.ProjectStart && (index % 2)"
+     [class.bg-color-athens-gray]="schedule.type !== ScheduleType.ProjectStart && !(index % 2)">
+  <div class="col-12 col-md-5 d-flex flex-column flex-md-row align-items-center">
+    <div class="d-flex align-items-center my-10 my-md-0">
+      <span class="time-span text-primary font-13 font-weight-medium" *ngIf="schedule.type !== ScheduleType.ProjectStart">{{ schedule.from | date : 'h:mm a' }}</span>
+      <span class="time-span text-primary font-11 font-weight-medium text-center pr-15" *ngIf="schedule.type === ScheduleType.ProjectStart">All<br/>Day</span>
+      <div class="image-span">
+        <job-hub-schedule-icon [schedule]="schedule" color="#07A39D"></job-hub-schedule-icon>
+      </div>
+    </div>
+    <div class="d-flex flex-column text-center text-md-left">
+      <span class="font-13 font-weight-bold color-mine-shaft cursor-pointer" (click)="navigateToDetail()">{{ schedule.data.name }}</span>
+      <span class="font-11 color-dove-gray d-none d-md-block">{{ schedule.data.project?.address }}</span>
+    </div>
+  </div>
+  <div class="col-12 col-md-4 text-center text-md-left">
+    <span class="font-13 color-dove-gray">{{ schedule.data.project?.address || schedule.data.user?.email }}</span>
+  </div>
+  <div class="col-12 col-md-3 text-center text-md-left">
+    <span class="font-13 color-dove-gray">{{ schedule.data.user?.phone }}</span>
+  </div>
+</div>

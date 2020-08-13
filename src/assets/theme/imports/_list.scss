@@ -1,0 +1,19 @@
+ul.green-dot-list {
+  li {
+    position: relative;
+    list-style: none;
+    padding: 5px 0;
+    outline: none;
+    &:before {
+      content: '';
+      display: block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: $niagara;
+      position: absolute;
+      top: 14px;
+      left: -20px;
+    }
+  }
+}

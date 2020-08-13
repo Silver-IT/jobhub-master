@@ -1,0 +1,6 @@
+<button (click)="handleClick.emit()" (mouseover)="hovered = true" (mouseout)="hovered = false" class="btn btn-payment btn-primary py-0 bg-color-catskill-white color-mine-shaft d-flex flex-column align-items-center position-relative border-0 shadow-none">
+  <job-hub-icon class="my-20" [icon]="icon" [color]="hovered ? 'white' : 'dove-gray'"></job-hub-icon>
+  <span class="text-dove-gray font-weight-bold font-14">{{label}}</span>
+  <span class="text-dove-gray font-10 font-weight-light mt-8">{{description}}</span>
+  <span *ngIf="recommended" class="bg-warning p-1 recommended-badge font-9 position-absolute text-white">Recommended</span>
+</button>

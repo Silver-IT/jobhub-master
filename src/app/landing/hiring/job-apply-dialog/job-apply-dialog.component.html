@@ -1,0 +1,21 @@
+<a class="close" mat-dialog-close><span class="material-icons">close</span></a>
+<h5 mat-dialog-title class="text-center mt-20 px-50">Please fill out this form and submit your resume or past work experience and someone will get back to you within 24 hours.</h5>
+<div mat-dialog-content class="py-30 pretty-scroll">
+  <form class="px-70" [formGroup]="applyForm" (ngSubmit)="applyJob()" #form>
+    <job-hub-text-input placeholder="Full name" formControlName="fullName"></job-hub-text-input>
+    <job-hub-text-input type="email" placeholder="Email Address" formControlName="email" ></job-hub-text-input>
+    <job-hub-phone-number-input formControlName="phone"></job-hub-phone-number-input>
+    <job-hub-text-input placeholder="Position Name" [value]="job.title" readonly="true"></job-hub-text-input>
+    <job-hub-cv-uploader></job-hub-cv-uploader>
+    <div class="mt-20">
+      <mat-checkbox class="color-dove-gray" formControlName="terms">
+        I agree to the <a mat-dialog-close class="text-primary" [routerLink]="ROUTES.landingPages.legalNotice | routeToAbsolute">Terms of Service</a> and <a mat-dialog-close class="text-primary" [routerLink]="ROUTES.landingPages.privacy | routeToAbsolute">Privacy Policy</a>
+      </mat-checkbox>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions class="d-flex justify-content-center">
+  <button class="btn btn-primary" (click)="applyJob()" [disabled]="applyForm.invalid || isSaving">Apply</button>
+</div>
+
+<job-hub-spinner *ngIf="isSaving"></job-hub-spinner>

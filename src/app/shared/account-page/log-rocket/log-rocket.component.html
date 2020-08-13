@@ -1,0 +1,11 @@
+<section class="py-40 px-15 px-md-0">
+  <div class="d-flex justify-content-between align-items-center">
+    <p class="font-18 color-mine-shaft font-weight-medium">User Sessions</p>
+    <form class="d-flex" [formGroup]="form">
+      <job-hub-select class="mr-20" [options]="authorizedOptions" label="Authorized" placeholder="Authorized" formControlName="authorized"></job-hub-select>
+      <job-hub-select [options]="resolvedOptions" label="Resolved" placeholder="Resolved" formControlName="resolved"></job-hub-select>
+    </form>
+  </div>
+
+  <job-hub-log-rocket-table [filter$]="form.valueChanges"></job-hub-log-rocket-table>
+</section>

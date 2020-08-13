@@ -1,0 +1,56 @@
+<job-hub-home-swiper-jumbotron></job-hub-home-swiper-jumbotron>
+
+<job-hub-section-builder title="About us">
+  <div class="row">
+    <div class="col-12 col-lg-6">
+      <h2 class="color-mine-shaft mb-35 text-center text-lg-left">The History of<br/> J&D Landscaping</h2>
+      <p class="color-dove-gray pr-0 pr-lg-100 mb-50 text-center text-lg-left">In 2003 at the age of 16, Joseph D. Masciovecchio started his dream of becoming an entrepreneur and opened up his company “J&D Landscaping” which was known as “J&D Snow Removal and Lawn Care” in the early days.</p>
+      <div class="d-flex justify-content-center justify-content-lg-start">
+        <button class="btn btn-primary" ngxScrollTo="root" [routerLink]="[ROUTES.landingPages.about]">Learn more</button>
+      </div>
+    </div>
+    <div class="col-12 col-lg-6">
+      <div class="mt-50 mt-lg-0">
+        <img class="img-fluid" src="assets/images/landing-page/home/history.png" alt="History">
+      </div>
+    </div>
+  </div>
+</job-hub-section-builder>
+
+<job-hub-section-builder title="How our platform works"
+                         description="A hardscaping project is an investment, it takes time to plan, coordinate, budget, design and so much more. It’s a process that has many steps, given our experience and expertise in the Hardscape industry and our passion for efficiency we have digitized much of this process to help provide customers a better experience even before their project starts."
+                         [hasBottomPadding]="false"
+                         [isWhite]="false">
+  <div class="d-flex justify-content-center mb-50">
+    <button class="btn btn-primary" ngxScrollTo="root" [routerLink]="[ROUTES.landingPages.whyChooseUs.root]">Learn more</button>
+  </div>
+  <div class="px-0">
+    <img class="img-fluid" src="assets/images/landing-page/home/laptop.png" alt="Screen">
+  </div>
+</job-hub-section-builder>
+
+<job-hub-section-builder title="Our Services"
+                         description="J & D Landscaping provides a line of services within the Hardscape industry, with thousands of projects completed and over 16 years in business we are leaders in the industry and are considered hardscape specialists. Please view our services and projects below."
+                         [container]="false">
+  <job-hub-landing-page-idea-board-by-category></job-hub-landing-page-idea-board-by-category>
+  <div class="d-flex justify-content-center">
+    <button class="btn btn-primary" ngxScrollTo="root" [routerLink]="[ROUTES.landingPages.ideaBoard]">Idea Board</button>
+  </div>
+</job-hub-section-builder>
+
+<job-hub-partner-section></job-hub-partner-section>
+
+<job-hub-section-builder title="They trust us">
+  <p class="color-dove-gray text-center mb-50">Join the over <a href="https://www.instagram.com/jdlandscapingllc/" target="_blank" class="text-primary font-weight-bold">25K followers</a> on instagram to see the most recent jobs we have completed</p>
+  <job-hub-home-swiper-testimonial></job-hub-home-swiper-testimonial>
+</job-hub-section-builder>
+
+<!--<job-hub-section-builder header="Insights and Tips from" title="Our latest posts" [isWhite]="false">-->
+<!--  <div class="row">-->
+<!--    <div class="col-12 col-md-4" *ngFor="let item of posts">-->
+<!--      <job-hub-post-item-card [data]="item"></job-hub-post-item-card>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</job-hub-section-builder>-->
+
+<job-hub-branding></job-hub-branding>

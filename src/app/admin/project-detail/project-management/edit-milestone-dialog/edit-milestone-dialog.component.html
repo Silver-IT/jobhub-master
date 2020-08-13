@@ -1,0 +1,22 @@
+<a class="close" mat-dialog-close><span class="material-icons">close</span></a>
+<h5 mat-dialog-title class="text-center mt-20 px-50 color-mine-shaft">{{milestone.order === MilestoneType.Final ? 'Project Completed Edit' : 'Deposit Edit'}}</h5>
+<div mat-dialog-content class="pt-10 px-50 pretty-scroll">
+  <p class="color-dove-gray font-14 text-center mx-20 mb-30" *ngIf="milestone.order === MilestoneType.Final">
+    What do you need on Milestone #3?
+  </p>
+  <form [formGroup]="form" class="mt-30">
+    <mat-button-toggle-group class="w-100 mb-4" #editType="matButtonToggleGroup" *ngIf="milestone.order === MilestoneType.Final" (change)="changeEditType()">
+      <mat-button-toggle class="w-100" [checked]="true" [value]="EditMilestoneType.CashPayment">Cash Payment</mat-button-toggle>
+      <mat-button-toggle class="w-100" [value]="EditMilestoneType.Refund">Refund</mat-button-toggle>
+      <mat-button-toggle class="w-100" [value]="EditMilestoneType.AddOn">Add on</mat-button-toggle>
+      <mat-button-toggle class="w-100" [value]="EditMilestoneType.Hold">Hold</mat-button-toggle>
+    </mat-button-toggle-group>
+    <job-hub-text-input placeholder="$" label="Amount" formControlName="amount" data-stripe="number" type="number"></job-hub-text-input>
+    <job-hub-textarea placeholder="Text for description" label="Description" formControlName="comment" *ngIf="milestone.order === MilestoneType.Final"></job-hub-textarea>
+  </form>
+</div>
+<div mat-dialog-actions class="d-flex justify-content-center">
+  <button class="btn btn-primary" (click)="editMilestone()" [disabled]="!form.valid">Apply</button>
+</div>
+
+<job-hub-spinner *ngIf="isSaving"></job-hub-spinner>

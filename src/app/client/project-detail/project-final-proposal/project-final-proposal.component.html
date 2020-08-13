@@ -1,0 +1,32 @@
+<section class="py-30 position-relative">
+  <div class="container">
+    <div class="row flex-column-reverse flex-md-row">
+      <div class="col-12 col-md-8 col-lg-9">
+        <p class="color-regent-gray font-weight-medium mb-20 d-none d-md-block">Proposal</p>
+        <job-hub-project-status-alert type="danger" text="Final Proposal Declined" *ngIf="proposal.status === FinalProposalStatus.Declined">Final Proposal Declined</job-hub-project-status-alert>
+        <job-hub-proposal-form [small]="true" [readonly]="true" [proposal]="proposal" (proposalChange)="formChange($event)" [project]="project" [customer]="project.user"></job-hub-proposal-form>
+      </div>
+      <div class="col-12 col-md-4 col-lg-3">
+        <div class="client-sticky-sidebar mb-20 mb-md-0">
+          <p class="color-regent-gray font-weight-medium mb-20 d-block d-md-none">Final Proposal</p>
+          <button class="btn btn-primary w-100 font-11 py-10 mb-20" *ngIf="proposal.status === FinalProposalStatus.Accepted" [routerLink]="[ROUTES.app.root, ROUTES.app.project, project.id, ROUTES.app.payment] | routeToAbsolute">Management</button>
+          <button class="btn btn-warning text-white w-100 font-11 py-10 mb-20" *ngIf="proposal.status === FinalProposalStatus.Pending" (click)="acceptProject()">Accept Project</button>
+          <button class="btn btn-danger btn-lt-md-block text-white w-100 font-11 py-10" *ngIf="canBeDeclined" (click)="decline()">Decline</button>
+          <div class="mt-20 mt-md-35" *ngIf="project.latitude && project.longitude">
+            <job-hub-map [latitude]="project.latitude" [longitude]="project.longitude"></job-hub-map>
+          </div>
+
+          <div *ngIf="project.assignedContractor" class="mt-20 mt-md-35">
+            <job-hub-request-chat [project]="project" [user]="project.assignedContractor"></job-hub-request-chat>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="d-flex flex-column flex-md-row justify-content-center justify-content-md-start mt-40">
+      <button class="btn btn-warning text-white btn-small btn-lt-md-block mr-0 mr-md-10 mb-10 mb-md-0"  *ngIf="proposal.status === FinalProposalStatus.Pending" (click)="acceptProject()">Accept Project</button>
+      <button class="btn btn-danger text-white btn-small btn-lt-md-block" *ngIf="canBeDeclined" (click)="decline()">Decline</button>
+    </div>
+  </div>
+  <job-hub-spinner *ngIf="isLoading"></job-hub-spinner>
+</section>

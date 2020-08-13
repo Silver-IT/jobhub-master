@@ -1,0 +1,6 @@
+<div class="form-group" [class.label-input-group]="label || noLabel">
+  <label class="form-label">
+    {{ label }}
+    <textarea autosize class="form-control" [style.height.px]="height" [placeholder]="placeholder" [(ngModel)]="value" (ngModelChange)="change($event)" [rows]="rows" [readonly]="readonly"></textarea>
+  </label>
+</div>

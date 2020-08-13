@@ -1,0 +1,53 @@
+<mwl-calendar-day-view
+  [viewDate]="viewDate"
+  [hourSegmentHeight]="71"
+  [hourSegmentTemplate]="hourSegmentTemplate"
+  [hourSegments]="2"
+  [dayStartHour]="8"
+  [dayEndHour]="18"
+  [eventTitleTemplate]="eventTitle"
+  [events]="events">
+</mwl-calendar-day-view>
+
+<ng-template #eventTitle let-event="event" let-view="view">
+  <div class="d-flex align-items-start h-100 px-15 py-10 rounded" [style.background-color]="(event.meta | calendarScheduleColor).bgColor">
+    <div class="mr-25 mt-10">
+      <job-hub-schedule-icon [schedule]="event.meta"></job-hub-schedule-icon>
+    </div>
+    <div class="d-flex flex-column">
+      <div class="d-flex align-items-center">
+        <span class="font-13 font-weight-bold color-mine-shaft" (mwlClick)="eventClicked(event.meta)">{{ event.title }}</span>
+        <span class="font-11 color-dove-gray ml-10">{{ event.meta?.data?.project?.address }}</span>
+      </div>
+      <div class="d-flex align-items-center">
+        <span class="dot mr-10" [style.background-color]="(event.meta | calendarScheduleColor).bgColor"></span>
+        <span class="font-11 color-dove-gray">{{ event.meta?.data?.user | fullName }}</span>
+        <span class="dot mx-10" [style.background-color]="(event.meta | calendarScheduleColor).bgColor"></span>
+        <span class="font-11 color-dove-gray">{{ event.meta?.data?.user?.email }}</span>
+        <span class="dot mx-10" [style.background-color]="(event.meta | calendarScheduleColor).bgColor"></span>
+        <span class="font-11 color-dove-gray">{{ event.meta?.data?.user?.phone }}</span>
+        <span class="dot mx-10" [style.background-color]="(event.meta | calendarScheduleColor).bgColor"></span>
+        <span class="font-11 color-dove-gray">{{ event.start | date : 'hh:mm a' }} - {{ event.end | date : 'hh:mm a' }}</span>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template
+  #hourSegmentTemplate
+  let-segment="segment"
+  let-locale="locale"
+  let-segmentHeight="segmentHeight"
+  let-isTimeLabel="isTimeLabel"
+  let-daysInWeek="daysInWeek"
+>
+  <div
+    [attr.aria-hidden]="{} | calendarA11y : (daysInWeek === 1 ? 'hideDayHourSegment' : 'hideWeekHourSegment')"
+    class="cal-hour-segment"
+    [style.height.px]="segmentHeight"
+    [class.cal-hour-start]="segment.isStart"
+    [class.cal-after-hour-start]="!segment.isStart"
+    [ngClass]="segment.cssClass">
+    <div class="cal-time font-12" *ngIf="isTimeLabel">{{ segment.displayDate | date : 'hh:mm a' }}</div>
+  </div>
+</ng-template>

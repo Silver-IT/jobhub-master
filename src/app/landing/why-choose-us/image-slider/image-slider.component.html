@@ -1,0 +1,9 @@
+<div class="image-slider">
+  <swiper [config]="config">
+    <div class="bg-white pt-10 pb-60 px-20" *ngFor="let item of images">
+      <div class="">
+        <img class="img-fluid" [src]="item" alt="Slider">
+      </div>
+    </div>
+  </swiper>
+</div>

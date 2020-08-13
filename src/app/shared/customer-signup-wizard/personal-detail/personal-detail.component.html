@@ -1,0 +1,8 @@
+<form [formGroup]="form">
+  <ng-container formGroupName="user">
+    <job-hub-text-input id="{{prefix}}_firstName" placeholder="First name" formControlName="firstName"></job-hub-text-input>
+    <job-hub-text-input id="{{prefix}}_lastName" placeholder="Last name" formControlName="lastName"></job-hub-text-input>
+    <job-hub-text-input id="{{prefix}}_email" type="email" placeholder="Email address" formControlName="email"></job-hub-text-input>
+    <job-hub-phone-number-input id="{{prefix}}_phone" formControlName="phone"></job-hub-phone-number-input>
+  </ng-container>
+</form>

@@ -1,0 +1,11 @@
+<div class="row justify-content-end" [style.color]="type | milestoneAddOnColor">
+  <div class="col-8 col-md-9 col-lg-10 d-flex justify-content-end align-items-center pr-0">
+    <span class="font-12 color-silver mr-2">{{type | optionLabel}}</span>
+    <job-hub-information-tooltip class="mr-2" [content]="comment"></job-hub-information-tooltip>
+    <span class="operator">{{type | milestoneAddOnOperator}}</span>
+  </div>
+  <div class="col-4 col-md-3 col-lg-2 d-flex justify-content-between align-items-center">
+    <span class="font-18 font-weight-medium">{{amount | currency}}</span>
+    <span class="cursor-pointer" *ngIf="!readonly" (click)="remove.emit()"><img src="assets/images/icons/remove.svg" alt="remove"></span>
+  </div>
+</div>

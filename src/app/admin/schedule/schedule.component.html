@@ -1,0 +1,29 @@
+<section class="p-15 p-md-30">
+  <div class="d-flex flex-column flex-md-row justify-content-between mb-30">
+    <p class="font-18 color-mine-shaft mb-15 mb-md-0 font-weight-medium">Schedule</p>
+    <job-hub-schedule-type-filter class="d-none d-md-block" [(type)]="type" (typeChange)="changeViewDate(null)"></job-hub-schedule-type-filter>
+  </div>
+
+  <p class="my-15 d-block d-md-none">This page is not supporting mobile devices</p>
+
+  <div class="justify-content-between d-none d-md-flex">
+    <div class="btn-group rounded shadow-3 mb-15">
+      <button class="btn btn-mini shadow-none btn-white font-12 font-weight-normal" [class.btn-primary]="view === CalendarView.Day" (click)="changeView(CalendarView.Day)">Today</button>
+      <button class="btn btn-mini shadow-none btn-white font-12 font-weight-normal" [class.btn-primary]="view === CalendarView.Month" (click)="changeView(CalendarView.Month)">Month</button>
+    </div>
+    <span class="font-18 font-weight-medium color-mine-shaft">{{ viewDate | date }}</span>
+
+    <job-hub-calendar-navigator [view]="view" [(viewDate)]="viewDate" (viewDateChange)="changeViewDate($event)"></job-hub-calendar-navigator>
+  </div>
+
+  <div [ngSwitch]="view" class="d-none d-md-block">
+    <job-hub-month-calendar *ngSwitchCase="CalendarView.Month" [events]="events" [viewDate]="viewDate" [hasLink]="true"></job-hub-month-calendar>
+    <job-hub-day-calendar *ngSwitchCase="CalendarView.Day" [events]="events" [viewDate]="viewDate"></job-hub-day-calendar>
+    <div class="d-flex font-weight-medium mt-15 align-items-center">
+      <div class="d-flex align-items-center mr-20" *ngFor="let item of scheduleStatusOptions">
+        <span class="big-dot mr-5" [style.background-color]="($any({ status: item.value }) | calendarScheduleColor).color"></span>
+        <span class="font-12 color-dove-gray">{{ item.label }}</span>
+      </div>
+    </div>
+  </div>
+</section>

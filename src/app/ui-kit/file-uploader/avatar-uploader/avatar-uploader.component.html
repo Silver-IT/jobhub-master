@@ -1,0 +1,13 @@
+<div class="d-flex flex-wrap" [ngClass]="'justify-content-center'" [style.width.px]="size" [style.height.px]="size">
+  <div class="photo position-relative" [class.circle]="rounded">
+    <img [src]="src || default" alt="Image" *ngIf="src !== ''">
+    <span *ngIf="failed">Failed!</span>
+    <job-hub-spinner *ngIf="loading"></job-hub-spinner>
+    <div class="overlay cursor-pointer">
+      <label class="cursor-pointer p-10 mt-2 w-100 h-100">
+        <input accept="image/x-png,image/gif,image/jpeg" class="d-none" type="file" ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event)"
+               [uploadInput]="uploadInput">
+      </label>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="table-header d-flex justify-content-between align-items-center bg-color-blue-lagoon text-white font-12 px-15">
+  <div *ngFor="let column of columns" [style.width]="column.width" [class.flex-grow-1]="!column.width">
+    <span>{{ column.label }}</span>
+  </div>
+</div>
+
+<div class="position-relative">
+  <div *ngFor="let row of rows">
+    <div class="table-row d-flex flex-column flex-md-row justify-content-between align-items-center bg-white py-15 text-center text-md-left px-15 cursor-pointer">
+      <div class="py-10 py-md-0" *ngFor="let column of columns" [style.width]="column.width" [class.flex-grow-1]="!column.width">
+
+        <ng-container *ngIf="column.templateRef">
+          <ng-template [ngTemplateOutlet]="column.templateRef" [ngTemplateOutletContext]="{row: row}"></ng-template>
+        </ng-container>
+
+        <ng-container *ngIf="!column.templateRef">
+          <span>{{ row[column.name] }}</span>
+        </ng-container>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="table-row d-flex justify-content-center align-items-center bg-white py-20 px-15" *ngIf="!rows.length && !loading">
+    <div class="text-center font-13 font-weight-medium color-dove-gray">{{ emptyDescription }}</div>
+  </div>
+
+  <job-hub-spinner [diameter]="20" *ngIf="loading"></job-hub-spinner>
+</div>
+<mat-paginator [length]="length"
+               [pageIndex]="skip / pageSize"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="[5, 10, 25, 100]"
+               (page)="page.emit($event)">
+</mat-paginator>
+

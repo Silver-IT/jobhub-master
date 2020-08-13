@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="17px" viewBox="0 0 16 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>DD1C8BCA-45B9-4474-97C5-1EE1640A2EF1</title>
+    <g id="Dashboard---AdminSide" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="AdminSide---Dashboard---Messages" transform="translate(-389.000000, -159.000000)" stroke="#07A39D" stroke-width="2">
+            <g id="Group" transform="translate(136.000000, 139.000000)">
+                <g id="icon_Search-Dark" transform="translate(254.000000, 21.500000)">
+                    <g id="search">
+                        <ellipse id="Oval" transform="translate(6.159717, 6.192308) rotate(-7.000000) translate(-6.159717, -6.192308) " cx="6.1597166" cy="6.19230769" rx="5.08886247" ry="5.11498581"></ellipse>
+                        <line x1="9.72347151" y1="9.96481242" x2="13.1351187" y2="13.5965321" id="Line"></line>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

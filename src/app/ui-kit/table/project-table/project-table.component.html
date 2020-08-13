@@ -1,0 +1,36 @@
+<job-hub-table [rows]="projects"
+               [columns]="columns"
+               [loading]="isLoading"
+               [length]="total"
+               [skip]="skip"
+               [pageSize]="take"
+               [queryParams$]="filter$"
+               (page)="onPage($event)"
+               emptyDescription="No projects to display.">
+  <ng-template #imageColumn let-project="row">
+    <job-hub-avatar [type]="project.projectType" (click)="clickProject(project)"></job-hub-avatar>
+  </ng-template>
+
+  <ng-template #nameColumn let-project="row">
+    <div class="d-flex flex-column pr-20">
+      <a class="font-13 font-weight-bold text-primary mb-1" (click)="clickProject(project)">{{ project.name || 'Lead - Pending' }}</a>
+      <span class="font-10 font-weight-medium color-dove-gray">{{ project.address }}</span>
+    </div>
+  </ng-template>
+
+  <ng-template #dateColumn let-project="row">
+    <span class="font-13 color-mine-shaft" (click)="clickProject(project)">{{ project[dateField] | date }}</span>
+  </ng-template>
+
+  <ng-template #creatorColumn let-project="row">
+    <span class="font-13 text-primary" (click)="clickProject(project)">{{ project.user | fullName }}</span>
+  </ng-template>
+
+  <ng-template #statusColumn let-project="row">
+    <span class="font-13 font-weight-medium color-mine-shaft" (click)="clickProject(project)">{{ project | projectStatusDescription }}</span>
+  </ng-template>
+
+  <ng-template #actionColumn let-project="row">
+    <job-hub-action-dropdown (edit)="clickProject(project)" (archive)="deleteProject(project)"></job-hub-action-dropdown>
+  </ng-template>
+</job-hub-table>

@@ -1,0 +1,30 @@
+@import "../../../../assets/theme";
+
+i {
+  margin-bottom: 6px;
+}
+
+:host {
+  ::ng-deep {
+    .dropdown-toggle {
+      position: absolute;
+      right: 4px;
+      top: 4px;
+      padding-right: 0 !important;
+      padding-left: 0 !important;
+      min-width: 40px;
+      @include circle(40px);
+      &:after {
+        content: none;
+      }
+    }
+  }
+}
+
+ul li {
+  transition: ease all .3s;
+  &:hover {
+    background-color: $niagara;
+    color: white;
+  }
+}

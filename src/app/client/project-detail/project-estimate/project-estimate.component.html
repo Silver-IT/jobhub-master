@@ -1,0 +1,35 @@
+<section class="py-30">
+  <div class="container">
+    <div class="row d-flex flex-column-reverse flex-md-row">
+      <div class="col-12 col-md-8 col-lg-9">
+        <p class="color-regent-gray font-weight-medium mb-20 d-none d-md-block">Project Estimate</p>
+        <job-hub-project-status-alert type="danger" text="Estimate Declined" *ngIf="estimate.status === EstimateStatus.Declined"></job-hub-project-status-alert>
+        <job-hub-site-visit-schedule-alert *ngIf="estimate.status === EstimateStatus.SiteVisitScheduled"
+                                           [schedule]="selectedSchedule"
+                                           (cancel)="cancelSchedule()"
+                                           (reschedule)="reschedule()"></job-hub-site-visit-schedule-alert>
+        <job-hub-estimate-form [small]="true" [readonly]="true" [renderSchedules]="true" [estimate]="estimate" [showStatus]="false" [project]="project"></job-hub-estimate-form>
+      </div>
+      <div class="col-12 col-md-4 col-lg-3">
+        <div class="client-sticky-sidebar mb-20 mb-md-0">
+          <!-- Mobile title start -->
+          <p class="color-regent-gray font-weight-medium mb-20 d-block d-md-none">Project Estimate</p>
+          <!-- Mobile title end -->
+          <button class="btn btn-warning text-white btn-small w-100" *ngIf="estimate.status === EstimateStatus.Pending && estimate.siteVisitSchedules && estimate.siteVisitSchedules.length" (click)="scheduleSiteVisit()">Schedule site visit</button>
+          <div class="mt-20 mt-md-45" *ngIf="project.latitude && project.longitude">
+            <job-hub-map [latitude]="project.latitude" [longitude]="project.longitude"></job-hub-map>
+          </div>
+          <div *ngIf="project.assignedContractor" class="mt-20 mt-md-45">
+            <job-hub-request-chat [project]="project" [user]="project.assignedContractor"></job-hub-request-chat>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex flex-column flex-md-row justify-content-center justify-content-md-start">
+      <button class="btn btn-warning text-white btn-small btn-lt-md-block mr-0 mr-md-10 mb-10 mb-md-0" *ngIf="estimate.status === EstimateStatus.Pending && estimate.siteVisitSchedules && estimate.siteVisitSchedules.length" (click)="scheduleSiteVisit()">Schedule site visit</button>
+      <button class="btn btn-primary btn-small btn-lt-md-block mr-0 mr-md-10 mb-10 mb-md-0" *ngIf="!estimate.siteVisitSchedules || !estimate.siteVisitSchedules.length" (click)="sendMessage()">Message project consultant</button>
+      <button class="btn btn-danger text-white btn-small btn-lt-md-block" *ngIf="estimate.status === EstimateStatus.Pending" (click)="decline()">Decline</button>
+    </div>
+  </div>
+  <job-hub-spinner *ngIf="isSaving"></job-hub-spinner>
+</section>

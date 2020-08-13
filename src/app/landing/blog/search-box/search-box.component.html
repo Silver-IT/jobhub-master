@@ -1,0 +1,11 @@
+<div class="card px-25 pt-50 pb-25">
+  <h6 class="text-primary font-weight-bold mb-30">Categories</h6>
+  <ul class="list-unstyled mb-50">
+    <li *ngFor="let item of dates" class="py-10 pl-20">
+      <a class="color-mine-shaft font-16 font-weight-medium"
+         routerLink="./"
+         routerLinkActive="active"
+         [queryParams]="{date: item}">{{ item | date : 'MMMM y' }}</a>
+    </li>
+  </ul>
+</div>

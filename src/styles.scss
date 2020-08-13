@@ -1,0 +1,12 @@
+@import "assets/theme/mat-theme-custom";
+
+// Customize bootstrap theme variables
+@import "assets/theme";
+@import "~bootstrap";
+
+// Custom theme styles
+@import "assets/theme/imports";
+
+* {
+  font-family: 'Poppins', sans-serif;
+}

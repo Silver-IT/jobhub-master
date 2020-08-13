@@ -1,0 +1,15 @@
+<a class="close" mat-dialog-close><span class="material-icons">close</span></a>
+<div mat-dialog-content class="py-30 text-center pretty-scroll">
+  <job-hub-avatar [src]="contractor.logoUrl" [size]="80"></job-hub-avatar>
+  <h3 class="mt-10 font-22 color-mine-shaft">{{ contractor.companyName }}</h3>
+  <p class="color-dove-gray">{{ contractor.serviceDescription }}</p>
+  <p class="mt-30 mb-2 color-dove-gray">Address</p>
+  <p class="text-primary font-19">{{ contractor.address }}</p>
+  <p class="mt-30 mb-2 color-dove-gray">Contact Numbers</p>
+  <p class="text-primary font-19">{{ contractor.contacts.replace(',', ' | ') }}</p>
+  <p class="mt-30 mb-2 color-dove-gray">Website</p>
+  <p class="font-19"><a class="text-primary" [href]="contractor.website">{{ contractor.website }}</a></p>
+</div>
+<div mat-dialog-actions class="d-flex justify-content-center">
+  <button class="btn btn-primary mt-30" mat-dialog-close>Close</button>
+</div>

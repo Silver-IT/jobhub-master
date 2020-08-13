@@ -1,0 +1,13 @@
+<div class="btn-group mb-15 shadow-3 rounded">
+  <button class="btn btn-mini shadow-none btn-white font-12 font-weight-normal px-15"
+          mwlCalendarPreviousView
+          [view]="view"
+          [(viewDate)]="viewDate" (viewDateChange)="changeDate($event)"><</button>
+  <button class="btn btn-mini shadow-none font-12 font-weight-normal z-index-1 btn-primary"
+          mwlCalendarToday
+          [(viewDate)]="viewDate" (viewDateChange)="changeDate($event)">Today</button>
+  <button class="btn btn-mini shadow-none btn-white font-12 font-weight-normal px-15"
+          mwlCalendarNextView
+          [view]="view"
+          [(viewDate)]="viewDate" (viewDateChange)="changeDate($event)">></button>
+</div>

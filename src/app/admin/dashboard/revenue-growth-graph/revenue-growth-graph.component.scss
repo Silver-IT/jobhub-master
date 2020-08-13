@@ -1,0 +1,11 @@
+.chart-renderer {
+  min-height: 310px;
+  margin-left: -50px;
+  margin-bottom: -110px;
+}
+
+:host {
+  ::ng-deep .gridline-path-vertical {
+    display: none;
+  }
+}

@@ -1,0 +1,31 @@
+<job-hub-jumbotron image="assets/images/landing-page/why-choose-us/header.jpg" title="Why choose us"></job-hub-jumbotron>
+
+<job-hub-section-builder header="What Makes" title="J&D Landscaping different?">
+  <div class="row pt-40 mb-100">
+    <div class="col-12 col-lg-4 mt-50 mt-lg-0" *ngFor="let item of factors">
+      <div class="d-flex flex-column align-items-center text-center px-20">
+        <div class="mb-55">
+          <img class="img-fluid" [src]="item.image" [alt]="item.title">
+        </div>
+        <h2 class="color-mine-shaft mb-75">{{ item.title }}</h2>
+        <p class="text-center color-dove-gray">{{ item.text }}</p>
+      </div>
+    </div>
+  </div>
+  <job-hub-request-estimate-button></job-hub-request-estimate-button>
+</job-hub-section-builder>
+
+<div class="container">
+  <h1 class="color-mine-shaft mb-100 text-center">How it works</h1>
+</div>
+
+<div class="big-tab" id="why_choose_us_tab">
+  <div class="cursor-pointer" [routerLink]="tab.route" *ngFor="let tab of tabs" routerLinkActive="active"><h1>{{ tab.label }}</h1></div>
+</div>
+<section class="bg-color-catskill-white pt-80 pb-100">
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</section>
+
+<job-hub-branding></job-hub-branding>

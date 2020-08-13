@@ -1,0 +1,10 @@
+<form [formGroup]="form">
+  <div class="row">
+    <div class="col">
+      <job-hub-time-picker [isRange]="false" label="From" formControlName="from"></job-hub-time-picker>
+    </div>
+    <div class="col">
+      <job-hub-time-picker [min]="form.get('from').value" [isRange]="false" label="To" formControlName="to"></job-hub-time-picker>
+    </div>
+  </div>
+</form>

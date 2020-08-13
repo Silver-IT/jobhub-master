@@ -1,0 +1,8 @@
+<section class="d-flex align-items-center h-100 text-center">
+  <ng-container *ngIf="(chats$ | async)?.length">
+    <h2 class="text-primary mx-auto font-25">Select a room to start conversation with Customer!</h2>
+  </ng-container>
+  <ng-container *ngIf="!(chats$ | async)?.length">
+    <p class="color-dove-gray w-50 mx-auto font-14">You don't have any conversation here yet.</p>
+  </ng-container>
+</section>

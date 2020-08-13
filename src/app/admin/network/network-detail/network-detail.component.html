@@ -1,0 +1,50 @@
+<section class="p-30">
+  <job-hub-spinner *ngIf="isLoading"></job-hub-spinner>
+
+  <div class="d-flex justify-content-between align-items-center mb-25">
+    <p class="color-mine-shaft font-18 font-weight-medium mb-0">Network Contractors</p>
+    <button type="button" class="btn btn-warning text-white btn-small" *ngIf="editMode" (click)="removeContractor()">Delete</button>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="update()">
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <job-hub-text-input label="Company name" placeholder="Company name"
+                            formControlName="companyName"></job-hub-text-input>
+      </div>
+      <div class="col-12 col-md-4">
+        <job-hub-text-input label="Address Location" placeholder="Address Location"
+                            formControlName="address"></job-hub-text-input>
+      </div>
+      <div class="col-12 col-md-4">
+        <job-hub-text-input label="Contact numbers" formControlName="contacts" placeholder="Contact numbers"></job-hub-text-input>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <job-hub-text-input label="Website Address" placeholder="Website Address"
+                            formControlName="website"></job-hub-text-input>
+      </div>
+      <div class="col-12 col-md-4">
+        <job-hub-select label="Category" [options]="categoryOptions" placeholder="Category" formControlName="category"></job-hub-select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <job-hub-textarea label="Service Description" placeholder="Brief description of the company for a max of 2 lines in this portion, maybe we can add rate system?" formControlName="serviceDescription">
+        </job-hub-textarea>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-md-8 d-flex">
+        <job-hub-text-input label="Logo Image" placeholder="Browse location" formControlName="logoUrl"></job-hub-text-input>
+        <job-hub-avatar-uploader class="ml-10" default="assets/images/icons/image-plus.svg" [(src)]="contractor.logoUrl" [size]="50"></job-hub-avatar-uploader>
+      </div>
+    </div>
+    <div class="mt-40">
+      <button class="btn btn-primary" [disabled]="!form.valid">Save</button>
+    </div>
+  </form>
+</section>

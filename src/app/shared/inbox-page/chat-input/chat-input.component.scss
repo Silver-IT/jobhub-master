@@ -1,0 +1,8 @@
+job-hub-textarea::ng-deep {
+  .form-group {
+    margin-bottom: 0;
+    textarea.form-control {
+      min-height: 27px;
+    }
+  }
+}

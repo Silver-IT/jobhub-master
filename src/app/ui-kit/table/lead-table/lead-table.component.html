@@ -1,0 +1,40 @@
+<job-hub-table [rows]="leads"
+               [columns]="columns"
+               [loading]="isLoading"
+               [length]="total"
+               [pageSize]="take"
+               [skip]="skip"
+               [queryParams$]="filter$"
+               (page)="onPage($event)"
+               emptyDescription="No leads to display.">
+  <ng-template #imageColumn let-lead="row">
+    <job-hub-avatar [initials]="lead.initials" (click)="clickLead(lead)"></job-hub-avatar>
+  </ng-template>
+
+  <ng-template #nameColumn let-lead="row">
+    <div class="d-flex flex-column pr-20">
+      <a class="font-13 font-weight-bold text-primary mb-1" (click)="clickLead(lead)">{{ lead.fullName }}</a>
+    </div>
+  </ng-template>
+
+  <ng-template #phoneColumn let-lead="row">
+    <span class="font-13 color-mine-shaft" (click)="clickLead(lead)">{{ lead.phone }}</span>
+  </ng-template>
+
+  <ng-template #emailColumn let-lead="row">
+    <span class="font-13 color-mine-shaft" (click)="clickLead(lead)">{{ lead.email }}</span>
+  </ng-template>
+
+  <ng-template #addressColumn let-lead="row">
+    <span class="font-13 color-mine-shaft" (click)="clickLead(lead)">{{ lead.address }}</span>
+  </ng-template>
+
+  <ng-template #dateColumn let-lead="row">
+    <span class="font-13 color-mine-shaft" (click)="clickLead(lead)">{{ lead[dateField] | date }}</span>
+  </ng-template>
+
+  <ng-template #actionColumn let-lead="row">
+    <job-hub-action-dropdown (edit)="clickLead(lead)" (archive)="archiveLead(lead)"></job-hub-action-dropdown>
+  </ng-template>
+
+</job-hub-table>

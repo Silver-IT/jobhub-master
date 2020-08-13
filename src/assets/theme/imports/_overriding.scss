@@ -1,0 +1,13 @@
+* {
+  outline: none;
+}
+
+a {
+  cursor: pointer;
+  &:hover {
+    color: $niagara;
+  }
+  &.text-primary:focus, &.text-primary:active {
+    color: $niagara !important;
+  }
+}

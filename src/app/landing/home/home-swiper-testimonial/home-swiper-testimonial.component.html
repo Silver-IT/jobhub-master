@@ -1,0 +1,12 @@
+<div class="text-white">
+  <swiper [config]="config">
+    <div class="testimonial-item bg-primary text-center pt-40 pt-md-50 pb-20 pb-md-60 px-20 px-md-70" *ngFor="let item of testimonial">
+      <div class="mb-20 mb-md-55">
+        <img class="img-fluid" src="assets/images/icons/quote.svg" alt="Quote">
+      </div>
+      <div class="font-16 font-weight-medium mb-40">{{ item.text }}</div>
+      <div class="font-13 font-weight-bold mb-1">{{ item.name }}</div>
+      <div class="font-13">{{ item.address }}</div>
+    </div>
+  </swiper>
+</div>

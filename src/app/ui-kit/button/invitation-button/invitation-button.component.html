@@ -1,0 +1,7 @@
+<div *ngIf="user.invitationStatus !== InvitationStatus.Accepted">
+  <span class="text-primary font-13 pr-20" *ngIf="user.invitationStatus === InvitationStatus.Sent">Invitation Sent</span>
+  <button class="btn btn-primary btn-small position-relative" (click)="sendInvitation($event)" [disabled]="isSaving">
+    <job-hub-spinner *ngIf="isSaving" [diameter]="20"></job-hub-spinner>
+    {{user.invitationStatus === InvitationStatus.Sent ? 'Resend' : 'Send Invitation'}}
+  </button>
+</div>

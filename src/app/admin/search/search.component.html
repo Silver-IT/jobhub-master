@@ -1,0 +1,42 @@
+<section class="p-15 p-md-30">
+  <div class="d-flex justify-content-between mb-30">
+    <p class="font-18 color-mine-shaft mb-0 font-weight-medium">Search Results</p>
+  </div>
+
+  <div *ngIf="(searchResult | isSearchResultEmpty) && !isLoading">
+    <p class="color-dove-gray">No items to display. Please try again with different search keyword.</p>
+  </div>
+
+  <ng-container *ngIf="searchResult.projects.length">
+    <p class="font-14 font-weight-medium color-regent-gray mb-20">Projects</p>
+    <div class="panel mb-50">
+      <job-hub-project-item *ngFor="let project of searchResult.projects" [project]="project"></job-hub-project-item>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="searchResult.customers.length">
+    <p class="font-14 font-weight-medium color-regent-gray mb-20">Customers</p>
+    <div class="panel mb-50">
+      <job-hub-user-item *ngFor="let customer of searchResult.customers" [user]="customer"></job-hub-user-item>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="searchResult.contractors.length">
+    <p class="font-14 font-weight-medium color-regent-gray mb-20">Contractors</p>
+    <div class="panel mb-50">
+      <job-hub-user-item *ngFor="let contractor of searchResult.contractors" [user]="contractor"></job-hub-user-item>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="searchResult.networkContractors.length">
+    <p class="font-14 font-weight-medium color-regent-gray mb-20">Network Contractors</p>
+    <div class="panel mb-50">
+      <job-hub-network-contractor-item *ngFor="let contractor of searchResult.networkContractors" [user]="contractor"></job-hub-network-contractor-item>
+    </div>
+  </ng-container>
+
+  <div class="py-80 position-relative" *ngIf="isLoading">
+    <job-hub-spinner></job-hub-spinner>
+  </div>
+</section>
+

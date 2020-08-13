@@ -1,0 +1,18 @@
+<ngx-masonry class="my-50" [options]="{gutter: gutter, animations: animations}" (layoutComplete)="layoutCompleted($event)">
+  <div ngxMasonryItem class="masonry-item" *ngFor="let idea of ideas"
+    [style.width]="cardWidth"
+    [style.margin-bottom.px]="gutter">
+    <job-hub-idea-board-card [editable]="editable"
+                             [selectable]="selectable"
+                             [clickable]="clickable"
+                             [idea]="idea"
+                             [isCustomer]="isCustomer"
+                             (view)="view($event)"
+                             (edit)="edit.emit($event)"
+                             (delete)="delete.emit($event)"></job-hub-idea-board-card>
+  </div>
+</ngx-masonry>
+<p class="d-flex align-items-center justify-content-center text-primary" *ngIf="hasPending">Loading
+  {{ ideas.length > loaded ? ideas.length - loaded : loaded - ideas.length }} more images...
+  <span class="d-inline-block ml-10 px-10 py-10 position-relative"><job-hub-spinner diameter="20"></job-hub-spinner></span>
+</p>

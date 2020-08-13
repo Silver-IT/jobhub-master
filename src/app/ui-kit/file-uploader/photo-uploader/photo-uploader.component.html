@@ -1,0 +1,14 @@
+<div class="d-flex flex-wrap mb-20" [ngClass]="'justify-content-' + align">
+  <div class="mr-10 mb-10" *ngFor="let file of files; let i = index;">
+    <div class="photo position-relative" [style.width.px]="size" [style.height.px]="size" (click)="viewImage(file.url)">
+      <a *ngIf="!readonly && !file.loading" class="remove cursor-pointer" (click)="deleteItem(i)"><img src="assets/images/icons/remove.svg" alt="Remove"></a>
+      <img class="img-fluid" [src]="file.url" alt="Image" *ngIf="file.url">
+      <span *ngIf="file.failed">Failed!</span>
+      <job-hub-spinner *ngIf="file.loading" [diameter]="size / 2"></job-hub-spinner>
+    </div>
+  </div>
+  <label class="cursor-pointer" *ngIf="!readonly" [style.width.px]="size" [style.height.px]="size">
+    <input accept="image/x-png,image/gif,image/jpeg" class="d-none" type="file" ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput" multiple>
+    <img class="img-fluid" src="assets/images/icons/image-plus.svg" alt="Plus">
+  </label>
+</div>

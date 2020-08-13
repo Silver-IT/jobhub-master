@@ -1,0 +1,103 @@
+@import "../../../../assets/theme";
+
+$point-size: 12px;
+$start-point-size: 37px;
+
+@mixin line($height) {
+  height: $height;
+  width: 2px;
+  background-color: $niagara;
+}
+
+.time-line {
+  position: relative;
+  .year {
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 34px;
+    height: 45px;
+    color: $niagara;
+  }
+  .event-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 70px;
+    .event-card-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    & > div {
+      flex: 0 0 440px;
+      line-height: 22px;
+    }
+    &:nth-child(odd) {
+      flex-direction: row-reverse;
+      .event-card-wrapper {
+        align-items: flex-start;
+      }
+    }
+  }
+}
+
+.event-card {
+  color: $dove-gray;
+  padding: 25px;
+  border-radius: 3px;
+  background-color: white;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.1);
+}
+
+.point {
+  display: block;
+  background-color: $niagara;
+  margin-top: 10px;
+  @include absolute_x_middle();
+  @include circle($point-size);
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 5px;
+    @include line(90px);
+  }
+  &.point-start {
+    @include circle($start-point-size);
+    &:before {
+      content: none;
+    }
+  }
+}
+
+.point-line {
+  @include absolute_x_middle();
+  @include line(100%);
+}
+
+@include media-breakpoint-down(md) {
+  .time-line {
+    .event-wrapper {
+      flex-direction: column !important;
+      padding-left: 30px;
+      .event-card-wrapper {
+        align-items: flex-start;
+      }
+      & > div {
+        flex: 0 0 auto;
+      }
+    }
+  }
+
+  .point {
+    left: 10px;
+    top: 70px;
+    &.point-start {
+      top: 0;
+    }
+  }
+
+  .point-line {
+    left: 10px;
+  }
+}

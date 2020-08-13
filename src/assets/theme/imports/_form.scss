@@ -1,0 +1,99 @@
+form {
+
+  label.form-label {
+    transition: ease box-shadow .3s;
+  }
+
+  .invalid {
+    label.form-label {
+      @include stroke_invalid;
+    }
+  }
+
+  label.form-label {
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  .form-control[readonly] {
+    background-color: $catskill-white;
+  }
+
+  .select-wrapper {
+    position: relative;
+    select {
+      -moz-appearance:none; /* Firefox */
+      -webkit-appearance:none; /* Safari and Chrome */
+      appearance:none;
+    }
+    &:after {
+      content: '';
+      background-image: url("/assets/images/icons/arrow-compact.svg");
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      display: block;
+      bottom: 14px;
+      right: 7px;
+      background-repeat: no-repeat;
+    }
+    &.readonly {
+      &:after {
+        content: none;
+      }
+    }
+  }
+
+  .label-input-group .select-wrapper {
+    &:after {
+      bottom: 2px;
+    }
+  }
+
+
+  .form-group.label-input-group {
+    padding-bottom: 2px;
+    padding-top: 6px;
+    border-radius: 3px;
+    box-shadow: 0 2px 8px 0 rgba(224,229,238,0.3);
+    background-color: white;
+    label {
+      font-size: 10px;
+      font-weight: 500;
+      color: $mine-shaft;
+      padding: 0 10px;
+    }
+    textarea.form-control, select.form-control, input.form-control {
+      background-color: white;
+      font-size: 13px;
+      padding: 0 !important;
+      outline: none !important;
+      box-shadow: none !important;
+      height: 26px;
+    }
+  }
+}
+
+.input-with-tooltip {
+  position: relative;
+  job-hub-information-tooltip {
+    position: absolute;
+    right: 40px;
+    top: 15px;
+    &.normal-text {
+      right: 12px;
+    }
+  }
+  ngb-popover-window {
+    min-width: 320px;
+  }
+
+  @include media-breakpoint-down(md) {
+    ngb-popover-window {
+      left: -117px !important;
+    }
+    ngb-popover-window > .arrow {
+      display: none;
+    }
+  }
+}

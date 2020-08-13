@@ -1,0 +1,21 @@
+<job-hub-milestone-template [milestone]="milestone">
+  <div class="milestone-status col-12 col-lg-8 order-1 order-lg-0 text-primary font-12 d-flex align-items-center mt-20 mt-md-0">
+
+    <div class="d-flex align-items-center w-100" *ngIf="milestone.paidDate">
+      <img src="assets/images/icons/payment/circle-check.svg" alt="circle check">
+      <span class="pl-2 font-weight-medium">Completed on {{milestone.paidDate | date: 'MMM dd, yyyy'}}</span>
+    </div>
+
+    <job-hub-milestone-payment-control
+      *ngIf="!milestone.paidDate"
+      [showMode]="showMode"
+      [readonly]="milestone.paidDate"
+      [disableActions]="false"
+      [milestone]="milestone"
+      (confirmCashPay)="confirmCashPayment.emit($event)"
+      (editMilestone)="editMilestone.emit($event)"
+      (requestPayment)="requestPayment.emit($event)"
+      (makePayment)="makePayment.emit($event)"></job-hub-milestone-payment-control>
+
+  </div>
+</job-hub-milestone-template>

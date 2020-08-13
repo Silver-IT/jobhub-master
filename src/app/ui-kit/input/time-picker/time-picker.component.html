@@ -1,0 +1,14 @@
+<div class="form-group" [class.label-input-group]="label">
+  <label class="form-label" ngbDropdown placement="top-right" #dropdown="ngbDropdown" [container]="container">
+    {{ label }}
+    <input class="form-control" placeholder="Select time" [ngModel]="value | timeSlotToStandardFormat : isRange" readonly>
+    <button type="button" class="dropdown-icon pr-0" ngbDropdownToggle mat-button color="accent"><i class="d-flex align-items-center justify-content-center mb-0"><img src="assets/images/icons/time.svg" alt="Time"></i></button>
+    <div class="w-100 pretty-scroll max-height-250 pb-0" ngbDropdownMenu aria-labelledby="dropdown">
+      <ul class="list-unstyled mb-0">
+        <ng-container *ngFor="let option of options">
+          <li *ngIf="option > min && option < max" class="px-15 py-2 cursor-pointer" (click)="change(option, dropdown)">{{ option | timeSlotToStandardFormat : isRange }}</li>
+        </ng-container>
+      </ul>
+    </div>
+  </label>
+</div>

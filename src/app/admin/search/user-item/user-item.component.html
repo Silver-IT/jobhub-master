@@ -1,0 +1,20 @@
+<div class="px-15 py-10 bg-white">
+  <div class="d-flex flex-column flex-md-row align-items-center row">
+    <div class="col-12 col-md-6 d-flex flex-column flex-md-row align-items-center">
+      <job-hub-avatar [src]="user.avatar"></job-hub-avatar>
+      <div class="d-flex flex-column ml-0 ml-md-10 text-center text-md-left my-15 my-md-0">
+        <span class="font-weight-bold text-primary font-13 cursor-pointer" (click)="navigate()">{{ user | fullName }}</span>
+        <span class="text-primary font-11">{{ user.email }}</span>
+      </div>
+    </div>
+    <div class="col-12 col-md-3 d-flex flex-column text-center text-md-left">
+      <span class="font-11 color-dove-gray">Phone number</span>
+      <span class="font-13 color-dove-gray">{{ user.phone }}</span>
+    </div>
+
+    <div class="col-12 col-md-3 d-flex flex-column text-center text-md-left">
+      <span class="font-11 color-dove-gray">Joined</span>
+      <span class="font-13 color-dove-gray">{{ user.createdAt | date }}</span>
+    </div>
+  </div>
+</div>

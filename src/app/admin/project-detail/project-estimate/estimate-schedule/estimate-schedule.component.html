@@ -1,0 +1,17 @@
+<div class="d-flex justify-content-between mb-20">
+  <p class="font-18 font-weight-medium color-mine-shaft mb-0">{{ viewDate | date }}</p>
+  <job-hub-calendar-navigator [view]="CalendarView.Month" [(viewDate)]="viewDate" (viewDateChange)="changeViewDate($event)"></job-hub-calendar-navigator>
+</div>
+<p class="my-15 d-block d-md-none">This page is not supporting mobile devices</p>
+<div class="position-relative mb-20 d-none d-md-block">
+  <job-hub-spinner *ngIf="isLoading"></job-hub-spinner>
+  <job-hub-month-calendar [viewDate]="viewDate"
+                          [editable]="true"
+                          [(tempSchedule)]="schedule"
+                          (tempScheduleChange)="scheduleChanged($event)"
+                          [events]="events"></job-hub-month-calendar>
+</div>
+<div class="d-flex flex-column flex-md-row">
+  <button class="btn btn-primary btn-lt-md-block" [disabled]="!schedule" (click)="submit()">Preview Estimate</button>
+  <button class="btn btn-primary btn-lt-md-block ml-0 ml-md-10 mt-15 mt-md-0" [disabled]="schedule" (click)="submit()" *ngIf="skippable">Skip Site Visit Schedule</button>
+</div>

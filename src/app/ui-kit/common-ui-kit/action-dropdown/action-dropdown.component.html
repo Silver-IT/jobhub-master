@@ -1,0 +1,13 @@
+<div ngbDropdown placement="bottom-right">
+  <job-hub-icon icon="options" [color]="color" class="cursor-pointer no-arrow" ngbDropdownToggle></job-hub-icon>
+  <div class="small-menu" ngbDropdownMenu>
+    <button ngbDropdownItem (click)="edit.emit()">
+      <span><img src="assets/images/icons/edit.svg" alt="Edit"></span>
+      <span>Edit</span>
+    </button>
+    <button ngbDropdownItem (click)="archive.emit()">
+      <span><img src="assets/images/icons/trash.svg" alt="Trash"></span>
+      <span>Archive</span>
+    </button>
+  </div>
+</div>

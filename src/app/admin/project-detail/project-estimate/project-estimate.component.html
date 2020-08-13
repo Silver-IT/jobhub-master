@@ -1,0 +1,9 @@
+<section class="py-50 px-15 px-lg-75 position-relative">
+  <ng-container [ngSwitch]="step">
+    <job-hub-estimate-general *ngSwitchCase="EstimateStep.General"
+                              (next)="step = EstimateStep.Schedule"></job-hub-estimate-general>
+    <job-hub-estimate-schedule *ngSwitchCase="EstimateStep.Schedule"
+                               (next)="step = EstimateStep.Preview"></job-hub-estimate-schedule>
+    <job-hub-estimate-preview *ngSwitchCase="EstimateStep.Preview" (edit)="edit()" [isEditing]="isEditing"></job-hub-estimate-preview>
+  </ng-container>
+</section>

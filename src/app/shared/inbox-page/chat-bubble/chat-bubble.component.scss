@@ -1,0 +1,9 @@
+.chat-bubble {
+  box-shadow: 0 2px 8px 0 rgba(224,229,238,0.3);
+  background-color: white;
+  min-width: 200px;
+  max-width: 1200px;
+  &.mine {
+    background-color: rgba(230,246,245,0.4);
+  }
+}

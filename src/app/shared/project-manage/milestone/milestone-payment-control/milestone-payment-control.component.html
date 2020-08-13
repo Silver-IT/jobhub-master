@@ -1,0 +1,24 @@
+<!-- context: milestone is not paid -->
+<div>
+  <span *ngIf="milestone.status === MilestoneStatus.ReleaseRequested && !milestone.payWithCash" class="text-primary font-12 px-2">(Payment requested)</span>
+
+  <ng-container *ngIf="showMode === MilestoneShowMode.Customer">
+    <button *ngIf="!milestone.payWithCash"
+            [disabled]="disableActions"
+            class="btn btn-primary text-white btn-small mr-3"
+            (click)="makePayment.emit(milestone)">Make payment</button>
+    <span *ngIf="milestone.payWithCash" class="text-primary font-12 px-2 mt-md-0">(Cash pending)</span>
+  </ng-container>
+
+  <ng-container *ngIf="showMode === MilestoneShowMode.Admin">
+    <button *ngIf="!milestone.payWithCash && milestone.status !== MilestoneStatus.ReleaseRequested"
+            [disabled]="disableActions"
+            class="btn btn-primary text-white btn-small mr-3"
+            (click)="requestPayment.emit(milestone)">Request Payment</button>
+    <mat-slide-toggle *ngIf="milestone.payWithCash" class="font-weight-bold pl-3 mr-3" (click)="clickCashToggle($event)">Cash pending</mat-slide-toggle>
+    <button *ngIf="!readonly && !milestone.paidDate && !milestone.payWithCash"
+            [disabled]="disableActions"
+            class="btn btn-warning text-white btn-small"
+            (click)="editMilestone.emit(milestone)">Edit</button>
+  </ng-container>
+</div>

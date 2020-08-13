@@ -1,0 +1,11 @@
+<a class="close" mat-dialog-close><span class="material-icons">close</span></a>
+<h5 mat-dialog-title class="text-center mt-20 px-50">Map location</h5>
+<div mat-dialog-content class="py-20 text-center color-dove-gray pretty-scroll">
+  <p>{{ data.address }}</p>
+  <job-hub-map [latitude]="data.latitude" [longitude]="data.longitude"
+               [mapTypeControl]="true" [mapDraggable]="true"
+               height="450"></job-hub-map>
+</div>
+<div class="d-flex justify-content-center" mat-dialog-actions>
+  <button class="btn btn-primary" mat-dialog-close>Close</button>
+</div>

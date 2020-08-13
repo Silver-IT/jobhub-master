@@ -1,0 +1,51 @@
+<section class="py-50 px-15 px-lg-75 position-relative">
+  <div class="row">
+    <div class="col-12 col-md-10 mt-30 mt-md-0">
+      <p class="color-mine-shaft font-18 font-weight-medium mb-25">Choose Materials</p>
+      <p class="color-mine-shaft mb-40" *ngIf="!project.pickOutPaverSchedule; else pickOutPaverSchedule">Milestone 1 is already paid, proceed to schedule the meeting to choose materials or message customer.</p>
+      <ng-template #pickOutPaverSchedule>
+        <p class="color-mine-shaft mb-40">Milestone 1 is already paid, pick out pavers call is scheduled at
+          <span class="text-primary font-weight-medium">{{ project.pickOutPaverSchedule.from | date : 'MMM d, yyyy, hh:mm a' }} - {{ project.pickOutPaverSchedule.to | date : 'hh:mm a' }}</span>.
+        </p>
+      </ng-template>
+
+      <div class="mb-40">
+        <button class="btn btn-warning btn-lt-md-block text-white" (click)="schedule()">{{ project.pickOutPaverSchedule ? 'Update Schedule' : 'Schedule Meeting' }}</button>
+      </div>
+      <form [formGroup]="form" (ngSubmit)="save()">
+        <p class="color-mine-shaft font-18 font-weight-medium mb-25">Layouts</p>
+        <div class="mb-50" formGroupName="materialRequests" *ngFor="let item of materialRequests.controls; let i = index">
+          <div [formGroupName]="i">
+            <p class="color-mine-shaft font-weight-medium">{{ item.value.type | optionLabel }}</p>
+            <div class="mb-30" formGroupName="notes" *ngFor="let note of item.get('notes').controls; let i = index">
+              <p class="color-mine-shaft mb-15" *ngIf="!note.isEditing">{{ note.value }}</p>
+              <job-hub-text-input *ngIf="note.isEditing" label="Note" placeholder="Material sample notes" [formControlName]="i"></job-hub-text-input>
+              <div>
+                <ng-container *ngIf="note.isEditing; else editButtonTemplate">
+                  <button type="button" class="btn btn-primary btn-small btn-lt-md-block mr-0 mr-md-15 mb-10 mb-md-0" [disabled]="note.invalid" (click)="note.isEditing = false">Save</button>
+                  <button type="button" class="btn btn-danger btn-small btn-lt-md-block" (click)="item.get('notes').removeAt(i)">Remove</button>
+                </ng-container>
+                <ng-template #editButtonTemplate>
+                  <button type="button" class="btn btn-primary btn-small btn-lt-md-block" (click)="note.isEditing = true">Edit</button>
+                </ng-template>
+              </div>
+            </div>
+            <div>
+              <button type="button" class="btn btn-warning btn-small btn-lt-md-block text-white" (click)="addNote(item)">Add New Note</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="my-30">
+          <button class="btn btn-primary" [disabled]="form.invalid">Save</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-12 col-md-2 mt-30 mt-md-0">
+      <div class="client-sticky-sidebar text-center">
+        <job-hub-request-chat userRole="Customer" [readonly]="!(project | isProjectEditable : true)" [project]="project" allowViewProfile="true" [user]="project.user"></job-hub-request-chat>
+      </div>
+    </div>
+  </div>
+  <job-hub-spinner *ngIf="isLoading"></job-hub-spinner>
+</section>

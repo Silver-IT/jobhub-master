@@ -1,0 +1,10 @@
+<section class="pt-100" [class.pb-100]="hasBottomPadding" [class.bg-color-catskill-white]="!isWhite">
+  <div class="container">
+    <p class="text-primary mb-2 font-22" [ngClass]="'text-' + align">{{ header }}</p>
+    <h1 class="color-mine-shaft mb-60" [ngClass]="'text-' + align">{{ title }}</h1>
+    <p class="color-dove-gray text-center mb-50 px-0 px-xl-150" *ngIf="description">{{ description }}</p>
+  </div>
+  <div [class.container]="container">
+    <ng-content></ng-content>
+  </div>
+</section>

@@ -1,0 +1,9 @@
+<agm-map [latitude]="latitude"
+         [longitude]="longitude"
+         [style.height.px]="height"
+         [zoom]="12"
+         [mapTypeControl]="mapTypeControl"
+         [mapDraggable]="mapDraggable"
+         [styles]="mapRetroStyle">
+  <agm-marker [latitude]="latitude" [longitude]="longitude" iconUrl="/assets/images/icons/map-marker.svg"></agm-marker>
+</agm-map>

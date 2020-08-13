@@ -1,0 +1,9 @@
+<section class="py-50 px-75 position-relative">
+  <div class="row">
+    <div class="col">
+      <job-hub-contract [readonly]="!isEditing" [project]="project" [finalProposal]="finalProposal"></job-hub-contract>
+    </div>
+  </div>
+
+  <job-hub-spinner *ngIf="isSaving"></job-hub-spinner>
+</section>

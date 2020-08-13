@@ -1,0 +1,20 @@
+<job-hub-spinner *ngIf="isLoading"></job-hub-spinner>
+<div class="container h-100 d-flex align-items-center justify-content-center">
+  <div class="row w-100 mb-0 mb-md-150">
+    <div class="col-12 col-md-6 col-lg-5 mx-auto">
+      <h1 class="text-center mb-50 color-mine-shaft">Login</h1>
+      <form class="w-100" autocomplete="off" [formGroup]="loginForm" (ngSubmit)="login()">
+        <job-hub-text-input type="email" label="Email address" placeholder="Email address" formControlName="email"></job-hub-text-input>
+        <job-hub-text-input type="password" label="Password" placeholder="Password" formControlName="password"></job-hub-text-input>
+
+
+        <p class="font-12 text-center color-dove-gray mb-50">Not a member? <a [routerLink]="ROUTES.landingPages.requestEstimate | routeToAbsolute" class="text-primary">Register</a></p>
+
+        <div class="d-flex flex-column align-items-center justify-content-center">
+          <button class="btn btn-primary mb-10 btn-lt-md-block" [disabled]="loginForm.invalid || isLoading">Login</button>
+          <a class="font-10 text-primary" [routerLink]="ROUTES.auth.forgotPassword | routeToAbsolute">Forgot password</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

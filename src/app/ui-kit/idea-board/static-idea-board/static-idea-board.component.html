@@ -1,0 +1,11 @@
+<div class="d-flex flex-column">
+  <div class="d-flex flex-column flex-md-row w-100 position-relative" *ngFor="let row of ideas">
+    <div class="before-after text-white d-flex align-items-center justify-content-between px-30 font-12 font-weight-bold" *ngIf="hasBeforeAfter">
+      <span>Before</span>
+      <span class="mr-10">After</span>
+    </div>
+    <div [style.flex]="item.flex" *ngFor="let item of row">
+      <img class="img-fluid" [src]="item.url" alt="Service image">
+    </div>
+  </div>
+</div>

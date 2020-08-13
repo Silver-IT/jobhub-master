@@ -1,0 +1,10 @@
+<div class="py-40 px-15 px-md-0">
+
+  <p class="font-weight-medium color-mine-shaft mb-15">Active Projects</p>
+
+  <job-hub-project-table (selectProject)="navigateToProjectDetail($event)"></job-hub-project-table>
+
+  <div class="mt-20">
+    <button class="btn btn-primary btn-lt-md-block" [routerLink]="[ROUTES.app.root, ROUTES.app.createProject] | routeToAbsolute">+ New Project</button>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+<div class="btn-group shadow-3 rounded">
+  <button class="btn btn-white font-weight-medium btn-mini shadow-none" [class.btn-primary]="!type" (click)="select(null)">All</button>
+  <button class="btn btn-white font-weight-medium btn-mini shadow-none" [class.btn-primary]="type === ScheduleType.SiteVisitSchedule" (click)="select(ScheduleType.SiteVisitSchedule)">Site Visits</button>
+  <button class="btn btn-white font-weight-medium btn-mini shadow-none" [class.btn-primary]="type === ScheduleType.ProjectStart" (click)="select(ScheduleType.ProjectStart)">Scheduled Projects</button>
+  <button class="btn btn-white font-weight-medium btn-mini shadow-none" [class.btn-primary]="type === ScheduleType.PickOutPaver" (click)="select(ScheduleType.PickOutPaver)">Pick out Pavers</button>
+</div>

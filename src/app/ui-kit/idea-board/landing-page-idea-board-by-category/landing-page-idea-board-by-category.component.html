@@ -1,0 +1,7 @@
+<div class="container">
+  <job-hub-tabset [tabs]="categories" (selectedChange)="categoryChanged($event)"></job-hub-tabset>
+</div>
+
+<div class="mt-45 mb-70 position-relative">
+  <job-hub-home-page-idea-board (cardLiked)="cardLiked()" [hasLearnMoreButton]="true" [ideas]="ideas" [isLoading]="isLoading"></job-hub-home-page-idea-board>
+</div>

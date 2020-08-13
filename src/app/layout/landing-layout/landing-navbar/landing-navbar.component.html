@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-xl bg-transparent">
+  <div class="container position-relative">
+    <a class="navbar-brand" routerLink="/"><img src="assets/images/logo.svg" alt="J&D Landscaping"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar" >
+      <img src="assets/images/icons/menu.svg" alt="menu">
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <div class="d-flex d-xl-none justify-content-between pt-70 pb-30">
+        <a class="navbar-brand"><img width="152" src="assets/images/logo.svg" alt="J&D Landscaping"></a>
+        <button class="navbar-toggler bg-transparent" type="button" data-toggle="collapse" data-target="#mainNavbar" >
+          <img src="assets/images/icons/close.svg" alt="close">
+        </button>
+      </div>
+      <ul class="navbar-nav ml-auto font-13 font-weight-medium text-white">
+        <li data-toggle="collapse" data-target="#mainNavbar" class="d-block d-lg-none nav-item" [routerLink]="[ROUTES.auth.login] | routeToAbsolute" routerLinkActive="active">
+          <a class="nav-link">Login</a>
+        </li>
+        <ng-container *ngFor="let item of menuItems">
+          <li data-toggle="collapse" data-target="#mainNavbar" class="nav-item" [routerLink]="item.route | routeToAbsolute" routerLinkActive="active">
+            <a class="nav-link">{{ item.label }}</a>
+          </li>
+        </ng-container>
+        <li class="nav-item static d-none d-xl-block">
+          <job-hub-request-estimate-button class="ml-20" [center]="false"></job-hub-request-estimate-button>
+        </li>
+      </ul>
+      <!--<div class="d-block d-xl-none mt-50 pt-25 pl-30 pb-25">
+        <div class="font-12 color-grey mt-4">© 2020 My Wealth Advisor. All rights reserved.</div>
+      </div>-->
+    </div>
+  </div>
+</nav>

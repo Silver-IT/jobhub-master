@@ -1,0 +1,34 @@
+<div class="d-flex justify-content-center align-items-center bg-color-black-squeeze drop-area rounded"
+     ngFileDrop
+     [style.height.px]="height"
+     [options]="options"
+     (uploadOutput)="onUploadOutput($event)"
+     [uploadInput]="uploadInput">
+  <div class="text-dove-gray font-14" *ngIf="!isUploading">
+    Drag & drop files here or
+    <label class="underline cursor-pointer text-primary font-weight-medium">
+      <input accept="image/x-png,image/gif,image/jpeg" class="d-none" type="file" ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput" multiple> Browse
+    </label>
+    your file...
+  </div>
+  <div class="text-dove-gray font-14" *ngIf="isUploading">
+    Please wait, uploading is in progress...
+  </div>
+</div>
+
+<div class="d-flex flex-column pt-25 progress-container">
+  <ng-progress #progress id="upload_progress" [spinner]="false" color="#07A39D" [thick]="true" [fixed]="false"></ng-progress>
+  <div class="d-flex justify-content-between font-12 color-aqua-island mt-10" *ngIf="isUploading">
+    <span>{{ pendingFiles.length }} files</span>
+    <span>Uploading...</span>
+  </div>
+</div>
+
+<div class="mt-10" *ngIf="files && files.length">
+  <h5 class="font-22 color-mine-shaft mb-20">Uploaded files preview</h5>
+  <div class="row">
+    <div class="col-3 mb-10" *ngFor="let file of files; let i = index">
+      <job-hub-image-renderer height="85" [readonly]="false" [src]="file" (delete)="deleteItem(i)"></job-hub-image-renderer>
+    </div>
+  </div>
+</div>

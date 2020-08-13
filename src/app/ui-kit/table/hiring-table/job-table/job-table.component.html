@@ -1,0 +1,30 @@
+<job-hub-table [rows]="jobs"
+               [columns]="columns"
+               [loading]="isLoading"
+               [pageSize]="take"
+               [length]="total"
+               (page)="onPage($event)"
+               emptyDescription="No jobs to display.">
+
+  <ng-template #titleColumn let-job="row">
+    <div class="d-flex flex-column pr-20">
+      <span class="font-13 font-weight-bold text-primary mb-1 cursor-pointer" (click)="selectJob.emit(job.id)">{{ job.title }}</span>
+    </div>
+  </ng-template>
+
+  <ng-template #typeColumn let-job="row">
+    <span class="font-13 color-mine-shaft">{{ job | jobType }}</span>
+  </ng-template>
+
+  <ng-template #salaryColumn let-job="row">
+    <span class="font-13 color-mine-shaft">{{ job.salary | currency }} per {{ job.salaryType | lowercase }}</span>
+  </ng-template>
+
+  <ng-template #dateColumn let-job="row">
+    <span class="font-13 color-mine-shaft">{{ job.createdAt | date }}</span>
+  </ng-template>
+
+  <ng-template #actionColumn>
+    <job-hub-action-dropdown></job-hub-action-dropdown>
+  </ng-template>
+</job-hub-table>

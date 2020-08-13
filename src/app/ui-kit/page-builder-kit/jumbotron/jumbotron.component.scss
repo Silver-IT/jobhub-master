@@ -1,0 +1,17 @@
+@import "../../../../assets/theme";
+
+.jumbotron {
+  border-radius: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  .container {
+    z-index: 1;
+  }
+}
+
+.gradient-mask {
+  @include absolute_fit_parent;
+  background: linear-gradient(180deg, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0) 100%);
+}

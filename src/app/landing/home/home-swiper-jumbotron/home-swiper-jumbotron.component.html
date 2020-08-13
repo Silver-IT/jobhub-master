@@ -1,0 +1,27 @@
+<div class="position-relative swiper-jumbotron">
+  <swiper [config]="config">
+    <div class="" *ngFor="let item of images">
+      <img class="img-fluid" src="assets/images/landing-page/home/{{item}}" alt="J&D Landscaping">
+    </div>
+  </swiper>
+
+  <div class="position-absolute w-100 h-100 d-flex align-items-center text-white content">
+    <div class="container">
+      <div class="content-overlay d-inline-block ml-n30 py-40 px-30">
+        <h1 class="mb-30 mt-0">Quality. Efficient. Affordable.</h1>
+        <h6 class="mt-0 mb-40 font-weight-medium">Are you looking to get a quote on an upcoming Hardscape project?</h6>
+        <h6 class="mb-40 font-weight-normal">
+          We’ve made it easier than ever to get an idea of what to budget for your project.<br class="d-none d-md-block"/>
+          Simply tell us what you have in mind and a project consultant will reach out to you<br class="d-none d-md-block"/>
+          to discuss pricing and answer any questions.</h6>
+        <h6 class="mb-40 font-weight-normal">You can also check out our Patio Packages section to view signature designs.</h6>
+        <div class="d-flex flex-column flex-md-row">
+          <job-hub-request-estimate-button [center]="false"></job-hub-request-estimate-button>
+          <button class="btn btn-white bg-white text-warning btn-normal ml-0 ml-md-30 mt-20 mt-md-0"
+                  [ngxScrollTo]="ScrollPosition.Root"
+                  [routerLink]="[ROUTES.landingPages.patioPackages] | routeToAbsolute">Patio Packages</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

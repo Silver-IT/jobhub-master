@@ -1,0 +1,20 @@
+<a class="close" [mat-dialog-close]="AgreementDialogAction.OpenAgreement"><span class="material-icons">close</span></a>
+<h5 mat-dialog-title class="text-center mt-20 px-20 px-md-50 color-mine-shaft">Payment Terms</h5>
+<p class="color-dove-gray font-14 text-center mx-0 mx-md-40">
+  Payments will be requested by the following scheme:
+</p>
+<div mat-dialog-content class="pt-20 pt-md-40 px-20 px-md-50 pretty-scroll text-center">
+
+  <p class="font-weight-medium font-18 text-primary mb-10">10% Initial deposit</p>
+  <p class="color-dove-gray mb-30">To lock in a date on our schedule.</p>
+
+  <p class="font-weight-medium font-18 text-primary mb-10">40% Start Project</p>
+  <p class="color-dove-gray mb-30">The morning we start the project.</p>
+
+  <p class="font-weight-medium font-18 text-primary mb-10">50% Project Complete</p>
+  <p class="color-dove-gray mb-30">Final payment, due upon completion of project.</p>
+
+</div>
+<div mat-dialog-actions class="d-flex justify-content-center">
+  <button class="btn btn-primary btn-lt-md-block" [mat-dialog-close]="AgreementDialogAction.Agreed">Confirm</button>
+</div>

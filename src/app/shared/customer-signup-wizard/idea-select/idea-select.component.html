@@ -1,0 +1,12 @@
+<form [formGroup]="filterForm">
+  <div class="row justify-content-between align-items-center">
+    <div class="col-3">
+      <job-hub-select placeholder="Services" [options]="availableProjectAccessoryTypes" formControlName="projectType"></job-hub-select>
+    </div>
+<!--    <div class="col-3">-->
+<!--      <job-hub-select placeholder="Materials" [options]="materials" formControlName="materialType"></job-hub-select>-->
+<!--    </div>-->
+    <button class="btn btn-primary mb-20 mr-15" (click)="skip.next()" *ngIf="hasSkip">Skip Step</button>
+  </div>
+</form>
+<job-hub-idea-board [ideas]="ideas" [clickable]="true" [selectable]="true"></job-hub-idea-board>

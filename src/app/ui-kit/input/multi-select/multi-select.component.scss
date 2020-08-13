@@ -1,0 +1,29 @@
+@import "../../../../assets/theme";
+
+.dropdown-toggle {
+  position: absolute;
+  right: 0;
+  padding-right: 10px !important;
+  top: 20px;
+  padding-left: 0 !important;
+  &:after {
+    content: none;
+  }
+}
+
+.tags-wrapper {
+  margin-top: 2px;
+  min-height: 20px;
+  .tag {
+    job-hub-icon::ng-deep {
+      display: inline-flex;
+      i {
+        display: inline-flex;
+        align-items: center;
+        svg {
+          width: 8px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,56 @@
+<section class="p-15 p-md-30">
+  <div class="row">
+    <job-hub-status-card [link]="[ROUTES.admin.root, ROUTES.admin.projects]" class="col-12 col-md-6 col-lg-3 mb-10 cursor-pointer" image="scheduled" text="Scheduled Projects" [value]="overallStats.projects"></job-hub-status-card>
+    <job-hub-status-card class="col-12 col-md-6 col-lg-3 mb-10" image="ytd" text="Total Revenue YTD" [value]="overallStats.ytd | shortNumber"></job-hub-status-card>
+    <job-hub-status-card class="col-12 col-md-6 col-lg-3 mb-10" image="estimates" text="Total Estimates Sent out" [value]="overallStats.estimates"></job-hub-status-card>
+    <job-hub-status-card [link]="[ROUTES.admin.root, ROUTES.admin.customers]" class="col-12 col-md-6 col-lg-3 mb-10 cursor-pointer" image="applicants" text="Registered Customers" [value]="overallStats.customers"></job-hub-status-card>
+  </div>
+
+  <div class="mt-20 row">
+    <div class="col-12 col-md-8 col-lg-9">
+      <job-hub-revenue-growth-graph></job-hub-revenue-growth-graph>
+    </div>
+    <div class="col-12 col-md-4 col-lg-3">
+      <job-hub-revenue-by-type-graph></job-hub-revenue-by-type-graph>
+    </div>
+  </div>
+
+  <div class="my-20 color-mine-shaft font-weight-medium d-flex justify-content-between align-items-center">
+    <p class="mb-0">Up to Next</p>
+    <a class="color-mine-shaft font-weight-medium" [routerLink]="[ROUTES.admin.root, ROUTES.admin.schedule] | routeToAbsolute">View All</a>
+  </div>
+
+  <div class="rounded overflow-hidden shadow-1 position-relative bg-white">
+    <div *ngFor="let day of days">
+      <span class="font-11 color-aqua-island mx-15 d-flex mt-20 mb-5">{{ groupedSchedules[day][0].from | recentDay }}</span>
+      <job-hub-schedule-item [schedule]="schedule" *ngFor="let schedule of groupedSchedules[day]; let i = index" [index]="i"></job-hub-schedule-item>
+    </div>
+    <div class="bg-white text-center py-20" *ngIf="!isScheduleLoading && !schedules.length">
+      <p class="font-13 color-dove-gray mb-0">No schedules for today.</p>
+    </div>
+    <div class="py-50" *ngIf="isScheduleLoading">
+      <job-hub-spinner [diameter]="30"></job-hub-spinner>
+    </div>
+  </div>
+
+
+  <div class="mt-40 mb-20 color-mine-shaft font-weight-medium d-flex justify-content-between align-items-center">
+    <p class="mb-0">Pending Estimates to Send ({{ pendingProjects.count }})</p>
+    <a class="color-mine-shaft font-weight-medium" [routerLink]="[ROUTES.admin.root, ROUTES.admin.projects] | routeToAbsolute">View All</a>
+  </div>
+
+  <div class="rounded overflow-hidden shadow-1 position-relative">
+    <div class="bg-white text-center py-20" *ngIf="!isPendingProjectsLoading && !pendingProjects.data.length">
+      <p class="font-13 color-dove-gray mb-0">Yay! All projects are estimated!</p>
+    </div>
+    <job-hub-pending-project *ngFor="let project of pendingProjects.data" [project]="project"></job-hub-pending-project>
+
+    <div class="py-50" *ngIf="isPendingProjectsLoading">
+      <job-hub-spinner [diameter]="30"></job-hub-spinner>
+    </div>
+  </div>
+
+  <div class="w-100 d-flex justify-content-center mt-20">
+    <button class="btn btn-primary btn-mini" (click)="loadPendingProjects()" *ngIf="pendingProjects.data.length < pendingProjects.count">Load more</button>
+  </div>
+</section>

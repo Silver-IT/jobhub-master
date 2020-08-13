@@ -1,0 +1,45 @@
+<section class="py-30 position-relative">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-8 col-lg-9">
+        <p class="color-regent-gray font-weight-medium mb-20">Manage Project</p>
+        <div *ngFor="let milestone of milestones; let i = index;">
+          <ng-container [ngSwitch]="milestone.order">
+            <job-hub-deposit-milestone
+              *ngSwitchCase="MilestoneType.Deposit"
+              [showMode]="MilestoneShowMode.Customer"
+              [milestone]="milestone"
+              (makePayment)="makePayment(milestone)"></job-hub-deposit-milestone>
+            <job-hub-start-milestone
+              *ngSwitchCase="MilestoneType.Start"
+              [showMode]="MilestoneShowMode.Customer"
+              [disableActions]="milestones[i-1] && !milestones[i-1].paidDate"
+              [milestone]="milestone"
+              [project]="project"
+              (makePayment)="makePayment(milestone)"></job-hub-start-milestone>
+            <job-hub-final-milestone
+              *ngSwitchCase="MilestoneType.Final"
+              [showMode]="MilestoneShowMode.Customer"
+              [disableActions]="milestones[i-1] && !milestones[i-1].paidDate"
+              [milestone]="milestone"
+              [project]="project"
+              (makePayment)="makePayment($event)"></job-hub-final-milestone>
+          </ng-container>
+        </div>
+      </div>
+      <div class="col-12 col-md-4 col-lg-3">
+        <div class="client-sticky-sidebar">
+          <button *ngIf="milestones | reviewAvailable" class="btn btn-primary btn-small mb-3 w-100" (click)="review()">Leave Review</button>
+          <div *ngIf="project.assignedContractor" class="mt-20 mb-30">
+            <job-hub-request-chat [project]="project" [user]="project.assignedContractor"></job-hub-request-chat>
+          </div>
+          <job-hub-review-contract [project]="project" *ngIf="!project.contractSignedDate"></job-hub-review-contract>
+          <button class="btn btn-primary btn-small w-100 mt-30 mb-15" [routerLink]="[ROUTES.app.root, ROUTES.app.project, project.id, ROUTES.app.proposal] | routeToAbsolute">View Proposal</button>
+          <button class="btn btn-primary btn-small w-100 mb-15" *ngIf="project.contractSignedDate" [routerLink]="[ROUTES.app.root, ROUTES.app.project, project.id, ROUTES.app.contract] | routeToAbsolute">View Contract</button>
+          <button class="btn btn-primary btn-small w-100" [routerLink]="[ROUTES.app.root, ROUTES.app.ideaBoard] | routeToAbsolute">Idea Board</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <job-hub-spinner *ngIf="isSaving"></job-hub-spinner>
+</section>

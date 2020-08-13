@@ -1,0 +1,11 @@
+@import "../../../assets/theme";
+
+.logo {
+  flex: 0 0 20%;
+}
+
+@include media-breakpoint-down(md) {
+  .logo {
+    flex: 0 0 50%;
+  }
+}

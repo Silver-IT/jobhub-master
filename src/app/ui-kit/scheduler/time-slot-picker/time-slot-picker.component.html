@@ -1,0 +1,15 @@
+<a class="close" [mat-dialog-close]="null"><span class="material-icons">close</span></a>
+<h5 mat-dialog-title class="text-center mt-20 px-50 color-mine-shaft">Select an hour block to call you on <br />{{ selectedDate | date }}</h5>
+<div mat-dialog-content class="px-20 py-40 pretty-scroll position-relative">
+  <div class="row justify-content-center">
+    <p class="color-dove-gray my-30" *ngIf="!slots.length">No available time slot for this day.</p>
+    <div class="col-12 col-md-4 mb-10" *ngFor="let item of slots">
+      <job-hub-time-block-button [slot]="item" [selected]="schedule === item" (selectSlot)="schedule = $event"></job-hub-time-block-button>
+    </div>
+  </div>
+  <job-hub-spinner *ngIf="isLoading"></job-hub-spinner>
+</div>
+<div mat-dialog-actions class="d-flex flex-column flex-md-row justify-content-center">
+  <button class="btn btn-warning text-white btn-lt-md-block mb-10 mb-md-0 mr-0 mr-md-20" [mat-dialog-close]="null">Back</button>
+  <button class="btn btn-primary text-white btn-lt-md-block" [disabled]="!schedule" [mat-dialog-close]="schedule">Schedule</button>
+</div>

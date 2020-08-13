@@ -1,0 +1,28 @@
+<p class="color-mine-shaft mb-20 font-weight-medium">Overall Traffic</p>
+<div class="d-flex flex-column flex-grow-1 justify-content-between bg-white rounded shadow-1 p-20 position-relative">
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-20">
+    <p class="color-mine-shaft mb-15 mb-md-0 font-weight-medium">Sessions</p>
+    <job-hub-toggle-button-group [options]="unitOptions" [(selectedOption)]="unit" (selectedOptionChange)="loadOverview()"></job-hub-toggle-button-group>
+  </div>
+  <div class="chart-renderer">
+    <ngx-charts-area-chart
+      *ngIf="!isLoading"
+      [animations]="true"
+      [gradient]="true"
+      [scheme]="colorSchema"
+      [legend]="false"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [showGridLines]="true"
+      [xAxisTickFormatting]="xAxisTickFormattingFn"
+      [xAxis]="true"
+      [yAxis]="true"
+      [timeline]="true"
+      [results]="sessions">
+    </ngx-charts-area-chart>
+  </div>
+<!--  <div class="d-flex align-items-center justify-content-start ml-20">-->
+<!--    <span class="dot mr-10"></span>-->
+<!--    <span class="font-12 text-primary">Sessions</span>-->
+<!--  </div>-->
+</div>

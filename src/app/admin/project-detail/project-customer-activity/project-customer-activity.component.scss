@@ -1,0 +1,15 @@
+@import "../../../../assets/theme";
+
+.history-table {
+  border-radius: 4px;
+}
+
+.history-table-header {
+  height: 36px;
+}
+
+.history-table-row {
+  @include media-breakpoint-up(md) {
+    height: 50px;
+  }
+}

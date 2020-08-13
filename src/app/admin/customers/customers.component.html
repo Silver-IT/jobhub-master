@@ -1,0 +1,11 @@
+<section class="p-15 p-md-30">
+  <div class="d-flex justify-content-between mb-30">
+    <p class="font-18 color-mine-shaft mb-0 font-weight-medium">Customers</p>
+  </div>
+
+  <job-hub-user-table (selectUser)="navigateUserProfilePage($event)"></job-hub-user-table>
+
+  <div class="mt-30">
+    <button class="btn btn-primary btn-lt-md-block" [routerLink]="[ROUTES.common.create]">+ New Customer</button>
+  </div>
+</section>

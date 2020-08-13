@@ -1,0 +1,24 @@
+@import "../../../../assets/theme";
+
+job-hub-image-renderer {
+  display: block;
+  @include flex(width, 136px);
+}
+
+form {
+  &::ng-deep {
+    .form-group {
+      background-color: $catskill-white;
+      input, select {
+        &.form-control {
+          background-color: $catskill-white;
+        }
+      }
+    }
+  }
+  job-hub-multi-select::ng-deep {
+    .form-group {
+      margin-bottom: 0;
+    }
+  }
+}

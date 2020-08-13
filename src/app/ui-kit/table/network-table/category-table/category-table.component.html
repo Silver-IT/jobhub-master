@@ -1,0 +1,18 @@
+<job-hub-table [rows]="categories"
+               [columns]="columns"
+               [loading]="isLoading"
+               [length]="total"
+               [pageSize]="take"
+               (page)="onPage($event)"
+               emptyDescription="No categories to display.">
+  <ng-template #nameColumn let-category="row">
+    <a (click)="selectCategory.emit(category.id)">
+      <span class="font-13 font-weight-bold text-primary mb-1">{{ category.name }}</span>
+    </a>
+  </ng-template>
+
+  <ng-template #actionColumn>
+    <job-hub-action-dropdown></job-hub-action-dropdown>
+  </ng-template>
+
+</job-hub-table>

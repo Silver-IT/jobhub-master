@@ -1,0 +1,21 @@
+@import "../../../../assets/theme";
+
+.chart-renderer {
+  min-height: 260px;
+  margin: -30px;
+  margin-left: -50px;
+}
+
+.dot {
+  @include circle(5px);
+}
+
+.min-40 {
+  min-width: 40px;
+}
+
+.legend-panel {
+  position: absolute;
+  right: 20px;
+  top: 20[x];
+}

@@ -1,0 +1,25 @@
+<job-hub-project-status-alert type="danger" text="This proposal is declined by the customer." *ngIf="finalProposal.status === FinalProposalStatus.Declined"></job-hub-project-status-alert>
+<div class="row">
+  <div class="col-12" [class.col-md-10]="finalProposal.status === FinalProposalStatus.Pending || finalProposal.status === FinalProposalStatus.Declined || project.user.invitationStatus !== InvitationStatus.Accepted">
+    <job-hub-final-proposal-review-warning-alert *ngIf="!finalProposal.id"></job-hub-final-proposal-review-warning-alert>
+    <job-hub-proposal-form
+      [proposal]="finalProposal" [small]="false"
+      [project]="project"
+      [customer]="project.customer"
+      [readonly]="true"></job-hub-proposal-form>
+  </div>
+  <div class="col-12 col-md-2 mt-30 mt-md-0" *ngIf="finalProposal.status === FinalProposalStatus.Pending || finalProposal.status === FinalProposalStatus.Declined || project.user.invitationStatus !== InvitationStatus.Accepted">
+    <div class="client-sticky-sidebar text-center">
+      <ng-container *ngIf="finalProposal.status === FinalProposalStatus.Pending || finalProposal.status === FinalProposalStatus.Declined">
+        <button class="btn btn-warning text-white w-100 mb-20" (click)="sendProposal()">{{finalProposal.id ? 'Update' : 'Send'}} Proposal</button>
+        <button class="btn btn-primary btn-small text-white w-100 mb-20" (click)="downloadProposal()">Download Proposal</button>
+        <button class="btn btn-primary btn-small w-100 mb-20" (click)="edit.emit()">Edit Proposal</button>
+      </ng-container>
+      <job-hub-invitation-button [user]="project.user"></job-hub-invitation-button>
+      <div class="mt-20">
+        <job-hub-request-chat userRole="Customer" [readonly]="!(project | isProjectEditable : true)" [project]="project" allowViewProfile="true" [user]="project.user"></job-hub-request-chat>
+      </div>
+    </div>
+  </div>
+  <job-hub-spinner *ngIf="isSaving"></job-hub-spinner>
+</div>

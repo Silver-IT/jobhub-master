@@ -1,0 +1,23 @@
+<section class="p-30">
+  <job-hub-spinner *ngIf="isLoading"></job-hub-spinner>
+
+  <div class="d-flex justify-content-between align-items-center mb-25">
+    <p class="color-mine-shaft font-18 font-weight-medium mb-0">Network Contractor Category</p>
+    <button type="button" class="btn btn-warning text-white btn-small" (click)="removeCategory()" *ngIf="editMode">Delete</button>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="update()">
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <job-hub-text-input label="Category name" placeholder="Category name"
+                            formControlName="name"></job-hub-text-input>
+      </div>
+      <div class="col-12 col-md-4">
+        <job-hub-yes-no-picker label="Published" formControlName="published"></job-hub-yes-no-picker>
+      </div>
+    </div>
+
+    <div class="mt-40">
+      <button type="submit" class="btn btn-primary" [disabled]="!form.valid || isLoading">Save</button>
+    </div>
+  </form>
+</section>

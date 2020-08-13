@@ -1,0 +1,15 @@
+<div class="d-flex justify-content-end" [class.bg-primary-transparent]="isSummary">
+  <div class="summary-row d-flex align-items-center py-10">
+    <div class="font-13 font-weight-bold color-dove-gray text-right" [class.text-primary]="isSummary">{{label}}</div>
+    <div class="font-20 text-primary value-field text-right font-weight-medium pl-2" [class.pr-2]="isSummary">
+      <ng-container *ngIf="!isDiscount; else discountWrapper">
+        <span>{{value | currency}}</span>
+      </ng-container>
+      <ng-template #discountWrapper>
+        <button *ngIf="!showDiscountEdit" (click)="showDiscountEdit = true" class="btn btn-add bg-primary text-white">+</button>
+        <input *ngIf="showDiscountEdit"[readOnly]="readonly" type="number" [(ngModel)]="value"
+               (ngModelChange)="valueChange.emit(value)" class="form-control discount-input text-right" placeholder="Discount">
+      </ng-template>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<section class="py-50 px-15 px-lg-75">
+  <p class="w-100 color-mine-shaft font-18 font-weight-medium mb-20">Customer Visit History</p>
+  <div class="position-relative">
+    <job-hub-spinner *ngIf="isLoading"></job-hub-spinner>
+    <div class="history-table overflow-hidden bg-white">
+      <div class="history-table-header bg-color-blue-lagoon text-white font-12 row">
+        <div class="col-12 col-md-3 align-items-center pl-50 d-none d-md-flex">Page</div>
+        <div class="col-12 col-md-3 align-items-center d-none d-md-flex">Visited at</div>
+        <div class="col-12 col-md-3 align-items-center d-none d-md-flex">Leaved at</div>
+        <div class="col-12 col-md-3 align-items-center d-none d-md-flex"></div>
+      </div>
+      <div class="history-table-row d-flex align-items-center justify-content-center color-dove-gray font-12" *ngIf="!history.length; else historyList">(No visit history yet)</div>
+      <ng-template #historyList>
+        <div class="history-table-row row cursor-pointer mb-15 mb-md-0" *ngFor="let item of history">
+          <div class="col-12 col-md-3 d-flex align-items-center justify-content-center justify-content-md-start py-15 py-md-0">
+            <span class="pl-10"><img src="assets/images/icons/time.svg" alt="history"></span>
+            <div class="d-flex flex-column justify-content-center pl-10">
+              <span class="font-13 font-weight-bold color-mine-shaft">{{item.page | optionLabel}}</span>
+            </div>
+          </div>
+          <div class="col-12 col-md-3 pl-20 font-12 d-flex justify-content-center justify-content-md-start align-items-center">
+            {{item.createdAt | date : 'MMM d, yyyy - hh:mm:ss a'}}
+          </div>
+          <div class="col-12 col-md-3 pl-20 font-12 d-flex justify-content-center justify-content-md-start align-items-center">
+            {{item.updatedAt | date : 'MMM d, yyyy - hh:mm:ss a'}}
+          </div>
+          <div class="col-12 col-md-3 pl-20 font-12 d-flex justify-content-center justify-content-md-start align-items-center">
+            {{item.createdAt | timeAgo}}
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</section>

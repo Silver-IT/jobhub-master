@@ -1,0 +1,15 @@
+<div class="d-flex align-items-center bg-white p-15 justify-content-between row">
+  <div class="col-12 col-md-5 d-flex flex-column flex-md-row align-items-center">
+    <job-hub-avatar size="32" [type]="project.projectType"></job-hub-avatar>
+    <div class="d-flex flex-column text-center text-md-left">
+      <span class="ml-10 font-13 font-weight-bold color-mine-shaft cursor-pointer my-10 my-md-0" (click)="navigateToProject()">{{ project.user | fullName }}</span>
+      <span class="ml-10 font-10 color-dove-gray">{{ project.name }}</span>
+    </div>
+  </div>
+  <div class="col-12 col-md-4 text-center text-md-left">
+    <span class="font-13 color-dove-gray">{{ project.address }}</span>
+  </div>
+  <div class="col-12 col-md-3 text-center text-md-left">
+    <span class="font-13 color-dove-gray">{{ project.createdAt | timeAgo }}</span>
+  </div>
+</div>

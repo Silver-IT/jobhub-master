@@ -1,0 +1,19 @@
+@import "../../../../assets/theme";
+
+.project-wrapper {
+  border-radius: 3px;
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 8px 0 rgba(224,229,238,0.3);
+}
+
+.image-wrapper {
+  max-width: 280px;
+  min-width: 280px;
+}
+
+@include media-breakpoint-down(md) {
+  .image-wrapper {
+    max-width: 100%;
+    min-width: 100%;
+  }
+}

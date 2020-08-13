@@ -1,0 +1,12 @@
+<div class="alert bg-warning text-white d-flex flex-column flex-md-row justify-content-between p-15">
+  <div class="d-flex align-items-center">
+    <div class="mr-15"><img class="img-fluid" src="assets/images/icons/warning.svg" alt="Warning"></div>
+    <p class="mb-0 font-weight-bold font-13 text-center text-md-left">Site visit scheduled for {{ schedule?.from | date : 'MMM d, y \' at \' h:mm a' }}</p>
+  </div>
+  <div class="d-flex align-items-center font-13 justify-content-center justify-content-md-start mt-10 mt-md-0">
+    <a class="font-weight-medium cursor-pointer" (click)="cancel.emit()">Cancel</a>
+    <span class="mx-10">or</span>
+    <a class="font-weight-medium cursor-pointer" (click)="reschedule.emit()">Reschedule visit</a>&nbsp;
+    <span>?</span>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+@import "../../../../assets/theme";
+
+.overlay-wrapper {
+  @include absolute_fit_parent;
+  .overlay {
+    @include absolute_fit_parent;
+    background-color: transparent;
+  }
+  .actions {
+    display: none;
+  }
+}
+
+.image-card {
+  job-hub-image-renderer::ng-deep div div {
+    overflow: hidden;
+    img {
+      transition: ease transform .5s;
+    }
+  }
+  &:hover {
+    .actions {
+      display: flex;
+    }
+    & job-hub-image-renderer::ng-deep div div {
+      img {
+        transform: scale(1.5);
+        transition: ease transform .5s;
+      }
+    }
+  }
+}

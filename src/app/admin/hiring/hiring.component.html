@@ -1,0 +1,15 @@
+<section class="p-15 p-md-30">
+
+  <div class="d-flex justify-content-between mb-20">
+    <p class="font-18 color-mine-shaft mb-0 font-weight-medium">Applicants</p>
+  </div>
+
+  <job-hub-applicant-table></job-hub-applicant-table>
+
+  <div class="d-flex justify-content-between mt-30 mb-20">
+    <p class="font-18 color-mine-shaft mb-0 font-weight-medium">Job Position</p>
+    <button class="btn btn-primary btn-mini" [routerLink]="[ROUTES.common.create]">+ New Job Position</button>
+  </div>
+
+  <job-hub-job-table (selectJob)="editJob($event)"></job-hub-job-table>
+</section>

@@ -1,0 +1,24 @@
+<section class="pt-30 d-flex flex-column">
+  <div class="container d-flex justify-content-between mb-10">
+    <p class="color-mine-shaft mb-0 font-weight-medium">Idea Board</p>
+  </div>
+
+  <form class="container" [formGroup]="filterForm">
+    <div class="row">
+      <div class="col-12 col-md-4 col-lg-3">
+        <job-hub-select [options]="availableProjectAccessoryTypes" label="Services" placeholder="Services" formControlName="projectType"></job-hub-select>
+      </div>
+      <div class="col-12 col-md-8 col-lg-9 d-flex flex-column flex-md-row justify-content-end mb-20">
+        <button class="btn btn-primary btn-toggle-mode btn-lt-md-block mr-0 mr-md-20 mb-20 mb-md-0" [routerLink]="[ROUTES.app.root, ROUTES.app.createProject] | routeToAbsolute">Create Project</button>
+        <button class="btn btn-primary btn-toggle-mode btn-lt-md-block" (click)="viewAllToggle()">{{ viewAll ? 'My likes' : 'View idea board' }}</button>
+      </div>
+    </div>
+  </form>
+
+  <job-hub-scrollable-idea-board [clickable]="true"
+                                 [userId]="user.id"
+                                 [hasContainer]="true"
+                                 [viewAll$]="viewAll$"
+                                 [filter$]="filterForm.valueChanges"></job-hub-scrollable-idea-board>
+</section>
+

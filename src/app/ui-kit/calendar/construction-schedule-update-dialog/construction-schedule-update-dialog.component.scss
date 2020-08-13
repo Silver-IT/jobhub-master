@@ -1,0 +1,6 @@
+@import "../../../../assets/theme";
+
+.dot {
+  @include circle(4px);
+  background-color: $niagara;
+}

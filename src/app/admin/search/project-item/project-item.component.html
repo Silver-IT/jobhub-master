@@ -1,0 +1,21 @@
+<div class="px-15 py-10 bg-white">
+  <div class="row d-flex align-items-center">
+    <div class="col-12 col-md-6 d-flex flex-column flex-md-row align-items-center">
+      <job-hub-avatar [type]="project.projectType"></job-hub-avatar>
+      <div class="d-flex flex-column ml-0 ml-md-10 text-center text-md-left my-15 my-md-0">
+        <span class="font-weight-bold text-primary font-13 cursor-pointer" [routerLink]="[ROUTES.admin.root, ROUTES.admin.projects, project.id, ROUTES.admin.project.brief] | routeToAbsolute">{{ project.name }}</span>
+        <span class="text-primary font-11">{{ project.address }}</span>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-3 d-flex flex-column text-center text-md-left">
+      <span class="font-11 color-dove-gray">Budget</span>
+      <span class="font-13 color-dove-gray">{{ project.budget | currency }}</span>
+    </div>
+
+    <div class="col-12 col-md-3 d-flex flex-column text-center text-md-left">
+      <span class="font-11 color-dove-gray">Created</span>
+      <span class="font-13 color-dove-gray">{{ project.createdAt | date }}</span>
+    </div>
+  </div>
+</div>

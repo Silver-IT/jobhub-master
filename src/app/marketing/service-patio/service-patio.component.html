@@ -1,0 +1,77 @@
+<job-hub-header></job-hub-header>
+<job-hub-navbar></job-hub-navbar>
+<job-hub-jumbotron-section></job-hub-jumbotron-section>
+<section class="py-100">
+  <div class="container">
+    <h2 class="font-44 text-center color-mine-shaft font-weight-normal mb-50">Why Us</h2>
+    <div class="row">
+      <div class="col-12 col-lg-6 color-dove-gray mb-30 mb-lg-0">
+        <p class="mb-30 pr-0 pr-lg-40">In 2003 at the age of 16, Joseph D. Masciovecchio started his dream of becoming an entrepreneur and opened up his company “J&D Landscaping” which was known as “J&D Snow Removal and Lawn Care” in the early days.</p>
+        <p class="mb-0 pr-0 pr-lg-40">The company started by focusing only on lawns and snow removal. However within the first year of business, Joe realized that he wanted more of a challenge than simply mowing a lawn or pushing snow.</p>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="d-flex mb-50" *ngFor="let item of factors">
+          <div class="img-min-60 mr-20">
+            <img class="img-fluid" [src]="item.image" [alt]="item.title">
+          </div>
+          <div>
+            <h3 class="color-dove-gray font-20 font-weight-bold mb-10 mt-0">{{ item.title }}</h3>
+            <p class="color-dove-gray mb-0">{{ item.text }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="py-100 bg-color-catskill-white">
+  <div class="container">
+    <h2 class="font-44 text-center color-mine-shaft font-weight-normal mb-50">Numbers</h2>
+    <div class="row">
+      <div class="col-12 col-md-4 mb-20 mb-md-0" *ngFor="let item of numbers">
+        <div class="d-flex flex-column align-items-center">
+          <span class="font-52 font-weight-medium text-primary">{{ item.count }}</span>
+          <p class="text-center font-20 font-weight-medium color-dove-gray">{{ item.label }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-100">
+  <h2 class="font-44 text-center color-mine-shaft font-weight-normal mb-15">Testimonials</h2>
+  <p class="color-dove-gray text-center mb-60">Don't Take Our Word For It. See What Our Clients Say.</p>
+  <job-hub-testimonial-section></job-hub-testimonial-section>
+</section>
+
+<job-hub-partner-section></job-hub-partner-section>
+
+<section class="pt-100">
+  <h2 class="font-44 text-center color-mine-shaft font-weight-normal mb-50">View Our Idea Board & Get Inspired</h2>
+  <job-hub-landing-page-idea-board-by-category></job-hub-landing-page-idea-board-by-category>
+</section>
+
+<section class="pt-30 pb-100">
+  <h2 class="font-44 text-center color-mine-shaft font-weight-normal mb-15">Request An Estimate</h2>
+  <p class="text-center color-dove-gray mb-60">Signup takes just a minute. Get access instantly.</p>
+  <div class="container">
+    <div class="d-flex justify-content-center">
+      <button class="btn btn-primary btn-x-large" (click)="requestEstimate()">Request Estimate</button>
+    </div>
+  </div>
+</section>
+
+<footer class="bg-color-black py-25">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-4 d-flex justify-content-center mb-15 mb-md-0">
+        <a class="font-10 text-white">© 2020. J & D Landscaping. All rights reserved.</a>
+      </div>
+      <div class="col-12 col-md-4 d-flex justify-content-center mb-15 mb-md-0">
+        <job-hub-social-buttons></job-hub-social-buttons>
+      </div>
+      <div class="col-12 col-md-4 d-flex justify-content-center">
+        <a class="font-12 font-weight-medium text-white" href="tel:18603246218">Need help? Call 860 324 6218</a>
+      </div>
+    </div>
+  </div>
+</footer>

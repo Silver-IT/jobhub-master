@@ -1,0 +1,10 @@
+ngb-typeahead-window.dropdown-menu {
+  margin-left: -10px;
+  button {
+    height: 30px;
+    & > ngb-highlight:first-child {
+      min-width: inherit;
+      max-width: inherit;
+    }
+  }
+}

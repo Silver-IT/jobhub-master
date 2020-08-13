@@ -1,0 +1,32 @@
+@import "../../../assets/theme";
+
+.table-header {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  height: 36px;
+}
+
+.table-row {
+}
+
+@include media-breakpoint-down(sm) {
+  .table-header {
+    span {
+      display: none;
+    }
+  }
+  .table-row {
+    & > div {
+      width: 100% !important;
+      &::ng-deep {
+        job-hub-avatar {
+          .avatar {
+            width: 100px !important;
+            height: 100px !important;
+            margin: auto;
+          }
+        }
+      }
+    }
+  }
+}

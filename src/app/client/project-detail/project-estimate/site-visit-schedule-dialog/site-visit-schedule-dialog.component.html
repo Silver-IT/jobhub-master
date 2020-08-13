@@ -1,0 +1,15 @@
+<a class="close" mat-dialog-close><span class="material-icons">close</span></a>
+<h5 mat-dialog-title class="text-center mt-20 px-0 px-md-50 color-mine-shaft">Schedule site visit</h5>
+<div mat-dialog-content class="pt-20 text-center pretty-scroll">
+  <p class="font-14 color-dove-gray mb-15">This is the date for your Site Visit.</p>
+  <div class="d-flex flex-wrap justify-content-center mx-n10">
+    <p class="text-primary font-24 font-weight-medium mt-40 mb-30">{{ siteVisitSchedule.from | date : 'MMM d, y \' at \' h:mm a' }}</p>
+  </div>
+
+</div>
+<div mat-dialog-actions class="d-flex justify-content-center mt-35 flex-column flex-md-row">
+  <button class="btn btn-lt-md-block btn-primary mb-10 mb-md-0" (click)="schedule()" [disabled]="isSaving">Schedule</button>
+  <button class="btn btn-lt-md-block btn-warning text-white ml-0 ml-md-4" (click)="requestAnotherDay()" [disabled]="isSaving">Request another day</button>
+</div>
+
+<job-hub-spinner *ngIf="isSaving"></job-hub-spinner>

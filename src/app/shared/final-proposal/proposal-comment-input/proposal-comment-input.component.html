@@ -1,0 +1,15 @@
+<div [class]="additionalClass">
+  <div class="d-flex">
+    <p [class.font-weight-bold]="!light" [class.mb-15]="!light" [class.font-weight-medium]="light" [class.mb-0]="light">{{ label }}</p>
+    <a class="cursor-pointer ml-20" (click)="notNecessary()" *ngIf="optional && !readonly"><img src="assets/images/icons/remove.svg" alt="Remove"></a>
+  </div>
+
+  <p class="mb-25 color-mine-shaft" *ngIf="description">{{ description }}</p>
+
+  <p class="font-14 color-mine-shaft" *ngIf="!isEditing || readonly">{{ value }}</p>
+  <job-hub-textarea [height]="height" *ngIf="isEditing && !readonly" [noLabel]="innerLabel === ''" [label]="innerLabel" placeholder="Description" [(ngModel)]="value" (ngModelChange)="change($event)"></job-hub-textarea>
+  <ng-content></ng-content>
+  <div>
+    <button type="button" class="btn btn-primary btn-lt-md-block btn-small" (click)="toggleEdit()" *ngIf="!readonly" [disabled]="isEditing && !value">{{ isEditing ? 'Save' : 'Edit' }}</button>
+  </div>
+</div>

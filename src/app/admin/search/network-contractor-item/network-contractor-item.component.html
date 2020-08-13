@@ -1,0 +1,20 @@
+<div class="px-15 py-10 bg-white">
+  <div class="d-flex align-items-center row">
+    <div class="col-12 col-md-6 d-flex flex-column flex-md-row align-items-center">
+      <job-hub-avatar [src]="user.logoUrl"></job-hub-avatar>
+      <div class="d-flex flex-column ml-0 ml-md-10 text-center text-md-left my-15 my-md-0">
+        <span class="font-weight-bold text-primary font-13">{{ user.companyName }}</span>
+        <span class="text-primary font-11">{{ user.address }}</span>
+      </div>
+    </div>
+    <div class="col-12 col-md-3 d-flex flex-column text-center text-md-left">
+      <span class="font-11 color-dove-gray">Category</span>
+      <span class="font-13 color-dove-gray">{{ user.category.name }}</span>
+    </div>
+
+    <div class="col-12 col-md-3 d-flex flex-column text-center text-md-left">
+      <span class="font-11 color-dove-gray">Registered</span>
+      <span class="font-13 color-dove-gray">{{ user.createdAt | date }}</span>
+    </div>
+  </div>
+</div>

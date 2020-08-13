@@ -1,0 +1,95 @@
+<section class="py-50 px-15 px-lg-75 position-relative">
+  <div class="row">
+    <div class="col-12 col-md-10 mt-30 mt-md-0">
+      <p class="mb-0"><span class="color-mine-shaft font-weight-bold mr-5">Order:</span><span class="font-weight-medium text-primary">{{ project.name }}</span></p>
+      <p class="mb-0"><span class="color-mine-shaft font-weight-bold mr-5">Start Date:</span><span class="font-weight-medium text-primary">{{ finalProposal.startDate | date }}</span></p>
+      <job-hub-spinner *ngIf="isLoading"></job-hub-spinner>
+
+      <div class="mt-40 mb-50">
+        <p class="text-primary mb-0">{{ project.user | fullName }}</p>
+        <p class="font-12 color-mine-shaft mb-0">{{ project.address }}</p>
+        <p class="font-12 color-mine-shaft mb-0">{{ project.user.phone }}</p>
+      </div>
+
+      <form [formGroup]="form">
+        <div formGroupName="materialOrderGroups" *ngFor="let group of materialOrderGroups.controls; let i = index">
+          <ng-container [ngSwitch]="group.value.groupType">
+            <p class="color-mine-shaft font-weight-bold mb-25" *ngSwitchCase="MaterialOrderGroupType.Bulk">Bulk Materials</p>
+            <p class="color-mine-shaft font-weight-bold mb-25" *ngSwitchCase="MaterialOrderGroupType.Other">Other</p>
+            <p class="color-mine-shaft font-weight-bold mb-25" *ngSwitchCase="MaterialOrderGroupType.Layout">{{ group.value.layoutType | optionLabel }} Materials</p>
+            <p class="color-mine-shaft font-weight-bold mb-25" *ngSwitchCase="MaterialOrderGroupType.LayoutAccessory">{{ group.value.layoutType | optionLabel }} Material Accessories</p>
+          </ng-container>
+
+          <ng-container [formGroupName]="i">
+            <p class="color-mine-shaft" *ngIf="!isEditing && !group.get('items').controls.length">N/A</p>
+            <ng-container formGroupName="items" *ngFor="let item of group.get('items').controls; let j = index">
+              <ng-container [formGroupName]="j">
+                <div>
+                  <p class="color-mine-shaft" *ngIf="!item.isEditing">
+                    <span class="font-weight-medium" *ngIf="item.value.name">{{ item.value.name }} - </span>
+                    <span class="mr-5">{{ item.value.amount }}</span>
+                    <span class="mr-5">, {{ item.value.amountType | optionLabel }}</span>
+                    <span class="mr-5">, {{ item.value.color }}</span>
+                    <span class="mr-5" *ngIf="item.value.brand">, {{ item.value.brand }}</span>
+                    <span class="mr-5" *ngIf="item.value.style">, {{ item.value.style }}</span>
+                    <span class="mr-5" *ngIf="item.value.comment"> - {{ item.value.comment }}</span>
+                    <span class="ml-20 mr-5 font-weight-medium text-primary">{{ item.value.requestDate | date : 'MMM d, yyyy - hh:mm a' }}</span>
+
+                    <ng-container *ngIf="isEditing">
+                      <a class="ml-15 mr-10 cursor-pointer" (click)="item.isEditing = true"><img src="assets/images/icons/edit.svg" alt="Edit"></a>
+                      <a class="cursor-pointer" (click)="group.get('items').removeAt(j)"><img src="assets/images/icons/remove.svg" alt="Remove"></a>
+                    </ng-container>
+                  </p>
+                  <div class="row" *ngIf="item.isEditing && isEditing">
+                    <div class="col-12 col-md-6 col-lg-4">
+                      <job-hub-auto-complete [category]="TagCategory.MaterialName" formControlName="name" label="Material Name" placeholder="Geo-Textile"></job-hub-auto-complete>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                      <job-hub-auto-complete id="{{prefix}}_materialOrderGroups_{{i}}_items_{{j}}_amount" [category]="TagCategory.MaterialAmount" formControlName="amount" label="Amount *" placeholder="#"></job-hub-auto-complete>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                      <job-hub-select id="{{prefix}}_materialOrderGroups_{{i}}_items_{{j}}_amountType" [options]="materialAmountTypeOptions" formControlName="amountType" label="Amount Type *"></job-hub-select>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                      <job-hub-auto-complete [category]="TagCategory.BrandManufacturer" formControlName="brand" label="Brand" placeholder="Techo-bloc"></job-hub-auto-complete>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                      <job-hub-auto-complete id="{{prefix}}_materialOrderGroups_{{i}}_items_{{j}}_color" [category]="TagCategory.PreferredColor" formControlName="color" label="Color *" placeholder="Champlain Grey"></job-hub-auto-complete>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                      <job-hub-auto-complete [category]="TagCategory.MaterialStyle" formControlName="style" label="Style" placeholder="Belgium"></job-hub-auto-complete>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                      <job-hub-date-picker id="{{prefix}}_materialOrderGroups_{{i}}_items_{{j}}_date" label="Request Delivery Date *" formControlName="date"></job-hub-date-picker>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                      <job-hub-time-picker id="{{prefix}}_materialOrderGroups_{{i}}_items_{{j}}_time" [isRange]="false" label="Request Delivery Time *" formControlName="time"></job-hub-time-picker>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                      <job-hub-text-input label="Message" placeholder="Placeholder content" formControlName="comment"></job-hub-text-input>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-20">
+                  <button type="button" class="btn btn-primary btn-small mr-15" *ngIf="isEditing && item.isEditing" (click)="item.isEditing = false" [disabled]="item.invalid">Save</button>
+                  <button type="button" class="btn btn-danger btn-small" *ngIf="isEditing && item.isEditing" (click)="group.get('items').removeAt(j)">Remove</button>
+                </div>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+          <div class="mb-50">
+            <button type="button" class="btn btn-lt-md-block btn-warning btn-small text-white" *ngIf="isEditing" (click)="addMaterial(group)">New Material</button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+    <div class="col-12 col-md-2 mt-30 mt-md-0">
+      <div class="client-sticky-sidebar text-center">
+        <button class="btn btn-primary w-100 mb-20" (click)="submitOrder()" *ngIf="!isEditing">Save Order</button>
+        <button class="btn btn-warning text-white w-100 mb-20" (click)="toggleEditMode()">{{ isEditing ? 'Preview' : 'Edit' }} Order</button>
+        <job-hub-request-chat userRole="Customer" [readonly]="!(project | isProjectEditable : true)" [project]="project" allowViewProfile="true" [user]="project.user"></job-hub-request-chat>
+      </div>
+    </div>
+  </div>
+</section>

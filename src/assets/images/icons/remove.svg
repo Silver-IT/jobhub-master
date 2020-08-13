@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>alert_qty</title>
+    <g id="Dashboard---AdminSide" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="AdminSide---ManageProject-AddonPayment" transform="translate(-990.000000, -831.000000)">
+            <g id="alert_qty" transform="translate(990.000000, 831.000000)">
+                <g id="circle_bg_red" fill="#D97070" fill-rule="evenodd">
+                    <circle id="Oval" cx="8" cy="8" r="8"></circle>
+                </g>
+                <text id="12" font-family="Poppins-Bold, Poppins" font-size="9" font-weight="bold" letter-spacing="0.8" fill="#FFFFFF">
+                    <tspan x="6.25" y="10.5">-</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

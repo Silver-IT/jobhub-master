@@ -1,0 +1,6 @@
+<div class="py-40 px-15 px-md-0">
+  <ng-container [ngSwitch]="form">
+    <job-hub-profile-form [user]="user" (changeEmail)="form = FormType.ChangeEmailForm" *ngSwitchCase="FormType.ProfileForm"></job-hub-profile-form>
+    <job-hub-change-email-form [user]="user" (profileView)="form = FormType.ProfileForm" *ngSwitchCase="FormType.ChangeEmailForm"></job-hub-change-email-form>
+  </ng-container>
+</div>
